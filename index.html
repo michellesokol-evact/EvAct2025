@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025: A Year of Impact | Evidence Action</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #20253a;
+            --teal: #05545a;
+            --magenta: #e600a0;
+            --light-cyan: #d5f4f7;
+            --pale-cyan: #ecfafb;
+            --off-white: #f8f8fa;
+            --gray: #5c5161;
+        }
+
+        body {
+            font-family: 'Roboto Condensed', -apple-system, sans-serif;
+            color: var(--navy);
+            background: var(--off-white);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--teal) 100%);
+            padding: 2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-slash {
+            color: var(--magenta);
+            font-size: 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #8B5CF6 0%, var(--magenta) 50%, var(--teal) 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="white" opacity="0.1"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2, h3{
+ font-family: "JetBrains Mono", monospace;        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .hero-tagline {
+            font-size: 1.2rem;
+            opacity: 0.85;
+            font-style: italic;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Story Cards */
+        .stories {
+            padding: 4rem 0;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--magenta);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .story-card:nth-child(2) {
+            border-left-color: var(--teal);
+        }
+
+        .story-card:nth-child(3) {
+            border-left-color: #5e93fb;
+        }
+
+        .story-card:nth-child(4) {
+            border-left-color: #5dd9b3;
+        }
+
+        .story-card:nth-child(5) {
+            border-left-color: #fe6f87;
+        }
+
+        .story-number {
+            display: inline-block;
+            background: var(--magenta);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .story-card:nth-child(2) .story-number {
+            background: var(--teal);
+        }
+
+        .story-card:nth-child(3) .story-number {
+            background: #5e93fb;
+        }
+
+        .story-card:nth-child(4) .story-number {
+            background: #5dd9b3;
+        }
+
+        .story-card:nth-child(5) .story-number {
+            background: #fe6f87;
+        }
+
+        .story-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--navy);
+        }
+
+        .story-section {
+            margin-bottom: 2rem;
+        }
+
+        .story-section h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 1rem;
+        }
+
+        .story-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .story-section li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+        }
+
+        .story-section li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--magenta);
+            font-weight: 700;
+        }
+
+        .why-matters {
+            background: var(--pale-cyan);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--teal);
+            margin-top: 2rem;
+        }
+
+        .why-matters strong {
+            color: var(--teal);
+        }
+
+        /* Multimedia Placeholders */
+        .media-placeholder {
+            background: linear-gradient(135deg, var(--light-cyan) 0%, var(--pale-cyan) 100%);
+            border: 2px dashed var(--teal);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .media-placeholder:hover {
+            background: linear-gradient(135deg, var(--pale-cyan) 0%, white 100%);
+            border-color: var(--magenta);
+        }
+
+        .media-placeholder-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-placeholder-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--teal);
+            margin-bottom: 0.5rem;
+        }
+
+        .media-placeholder-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: white;
+            border-left: 6px solid var(--magenta);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quote-box:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transform: translateX(4px);
+        }
+
+        .quote-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .quote-attribution {
+            color: var(--teal);
+            font-weight: 600;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(32, 37, 58, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            margin: 2rem;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--pale-cyan);
+            color: var(--magenta);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-box {
+            background: var(--pale-cyan);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border-top: 4px solid var(--magenta);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--teal);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-content p {
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--magenta);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--magenta);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            border-color: var(--magenta);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .story-card {
+                padding: 2rem;
+            }
+
+            .story-title {
+                font-size: 1.5rem;
+            }
+
+            .modal-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                evidence action <span class="logo-slash">/</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>2025: A Year of Impact</h1>
+            <p class="hero-subtitle">Top Stories from Evidence Action</p>
+            <p class="hero-tagline">We do development differently</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="stories">
+            <!-- Story 1: Syphilis-Free Start -->
+            <article class="story-card">
+                <div class="story-number">1</div>
+                <h2 class="story-title">Syphilis-Free Start: Excellence, Scale, & Strategic Momentum</h2>
+                
+                <div class="story-section">
+                    <h3>Key Accomplishments</h3>
+                    <ul>
+                        <li>Massive scale-up: Successfully trained 1,659 health facilities and ~16,000 healthcare workers in Cameroon</li>
+                        <li>Completed Phase 1 in Zambia reaching ~838 facilities and 11,500+ providers</li>
+                        <li>Exceptional coverage: 75% of ANC-going pregnant women screened for syphilis and 86% of syphilis-positive women treated in Zambia</li>
+                        <li>Strategic expansion: Secured funding from GiveWell for Côte d'Ivoire expansion</li>
+                        <li>First grant from Gates Foundation for technical assistance across 5-7 additional countries</li>
+                    </ul>
+                </div>
+
+                <div class="quote-box" onclick="openModal()">
+                    <p class="quote-text">"The introduction of HIV/Syphilis dual testing has been a game changer for us. We have seen firsthand how early testing changes outcomes."</p>
+                    <p class="quote-attribution">— Esther, MCH Nurse, Shampande Clinic, Zambia</p>
+                    <p style="color: var(--magenta); margin-top: 1rem; font-weight: 600;">Click to read the full success story →</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-number">75%</span>
+                        <span class="stat-label">Pregnant women screened</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">86%</span>
+                        <span class="stat-label">Positive women treated</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Screening rate at Shampande</span>
+                    </div>
+                </div>
+
+                <div class="why-matters">
+                    <strong>Why this matters:</strong> Demonstrates our ability to achieve excellence at scale across multiple countries while strategically expanding our footprint and influence. The Gates partnership validates our reputation in the maternal syphilis space and creates opportunities to drive sector-wide change beyond direct implementation.
+                </div>
+            </article>
+
+            <!-- Story 2: Safe Water Now -->
+            <article class="story-card">
+                <div class="story-number">2</div>
+                <h2 class="story-title">Safe Water Now: From 10-Year Foundation to Global Expansion</h2>
+                
+                <div class="story-section">
+                    <h3>Key Accomplishments</h3>
+                    <ul>
+                        <li>10 years of Safe Water in Kenya: Decade-long partnership demonstrating sustained commitment</li>
+                        <li>India scale-up launched: MOUs signed in Andhra Pradesh and Madhya Pradesh with national JJM endorsement</li>
+                        <li>East Africa expansion: Completed large-scale installations in Uganda and Malawi</li>
+                        <li>Innovative partnerships: Collaboration with Innovation Africa expanding ILC reach to 900,000+ in Uganda and 95,000+ in Malawi</li>
+                        <li>Strategic growth: Water Point Exploration surveys in Nigeria and Sierra Leone</li>
+                    </ul>
+                </div>
+
+                <div class="media-placeholder" onclick="alert('Uganda ILC completion video would play here')">
+                    <div class="media-placeholder-icon">▶️</div>
+                    <div class="media-placeholder-title">Uganda ILC Completion Video</div>
+                    <div class="media-placeholder-desc">Watch how In-Line Chlorination is bringing safe water to communities across Uganda</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-number">10</span>
+                        <span class="stat-label">Years in Kenya</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">900K+</span>
+                        <span class="stat-label">People reached in Uganda</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Indian states launched</span>
+                    </div>
+                </div>
+
+                <div class="why-matters">
+                    <strong>Why this matters:</strong> Demonstrates our ability to adapt proven safe water delivery models across vastly different infrastructure contexts and geographies. Shows Evidence Action's capacity to secure government buy-in, execute complex partnerships, and scale life-saving interventions efficiently.
+                </div>
+            </article>
+
+            <!-- Story 3: Equal Vitamin Access -->
+            <article class="story-card">
+                <div class="story-number">3</div>
+                <h2 class="story-title">Equal Vitamin Access (IFA): Coverage Excellence Across Two Continents</h2>
+                
+                <div class="story-section">
+                    <h3>Key Accomplishments</h3>
+                    <ul>
+                        <li>India sustained excellence: 64% full coverage, 83% any coverage for school-aged adolescent girls</li>
+                        <li>Malawi proof of concept: First at-scale weekly IFA program in Africa with 54% of girls consuming 1+ tablet monthly</li>
+                        <li>Major expansion approved: Secured funding for Uttar Pradesh and Bihar in India, plus scale-up to 15 districts in Malawi (targeting ~1.2M adolescent girls)</li>
+                        <li>Under-5 gains: Improved coverage for children under 5 in India (44% full coverage, 59% any coverage)</li>
+                    </ul>
+                </div>
+
+                <div class="media-placeholder" onclick="alert('India IFA video would play here')">
+                    <div class="media-placeholder-icon">▶️</div>
+                    <div class="media-placeholder-title">India IFA Program Video</div>
+                    <div class="media-placeholder-desc">See how weekly iron supplementation is transforming adolescent girls' health</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-number">83%</span>
+                        <span class="stat-label">India coverage rate</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">1.2M</span>
+                        <span class="stat-label">Girls to be reached in expansion</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">15</span>
+                        <span class="stat-label">Districts in Malawi scale-up</span>
+                    </div>
+                </div>
+
+                <div class="why-matters">
+                    <strong>Why this matters:</strong> Demonstrates our ability to achieve and maintain high coverage across vastly different contexts, successfully expand proven interventions to new regions, and balance scale-up with sustainability planning.
+                </div>
+            </article>
+
+            <!-- Story 4: Accelerator -->
+            <article class="story-card">
+                <div class="story-number">4</div>
+                <h2 class="story-title">Accelerator: A Breakthrough Year for New Program Development</h2>
+                
+                <div class="story-section">
+                    <h3>Key Accomplishments</h3>
+                    <ul>
+                        <li>Historic pipeline: 2025 marked the highest number of late-stage programs in Evidence Action history, with 7 interventions simultaneously at stages 4-5</li>
+                        <li>Programs advancing: Reading glasses pilot in Uganda, vouchers pilot in Liberia, IPTsc prevalence surveys in Nigeria</li>
+                        <li>Immunization demand generation submitted to GiveWell RFP</li>
+                        <li>MMS Nigeria pilot showing promising results</li>
+                        <li>Strategic positioning: Successfully demonstrated capacity to identify, test, and prepare multiple high-impact interventions for scale simultaneously</li>
+                    </ul>
+                </div>
+
+                <div class="media-placeholder" onclick="alert('Nigeria MMS video would play here')">
+                    <div class="media-placeholder-icon">▶️</div>
+                    <div class="media-placeholder-title">Nigeria MMS Pilot Video</div>
+                    <div class="media-placeholder-desc">Multiple micronutrient supplementation bringing better outcomes for pregnant women</div>
+                </div>
+
+                <div class="media-placeholder" onclick="alert('Reading Glasses video would play here')">
+                    <div class="media-placeholder-icon">▶️</div>
+                    <div class="media-placeholder-title">Reading Glasses Pilot Video</div>
+                    <div class="media-placeholder-desc">How simple reading glasses are unlocking economic opportunity in Uganda</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-number">7</span>
+                        <span class="stat-label">Late-stage interventions</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">Historic</span>
+                        <span class="stat-label">Highest pipeline ever</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">4-5</span>
+                        <span class="stat-label">Program stages reached</span>
+                    </div>
+                </div>
+
+                <div class="why-matters">
+                    <strong>Why this matters:</strong> Illustrates organizational capacity for innovation and our differentiated approach to evidence-based program development. Shows strong future pipeline that positions Evidence Action for continued growth and impact.
+                </div>
+            </article>
+
+            <!-- Story 5: Deworm the World India -->
+            <article class="story-card">
+                <div class="story-number">5</div>
+                <h2 class="story-title">Deworm the World India: A Decade of National Deworming Day & Government Ownership</h2>
+                
+                <div class="story-section">
+                    <h3>Key Accomplishments</h3>
+                    <ul>
+                        <li>10 years of National Deworming Day reaching hundreds of millions of children across India</li>
+                        <li>Government-led exits successfully completed in multiple states (Madhya Pradesh, Rajasthan, Tripura) following dramatic prevalence reductions</li>
+                        <li>Sustainability model validated: States maintaining high coverage independently after Evidence Action technical assistance transitions out</li>
+                        <li>Continuing impact: August 2025 NDD round reached ~176M children across 10 states</li>
+                    </ul>
+                </div>
+
+                <div class="media-placeholder" onclick="alert('Nigeria Deworm video would play here')">
+                    <div class="media-placeholder-icon">▶️</div>
+                    <div class="media-placeholder-title">Nigeria Deworm the World Video</div>
+                    <div class="media-placeholder-desc">See deworming programs reaching children across Nigeria</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-number">10</span>
+                        <span class="stat-label">Years of NDD</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">176M</span>
+                        <span class="stat-label">Children reached (Aug 2025)</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Successful state exits</span>
+                    </div>
+                </div>
+
+                <div class="why-matters">
+                    <strong>Why this matters:</strong> Showcases our unique approach to technical assistance focused on building government capacity and achieving sustainable exits. Demonstrates that evidence-based interventions can be successfully handed over to governments while maintaining impact—a key differentiator for Evidence Action.
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <h3>Join Us in Creating Impact</h3>
+            <p>2025 has been a year of remarkable achievements. Help us continue this momentum into 2026.</p>
+            <a href="https://www.evidenceaction.org/donate" class="cta-button">Support Our Work</a>
+            <p style="margin-top: 2rem; opacity: 0.7; font-size: 0.9rem;">© 2025 Evidence Action. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Shampande Story -->
+    <div id="shambandeModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <h2 style="color: var(--magenta); margin-bottom: 1.5rem;">Shampande Clinic: A Game-Changer in Maternal Health</h2>
+            
+            <p style="margin-bottom: 1rem;">Shampande Clinic in Choma District, Southern Province, has emerged as a model site following the introduction of the HIV/Syphilis Dual Rapid Diagnostic Test, as part of Zambia's strategic efforts to strengthen integrated disease surveillance and maternal health services.</p>
+
+            <h3 style="color: var(--teal); margin-top: 2rem; margin-bottom: 1rem;">Before Implementation</h3>
+            <p>Syphilis testing required sending samples to labs or conducting manual tests in the MCH Department using reagents and a manual shaker. This led to:</p>
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li>24-hour wait times for results</li>
+                <li>Missed critical treatment windows</li>
+                <li>Limited support from Community-Based Volunteers</li>
+                <li>Time-consuming processes prone to errors</li>
+            </ul>
+
+            <h3 style="color: var(--teal); margin-top: 2rem; margin-bottom: 1rem;">The Transformation</h3>
+            <p style="margin-bottom: 1rem;"><em>"The new way of testing is much easier, because you don't have to prick the patient twice. Both tests can be performed using just one test kit,"</em> said Clement, one of the CBVs.</p>
+            
+            <div style="background: var(--pale-cyan); padding: 1.5rem; border-radius: 8px; margin: 2rem 0;">
+                <strong style="color: var(--teal);">Impact Statistics:</strong>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--magenta);">4%</div>
+                        <div style="font-size: 0.9rem;">Q1 2023 screening rate</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--magenta);">100%</div>
+                        <div style="font-size: 0.9rem;">Q1 2025 screening rate</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--magenta);">7%</div>
+                        <div style="font-size: 0.9rem;">Positive case yield</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2rem; font-weight: 700; color: var(--magenta);">100%</div>
+                        <div style="font-size: 0.9rem;">Treatment rate</div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-top: 1.5rem;"><em>"That pregnancy ended in a healthy delivery, something we attribute to the early detection and intervention,"</em> says Esther, recounting a mother who had previously experienced a syphilis-attributed stillbirth but achieved a successful pregnancy outcome after early dual testing and treatment.</p>
+
+            <p style="margin-top: 1.5rem; font-style: italic; color: var(--gray);">The partnership between the Ministry of Health, Evidence Action, and CDC has been instrumental in this vital transformation.</p>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('shambandeModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('shambandeModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('shambandeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Smooth scroll for internal navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
