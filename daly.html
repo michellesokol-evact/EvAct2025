@@ -27,7 +27,7 @@
     .country-tab.active { background:#EC4899; color:#fff; border-color:#EC4899; }
 
     .chart-container { overflow-x:auto; overflow-y:hidden; }
-    .chart-wrapper { position:relative; height:500px; margin-top:50px; margin-bottom:10px; min-width:1400px; }
+    .chart-wrapper { position:relative; height:400px; margin-top:50px; margin-bottom:10px; min-width:1400px; }
     .y-axis { position:absolute; left:0; top:0; bottom:60px; width:280px; display:flex; flex-direction:column; }
     .program-label {
       font-size:11px; text-align:right; padding-right:10px; cursor:pointer; transition:all .2s; line-height:1.3;
@@ -269,7 +269,7 @@ function setActiveTab(country) {
       });
 
       // Plot points
-      const chartHeight = 500 - 60;
+      const chartHeight = 400 - 60;
       const heightPerProgram = chartHeight / programs.length;
 
       programs.forEach((program, index) => {
