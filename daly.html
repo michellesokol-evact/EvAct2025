@@ -27,7 +27,7 @@
     .country-tab.active { background:#EC4899; color:#fff; border-color:#EC4899; }
 
     .chart-container { overflow-x:auto; overflow-y:hidden; }
-    .chart-wrapper { position:relative; height:800px; margin-top:50px; margin-bottom:10px; min-width:1400px; }
+    .chart-wrapper { position:relative; height:500px; margin-top:50px; margin-bottom:10px; min-width:1400px; }
     .y-axis { position:absolute; left:0; top:0; bottom:60px; width:280px; display:flex; flex-direction:column; }
     .program-label {
       font-size:11px; text-align:right; padding-right:10px; cursor:pointer; transition:all .2s; line-height:1.3;
@@ -59,15 +59,7 @@
 <body>
   <div class="container">
       <span class="title">COST PER DALY AVERTED</span>
-    <div class="legend">
-        
-      <div class="legend-item">
-        <div class="legend-dot late-stage"></div><span>Late stage programming</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot at-scale"></div><span>At-scale programming</span>
-      </div>
-    </div>
+   
 
     <!-- NEW: Country tabs container -->
    
@@ -118,22 +110,11 @@
       { name: "Dispensers for Safe Water (Kenya)", cost: 978, stage: "at-scale", min: null, max: null },
       { name: "Dispensers for Safe Water (Uganda)", cost: 143.91, stage: "at-scale", min: null, max: null },
       { name: "Dispensers for Safe Water (Malawi)", cost: 196, stage: "at-scale", min: null, max: null },
-      { name: "In-Line Chlorination (India)", cost: 538, stage: "late-stage", min: null, max: null },
-      { name: "Safe Water Expansion (Nigeria)", cost: 296, stage: "late-stage", min: 211, max: 457 },
-      { name: "Vouchers for Safe Water (Liberia)", cost: 95, stage: "late-stage", min: 53, max: 375 },
-      { name: "Vouchers for Safe Water (Zambia)", cost: 80, stage: "late-stage", min: null, max: null },
       { name: "Iron & Folic Acid Supplementation (India)", cost: 56, stage: "at-scale", min: null, max: null },
-      { name: "Iron & Folic Acid Supplementation (Malawi)", cost: 243, stage: "late-stage", min: null, max: null },
-      { name: "Multiple Micronutrient Supplementation (Cameroon)", cost: 86, stage: "late-stage", min: null, max: null },
-      { name: "Multiple Micronutrient Supplementation (Tanzania)", cost: 70, stage: "late-stage", min: null, max: null },
-      { name: "Multiple Micronutrient Supplementation (Liberia)", cost: 217, stage: "late-stage", min: null, max: null },
+      { name: "Iron & Folic Acid Supplementation (Malawi)", cost: 243, stage: "at-scale", min: null, max: null },
       { name: "Syphilis Free Start (Liberia)", cost: 148, stage: "at-scale", min: null, max: null },
-      { name: "Syphilis Free Start (Zambia)", cost: 20, stage: "late-stage", min: null, max: null },
-      { name: "Syphilis Free Start (Cameroon)", cost: 33, stage: "late-stage", min: null, max: null },
-      { name: "HPV Vaccination (Malawi)", cost: 243, stage: "late-stage", min: null, max: null },
-      { name: "HPV Vaccination (Nigeria)", cost: 448, stage: "late-stage", min: 434, max: 857 },
-      { name: "Reading Glasses for Adults (Nigeria)", cost: 197, stage: "late-stage", min: 74, max: 334 },
-      { name: "Immunization Demand Generation (Nigeria)", cost: 188, stage: "late-stage", min: 213, max: 284 }
+      { name: "Syphilis Free Start (Zambia)", cost: 20, stage: "at-scale", min: null, max: null },
+      { name: "Syphilis Free Start (Cameroon)", cost: 33, stage: "at-scale", min: null, max: null },
     ];
 
     // EDIT these to your preferred 1×GDP (USD) values used as WHO CE thresholds.
@@ -142,12 +123,9 @@
       "Uganda": 1073,
       "Malawi": 508,
       "India": 2697,
-      "Nigeria":807,
       "Liberia": 846,
       "Zambia": 1235,
-      "Cameroon": 1762,
-      "Tanzania": 1186
-    };
+      "Cameroon": 1762    };
 
     const minCost = 0;
     const maxCost = 2800;
@@ -291,7 +269,7 @@ function setActiveTab(country) {
       });
 
       // Plot points
-      const chartHeight = 800 - 60;
+      const chartHeight = 500 - 60;
       const heightPerProgram = chartHeight / programs.length;
 
       programs.forEach((program, index) => {
