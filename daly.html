@@ -150,7 +150,7 @@
     };
 
     const minCost = 0;
-    const maxCost = 2210;
+    const maxCost = 2800;
     const chartWidth = 1070;
 
     function clamp(val, min, max){ return Math.max(min, Math.min(max, val)); }
@@ -279,7 +279,7 @@ function setActiveTab(country) {
       });
 
       // X-axis labels
-      const xLabels = [2200, 2000, 1800, 1600, 1400, 1200, 1000, 800, 600, 400, 200, 0];
+      const xLabels = [2600, 2400, 2200, 2000, 1800, 1600, 1400, 1200, 1000, 800, 600, 400, 200, 0];
       xLabels.forEach(value => {
         const label = document.createElement('span');
         label.className = 'x-label';
