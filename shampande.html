@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Clinic's Transformation | Evidence Action</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+   <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            line-height: 1.7;
+            color: #20253a;
+            background: #ffffff;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #20253a 0%, #05545a 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'JetBrains Mono', sans-serif;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .story-section {
+            margin: 60px 0;
+        }
+
+        .story-section h2 {
+            color: #20253a;
+            font-size: 2em;
+            margin-bottom: 25px;
+            font-weight: 400;
+        }
+
+        .story-section p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .highlight-stat {
+            background: #ecfafb;
+            border-left: 4px solid #05545a;
+            padding: 30px;
+            margin: 40px 0;
+            font-size: 1.15em;
+        }
+
+        .highlight-stat strong {
+            color: #05545a;
+            font-size: 1.3em;
+        }
+
+        .quote-block {
+            background: #f8f8fa;
+            border-left: 5px solid #e600a0;
+            padding: 30px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.2em;
+            color: #20253a;
+        }
+
+        .quote-attribution {
+            text-align: right;
+            margin-top: 15px;
+            font-style: normal;
+            font-size: 0.9em;
+            color: #5c5161;
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: auto;
+            background: linear-gradient(135deg, #ecfafb 0%, #d5f4f7 100%);
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            color: #5c5161;
+            font-size: 0.9em;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .impact-card {
+            text-align: center;
+            padding: 25px;
+            background: #ecfafb;
+            border-radius: 4px;
+        }
+
+        .impact-number {
+            font-size: 2.5em;
+            color: #05545a;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .impact-label {
+            font-size: 0.95em;
+            color: #20253a;
+        }
+
+        .cta-section {
+            background: #05545a;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin: 80px 0 0 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .cta-section p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #e600a0;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #bc9ed2;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #05545a;
+        }
+
+        .inline-cta {
+            background: #ffb9ef;
+            border: 2px solid #e600a0;
+            padding: 30px;
+            margin: 50px 0;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .inline-cta h3 {
+            color: #20253a;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .inline-cta p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            color: #20253a;
+        }
+
+        .cost-effectiveness {
+            background: #05545a;
+            color: white;
+            padding: 40px;
+            margin: 50px 0;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .cost-effectiveness h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .cost-effectiveness p {
+            font-size: 1.15em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .story-section h2 {
+                font-size: 1.5em;
+            }
+            
+            .photo-placeholder {
+                height: 250px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>One Clinic's Transformation  —  <br>And the Thousands of Lives It Represents</h1>
+        <p class="subtitle">How a simple change in testing is preventing stillbirths across Zambia</p>
+    </div>
+
+    <div class="container">
+        <div class="story-section">
+          <p>Over the past year, something remarkable has happened at Shampande Clinic in rural Zambia.</p><p>Syphilis screening rates jumped from 4% to 100%. The positivity detection rate increased sevenfold. Every woman who tested positive received same-day treatment. According to facility staff, the clinic hasn't recorded a syphilis-attributed stillbirth since implementation began.</p>
+<p>One nurse described the moment she realized the program's power: A woman returned for her second pregnancy after experiencing a syphilis-attributed stillbirth previously. This time, dual testing enabled early detection and same-day treatment for both her and her partner.</p>
+
+            <div class="quote-block">
+                "That pregnancy ended in a healthy delivery, something we attribute to the early detection and intervention."
+                <div class="quote-attribution"> —  Nurse at Shampande Clinic</div>
+            </div>
+        </div>
+         <div class="story-section">
+        <p>This shift didn’t happen by chance. It was part of a nationwide effort by Zambia’s Ministry of Health — supported by Evidence Action’s technical assistance — to integrate HIV/syphilis dual rapid diagnostic tests (RDTs) across the country’s antenatal care system.
+</p>
+</div>
+
+       
+            <img class="photo-placeholder" src="images/mothertesting.jpg">
+       
+
+        <div class="story-section">
+            <h2>From One Clinic to a Country</h2>
+            
+            <p>Shampande's story isn't unique — it's one of nearly 2,000 health facilities across Zambia where similar transformations are happening.</p>
+
+            <p>The Ministry of Health partnered with Evidence Action to replace standard HIV tests with dual HIV/syphilis tests throughout the country's antenatal care system. The change was simple: one finger-prick, two results, twenty minutes. When women come for their first prenatal visit, they're now screened for both infections that pose serious risks to their babies.</p>
+
+            <p>The results have been dramatic. National screening coverage climbed from 45% to 75% in just 18 months. Among trained facilities, 90% of pregnant women are tested — and 86% of those testing positive receive treatment.</p>
+
+            <p>That translates to thousands of families who won't experience the grief that brought one mother back to Shampande Clinic.</p>
+
+            <div class="impact-grid">
+                <div class="impact-card">
+                    <span class="impact-number">2,000</span>
+                    <span class="impact-label">Health facilities transformed in Zambia</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-number">90%</span>
+                    <span class="impact-label">Of pregnant women tested in trained facilities</span>
+                </div>
+                <div class="impact-card">
+                    <span class="impact-number">86%</span>
+                    <span class="impact-label">Treatment rate for positive cases</span>
+                </div>
+            </div>
+
+            <div class="quote-block">
+                "The new way of testing is much easier, because you don't have to prick the patient twice. Both tests can be performed using just one test kit."
+                <div class="quote-attribution"> —  Clement, Community-based Volunteer</div>
+            </div>
+
+            <div class="quote-block">
+                "With the early identification of syphilis and early treatment, this is definitely a game changer. We have seen firsthand how early testing changes outcomes."
+                <div class="quote-attribution"> —  Esther, MCH Nurse</div>
+            </div>
+
+            <p>The program revealed something else: syphilis prevalence among pregnant women is more than double what initial estimates suggested — meaning the problem was far bigger than anyone knew, and the need for this intervention even more urgent.</p>
+        </div>
+
+        
+
+        <img class="photo-placeholder" src="images/dualtest.jpg">
+        
+        <div class="story-section">
+            <h2>Building Momentum</h2>
+            
+            <p>What started in Liberia in 2020 is now expanding across countries. Liberia has achieved 88% screening coverage nationally and is transitioning the program to full government ownership. Cameroon has trained over 1,600 health facilities. </p>
+            <p>Building on this success, we’ve identified new regions where dual HIV/syphilis testing can deliver equally strong results at similar cost-effectiveness — and we’re working with partners to expand the program’s reach to millions more women.</p>
+
+            <p>At every facility, the story is similar to Shampande's: healthcare workers who previously couldn't offer syphilis testing now can. Women who would have lost their babies now don't. Health systems building the capability to prevent preventable tragedies — independently and sustainably.</p>
+
+            <div class="cost-effectiveness">
+                <h3>Extraordinary Cost-Effectiveness</h3>
+                <p>At <strong>$20 per year of healthy life restored</strong>, this intervention is roughly 60 times more cost-effective than the World Health Organization's threshold for exceptional programs.</p>
+            </div>
+        </div>
+
+     
+
+        <div class="story-section">
+            <h2>The Opportunity Ahead</h2>
+            
+            <p>Maternal syphilis remains deeply neglected globally, with few organizations working to address it at scale. But the model is proven. The infrastructure is working. And the momentum is building.</p>
+
+            <p>The opportunity now is to ensure that what transformed care at Shampande — and thousands of facilities like it — becomes standard practice across countries where maternal syphilis remains a preventable tragedy.</p>
+
+            <p>For the mother who returned to Shampande, early detection meant the difference between grief and joy. For thousands of families across Zambia, it means babies who come home healthy instead of not coming home at all.</p>
+
+            <p><strong>That's the power of sustainable health systems change — measured in individual lives transformed and collective grief prevented.</strong></p>
+        </div>
+    </div>
+
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.story-section, .highlight-stat, .quote-block, .impact-grid, .inline-cta').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
