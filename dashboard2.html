@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Action 2025 Impact Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #006680 0%, #004d66 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            padding: 25px;
+            background: linear-gradient(135deg, #006680 0%, #004d66 100%);
+            color: white;
+        }
+
+        .program-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .program-tagline {
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .card-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            padding: 25px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #E91E8C;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        .card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .card-details.expanded {
+            max-height: 2000px;
+        }
+
+        .details-content {
+            padding: 25px;
+        }
+
+        .details-section {
+            margin-bottom: 20px;
+        }
+
+        .details-section h3 {
+            color: #006680;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .details-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .details-section li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .details-section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #E91E8C;
+            font-weight: bold;
+        }
+
+        .expand-btn {
+            width: 100%;
+            padding: 15px;
+            background: #f8f9fa;
+            border: none;
+            color: #006680;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .expand-btn:hover {
+            background: #e9ecef;
+        }
+
+        .expand-icon {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            margin-left: 5px;
+        }
+
+        .expand-icon.rotated {
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Evidence Action 2025</h1>
+            <p class="subtitle">Impact Across Five Major Programs</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Syphilis-Free Start Card -->
+            <div class="program-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="program-name">Syphilis-Free Start</div>
+                    <div class="program-tagline">Scale & Strategic Momentum</div>
+                </div>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">1,659</span>
+                        <span class="stat-label">Facilities Trained (Cameroon)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">20,600+</span>
+                        <span class="stat-label">Providers Trained (Zambia)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">86%</span>
+                        <span class="stat-label">Treatment Coverage</span>
+                    </div>
+                </div>
+                <button class="expand-btn">
+                    Learn More <span class="expand-icon">▼</span>
+                </button>
+                <div class="card-details">
+                    <div class="details-content">
+                        <div class="details-section">
+                            <h3>Key Achievements</h3>
+                            <ul>
+                                <li>Successfully trained ~16,000 healthcare workers in Cameroon</li>
+                                <li>Completed Phase 1 & 2 in Zambia, reaching 1,869 facilities</li>
+                                <li>75% of ANC-going pregnant women screened for syphilis in Zambia</li>
+                                <li>Shampande Clinic achieved 100% screening and treatment rates</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <h3>Strategic Expansion</h3>
+                            <ul>
+                                <li>Gates Foundation grant for light-touch TA across 5-7 countries</li>
+                                <li>Côte d'Ivoire expansion expected to reach 3.6M women over 5 years</li>
+                                <li>Positioning to influence Global Fund 2027-2029 proposal cycle</li>
+                                <li>Building global advocacy coalition for congenital syphilis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Safe Water Now Card -->
+            <div class="program-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="program-name">Safe Water Now</div>
+                    <div class="program-tagline">10-Year Foundation to Global Expansion</div>
+                </div>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">25%</span>
+                        <span class="stat-label">Decline in Under-5 Mortality (Kenya)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">200K+</span>
+                        <span class="stat-label">People Reached (Uganda/Malawi ILC)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">300K</span>
+                        <span class="stat-label">People Reached (India)</span>
+                    </div>
+                </div>
+                <button class="expand-btn">
+                    Learn More <span class="expand-icon">▼</span>
+                </button>
+                <div class="card-details">
+                    <div class="details-content">
+                        <div class="details-section">
+                            <h3>Africa Footprint</h3>
+                            <ul>
+                                <li>10+ years of safe water delivery in Kenya, now reaching 1M people</li>
+                                <li>Testing government handover model in Busia and Siaya counties</li>
+                                <li>ILC installations completed in Uganda and Malawi</li>
+                                <li>Partnership with Innovation: Africa reaching 4M+ people beyond our footprint</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <h3>India Scale-Up</h3>
+                            <ul>
+                                <li>55 contractor-led installations in Andhra Pradesh reaching 40,000 people</li>
+                                <li>Odisha MOU near signature for state-funded pilot by end of 2025</li>
+                                <li>Chlorination elevated to core JJM 2.0 priority nationally</li>
+                                <li>Light-touch support expanding to 3-5 states</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <h3>Geographic Expansion</h3>
+                            <ul>
+                                <li>Water Point Exploration surveys in Nigeria and Sierra Leone</li>
+                                <li>GiveWell proposal for northern Nigeria expansion (under investigation)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Equal Vitamin Access Card -->
+            <div class="program-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="program-name">Equal Vitamin Access</div>
+                    <div class="program-tagline">Coverage Excellence Across Two Continents</div>
+                </div>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">36M</span>
+                        <span class="stat-label">Children Reached Annually (India)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">600K</span>
+                        <span class="stat-label">Adolescent Girls (Malawi)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">60%</span>
+                        <span class="stat-label">Increase in MMS Consumption</span>
+                    </div>
+                </div>
+                <button class="expand-btn">
+                    Learn More <span class="expand-icon">▼</span>
+                </button>
+                <div class="card-details">
+                    <div class="details-content">
+                        <div class="details-section">
+                            <h3>India IFA Program</h3>
+                            <ul>
+                                <li>Continuing support to 5 current states through 2027</li>
+                                <li>Expansion to Uttar Pradesh and Bihar through 2030</li>
+                                <li>Projected 180K total DALYs averted at $53 per DALY</li>
+                                <li>Exploring additional states (Andhra Pradesh, Maharashtra)</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <h3>Malawi Scale-Up</h3>
+                            <ul>
+                                <li>First at-scale weekly IFA program in Africa region</li>
+                                <li>54% of girls consuming 1+ tablet monthly across 7 districts</li>
+                                <li>19% full-dose adherence achieved</li>
+                                <li>~45K anemia cases averted, ~2,800 DALYs averted</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <h3>Nigeria Nutrition Programs</h3>
+                            <ul>
+                                <li>MMS pilot showing 99% distribution rate (up from 67% baseline)</li>
+                                <li>Average consumption increased to 117 daily doses (from 72 baseline)</li>
+                                <li>SQ-LNS opportunity: Support $30M government rollout</li>
+                                <li>Projected to save 1,640 additional lives at $1,280 per life saved</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deworm the World Card -->
+            <div class="program-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="program-name">Deworm the World</div>
+                    <div class="program-tagline">Strategic Exits & New Beginnings</div>
+                </div>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">145.9M</span>
+                        <span class="stat-label">Children Reached (India, Aug 2025)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">10</span>
+                        <span class="stat-label">Years of National Deworming Day</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">State Exits in Progress</span>
+                    </div>
+                </div>
+                <button class="expand-btn">
+                    Learn More <span class="expand-icon">▼</span>
+                </button>
+                <div class="card-details">
+                    <div class="details-content">
+                        <div class="details-section">
+                            <h3>India Strategic Exits</h3>
+                            <ul>
+                                <li>Exits completed: Rajasthan, Tripura</li>
+                                <li>December 2025 exits: Madhya Pradesh, Uttarakhand, Jharkhand, Karnataka, Haryana, Chhattisgarh</li>
+                                <li>Full TA continuing in Andhra Pradesh, Uttar Pradesh, Bihar</li>
+                                <li>Demonstrating sustainable handovers that maintain impact</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <h3>Tanzania Launch</h3>
+                            <ul>
+                                <li>Secured Founders' Pledge funding for new country entry</li>
+                                <li>Supporting November 2025 MDA round</li>
+                                <li>First partner in 20 years to support nationwide impact assessment</li>
+                                <li>Will reshape national treatment strategy toward 2030 WHO targets</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accelerator Card -->
+            <div class="program-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="program-name">The Accelerator</div>
+                    <div class="program-tagline">A Breakthrough Year for Innovation</div>
+                </div>
+                <div class="card-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Interventions at Late Stages</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">256</span>
+                        <span class="stat-label">Reading Glasses Distributed (Uganda)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">43%</span>
+                        <span class="stat-label">Mobilization Rate (Reading Glasses)</span>
+                    </div>
+                </div>
+                <button class="expand-btn">
+                    Learn More <span class="expand-icon">▼</span>
+                </button>
+                <div class="card-details">
+                    <div class="details-content">
+                        <div class="details-section">
+                            <h3>Historic Pipeline</h3>
+                            <ul>
+                                <li>2025 marked highest number of late-stage programs in EA history</li>
+                                <li>7 interventions simultaneously at stages 4-5</li>
+                                <li>Demonstrates organizational capacity for innovation at scale</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <h3>Programs Advancing</h3>
+                            <ul>
+                                <li>Reading glasses pilot: Testing two delivery models in Uganda with strong MOH leadership</li>
+                                <li>Vouchers for safe water: Pilot launched in Liberia, scoping in Nigeria</li>
+                                <li>IPTsc (malaria prevention): Prevalence surveys completed in Nigeria</li>
+                                <li>Immunization demand generation: Submitted to GiveWell RFP</li>
+                                <li>HPV vaccination: Ready-to-launch in Malawi, funding is primary barrier</li>
+                            </ul>
+                        </div>
+                        <div class="details-section">
+                            <h3>Key Opportunities</h3>
+                            <ul>
+                                <li>800M+ people worldwide with untreated vision loss</li>
+                                <li>Reading glasses deliver 33% income boost in vision-intensive work</li>
+                                <li>HPV vaccine prevents 99% of common cancer-causing strains</li>
+                                <li>Strong future pipeline positioning EA for continued growth</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCard(card) {
+            const details = card.querySelector('.card-details');
+            const icon = card.querySelector('.expand-icon');
+            
+            details.classList.toggle('expanded');
+            icon.classList.toggle('rotated');
+        }
+    </script>
+</body>
+</html>

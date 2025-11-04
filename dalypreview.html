@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cost-Effectiveness Chart</title>
-  <style>
+<style>
     * { margin:0; padding:0; box-sizing:border-box; }
-    body {background:#f8f9fa; padding:20px; }
+
     .container { max-width:800px; margin:0 auto; background:#fff; border-radius:8px; padding:40px; box-shadow:0 2px 8px rgba(0,0,0,.1); }
     .legend { display:flex; gap:30px; margin-bottom:16px; flex-wrap:wrap; justify-content:center;}
     .legend-item { display:flex; align-items:center; gap:8px; font-size:12px; }
@@ -338,14 +332,3 @@ function setActiveTab(country) {
     // Optional: pre-select first country with known GDP
     
   </script>
-</body>
-</html>
-
-
-<div style="background-color:#bc93d2; padding:20px;"><h3>The DALYs formula: How we benchmark health interventions</h3> 
-<p>The World Bank and the World Health Organization developed the DALYs formula as part of the Global Burden of Disease (GBD) study. The formula*: </p>
-    <p>DALY = <span style="color:#05545a">YLL (years of life lost)</span> + <span style="color:#05545a">YLD (years lived with disability)</span></p>
-    <ul>
-<li style="margin-left:20px;"><span style="color:#05545a">YLL (years of life lost)</span> = n (number of deaths) x L1 (the standard life expectancy at age of death)</li>
-<li style="margin-left:20px;"><span style="color:#05545a">YLD (years lived with disability)</span> = l (number of new cases of a disease) x DW (disability weight) x L2 (duration of disability)</li></ul>
-<p>*This is a hyper-simplified formula to help communicate this concept in general terms. When calculating DALYs, we also take into account other variables like discounting, which considers time preferencing for effects now vs. later. If you are interested in the full explanation of how we calculate DALYs, feel free to email us at communications@evidenceaction.org.</p></div>

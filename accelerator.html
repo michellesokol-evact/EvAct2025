@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Action's Accelerator: Transforming Lives at Scale in 2025</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+      h1, h2, h3, h4, h5, h6 {
+            font-family: 'JetBrains Mono', -apple-system, sans-serif;
+            color: #0f4c81;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+        }
+
+     body {
+            font-family: 'Roboto Condensed', -apple-system, sans-serif;
+            color: var(--navy);
+            background: var(--off-white);
+            line-height: 1.6;
+        }
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('https://assets.evidenceaction.org/web/images/Gradients/_2560xAUTO_crop_center-center_none/9187/ea-gradient-1.webp') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #20253A;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-label {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        /* Content Sections */
+        .content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            margin-top:40px;
+        }
+
+        .section {
+            padding: 6rem 0;
+        }
+
+        .section-intro {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            color: #2c2c2c;
+        }
+
+        .section-header {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: #0f4c81;
+            line-height: 1.3;
+        }
+
+        .section-subheader {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* Visual Breaks */
+        .visual-break {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            height: 70vh;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+            overflow: hidden;
+        }
+
+        .visual-placeholder {
+            text-align: center;
+            color: #999;
+            padding: 2rem;
+        }
+
+        .visual-placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .visual-caption {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0 2rem;
+        }
+
+        /* Stats Callout */
+        .stats-callout {
+            background: #f8f9fa;
+            border-left: 4px solid #0f4c81;
+            padding: 2rem 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0f4c81;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Quote Block */
+        .quote-block {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: #2c2c2c;
+            border-left: 3px solid #0f4c81;
+            padding-left: 2rem;
+            margin: 3rem 0;
+            line-height: 1.6;
+        }
+
+        /* Intervention Cards */
+        .intervention-card {
+            margin: 4rem 0;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .intervention-card:last-child {
+            border-bottom: none;
+        }
+
+        .intervention-title {
+            font-size: 2rem;
+            color: #0f4c81;
+            margin-bottom: 0.5rem;
+        }
+
+        .intervention-meta {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.85rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Full-Width Image Section */
+        .full-image-section {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin: 5rem 0;
+        }
+
+        .full-image-wrapper {
+            height: 80vh;
+            background: #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .image-overlay-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 4rem 2rem 2rem;
+            font-size: 1.3rem;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: #20253A;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 6rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #0f4c81;
+            padding: 1rem 3rem;
+            text-decoration: none;
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: transform 0.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-header {
+                font-size: 2rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .quote-block {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">Evidence Action Accelerator</div>
+            <h1>The Moment of Maximum Impact</h1>
+            <p class="hero-subtitle">Seven proven interventions. Millions of lives within reach. The time to act is now.</p>
+        </div>
+        <div class="scroll-indicator">↓ Scroll to explore</div>
+    </section>
+
+    <!-- Introduction -->
+    <div class="content-wrapper">
+
+
+    <section id="intro">
+      <p>In a development landscape marked by shrinking resources and growing scrutiny on aid effectiveness, Evidence Action&#39;s Accelerator serves a critical function: identifying health interventions with genuine potential to achieve transformational impact at population scale. Since 2019, we&#39;ve assessed over 100 interventions through our rigorous six-stage process, advancing only the 2% that demonstrate exceptional evidence, cost-effectiveness, and practical scalability.</p>
+
+      <p>This selectivity is a deliberate response to a fundamental challenge in global health: proven solutions exist for many health problems, yet limited funding means difficult choices about where to invest. The Accelerator&#39;s role is to identify interventions where rigorous evidence meets government partnership and clear implementation pathways &mdash; creating opportunities for donor investment to achieve maximum impact per dollar.</p>
+
+      <p>Right now, seven health interventions occupy our late-stage pipeline, representing years of evidence review, cost-effectiveness modeling, and strategic planning. In February, we shared these solutions publicly, highlighting their potential to address neglected health challenges affecting millions of people. Nine months later, several are demonstrating real progress toward scale &mdash; revealing both the opportunities for impact and the funding gaps that stand between promising interventions and population-level change.</p>
+    </section>
+
+    <section id="model">
+      <h2>The Accelerator Model: Why Systematic Vetting Matters</h2>
+      <p>Our six-stage framework evaluates interventions across 12 criteria organized into three tiers. Primary criteria examine evidence quality, cost-effectiveness, and scale of potential impact. Secondary criteria assess organizational fit, fundability, government landscape, and implementation feasibility. Tertiary criteria consider transformational potential, replicability, and attribution.</p>
+
+      <p>This comprehensive approach requires investment. Our annual Accelerator budget of approximately $4 million supports the staffing, in-country scoping, and Stage 4 field testing that moves interventions from promising concepts to implementation-ready programs. This includes:</p>
+
+      <ul>
+        <li><strong>Rigorous evidence review</strong> to ensure interventions demonstrate effectiveness in controlled research settings</li>
+        <li><strong>Cost-effectiveness modeling</strong> that accounts for real-world implementation costs, not just commodity prices</li>
+        <li><strong>In-country scoping</strong> to evaluate government engagement, partner landscape, implementation feasibility, and data availability</li>
+        <li><strong>Stage 4 field testing</strong> through formative research, prototyping, and piloting that pressure-tests key program assumptions before full-scale commitment</li>
+      </ul>
+
+      <p>The result: programs like <strong>Syphilis-Free Start</strong> and <strong>Equal Vitamin Access</strong> that now reach tens of millions of people with proven, cost-effective interventions. These successes validate an approach that prioritizes careful vetting over rapid deployment.</p>
+    </section>
+
+    <section id="pipeline">
+      <h2>Late-Stage Pipeline: Where Progress Meets Funding Needs</h2>
+      <p>Several interventions from our February announcement have advanced significantly, demonstrating the kind of progress that creates genuine scaling opportunities &mdash; if funding can be secured.</p>
+    </section>
+
+    </div>
+
+    <!-- Visual Break 1 -->
+    <div class="visual-break">
+        <div class="visual-placeholder">
+            <div class="visual-placeholder-icon">📸</div>
+            <div style="font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">
+                Video: Overview of Accelerator Programs
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <h2 class="section-header" style="text-align: center; margin-bottom: 4rem;">Breaking Through Where Others Have Struggled</h2>
+    </div>
+
+    <!-- Reading Glasses -->
+     <div class="visual-break">
+        <div class="visual-placeholder">
+            <div class="visual-placeholder-icon">📸</div>
+            <div style="font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">
+                Reading Glasses: Unlocking Economic Potential for 800 Million People
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <section class="intervention-card">
+            <p class="intervention-meta">Stage 4 • Uganda</p>
+            <p>
+                In Uganda's Budaka and Mbale districts, we're witnessing something remarkable. Adults who had given up reading, abandoned their work, or felt isolated from their communities are suddenly able to see clearly again. For just 60 cents per pair, we're not just correcting vision—we're restoring dignity and economic opportunity.
+            </p>
+            
+            <div class="stats-callout">
+                <div class="stat-item">
+                    <div class="stat-number">33%</div>
+                    <div class="stat-label">Income increase for people in vision-intensive jobs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$0.60</div>
+                    <div class="stat-label">Cost per pair of reading glasses</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">25,000</div>
+                    <div class="stat-label">People reached in current pilot</div>
+                </div>
+            </div>
+
+            <p>
+                Our pilot, launched in August, has already begun reaching 25,000 people through two carefully designed delivery models. When scaled globally, this simple intervention could unlock billions in productivity losses while addressing one of the world's most neglected health challenges.
+            </p>
+
+            <p class="quote-block">
+                "With Ministry of Health partnership secured and operational models proven, we're ready to demonstrate that non-specialist screening can safely deliver this intervention at population scale."
+            </p>
+        </section>
+
+        <!-- Micronutrient Supplements -->
+        <section class="intervention-card">
+            <h3 class="intervention-title">Multiple Micronutrient Supplements</h3>
+            <p class="intervention-meta">Stage 4 • Nigeria</p>
+            <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem;">
+                Saving Mothers and Babies in Nigeria
+            </p>
+            
+            <p>
+                Every day, pregnant women in Nigeria face preventable complications that wealthy countries solved decades ago with simple prenatal vitamins. Our pilot results tell a powerful story of what's possible when we bridge this gap systematically.
+            </p>
+        </section>
+    </div>
+
+    <!-- Visual Break 2 -->
+    <div class="visual-break">
+        <div class="visual-placeholder">
+            <div class="visual-placeholder-icon">📸</div>
+            <div style="font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">
+                Video: Prenatal care in Nigerian health facilities
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <section class="intervention-card" style="border: none; padding-bottom: 0;">
+            <p>
+                In just months, we've increased distribution coverage from 67% to 99% and seen daily supplement consumption jump by 60%. Women are now receiving the 15 essential vitamins and minerals their babies need for healthy development.
+            </p>
+
+            <div class="stats-callout">
+                <div class="stat-item">
+                    <div class="stat-number">31,000</div>
+                    <div class="stat-label">Disability-adjusted life years saved</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12,800</div>
+                    <div class="stat-label">Cases of anemia prevented</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1.5M</div>
+                    <div class="stat-label">Pregnant women reached at scale</div>
+                </div>
+            </div>
+
+            <p>
+                <strong>The scaling moment:</strong> With pilot results due in February 2026, we're actively fundraising for expansion across 2-3 Nigerian states, leveraging donated commodities to maximize impact per dollar.
+            </p>
+        </section>
+
+        <!-- SQ-LNS -->
+        <section class="intervention-card">
+            <h3 class="intervention-title">Small-Quantity Lipid Supplements</h3>
+            <p class="intervention-meta">Stage 4 • Nigeria</p>
+            <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem;">
+                A $30 Million Government Investment That Needs Guidance
+            </p>
+            
+            <p>
+                Nigeria's government has committed $30 million to purchase lipid-based nutrient supplements that could reach 1-2 million children. This represents one of the largest government investments in child nutrition interventions we've seen. The challenge? Without strategic targeting and operational support, much of this impact could be lost.
+            </p>
+
+            <p>
+                This is where Evidence Action's expertise becomes transformational. For just $2.1 million in technical assistance, we can ensure these supplements reach the children who need them most, saving additional lives and preventing thousands of cases of severe acute malnutrition.
+            </p>
+
+            <p class="quote-block">
+                "This opportunity is time-sensitive. The government procurement is moving forward with or without optimized targeting. Our window to multiply this investment's impact requires immediate action."
+            </p>
+        </section>
+    </div>
+
+    <!-- Full Width Section Break -->
+    <div class="visual-break">
+        <div class="visual-placeholder">
+            <div class="visual-placeholder-icon">📸</div>
+            <div style="font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">
+ Photo: Child receiving nutritional supplement            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <h2 class="section-header" style="text-align: center; margin: 4rem 0;">Building on Proven Foundations</h2>
+
+        <!-- Malaria Prevention -->
+        <section class="intervention-card">
+            <h3 class="intervention-title">Malaria Prevention</h3>
+            <p class="intervention-meta">Stage 4 • Nigeria</p>
+            <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem;">
+                Reaching the Neglected 200 Million
+            </p>
+            
+            <p>
+                School-age children represent the missing piece in global malaria elimination efforts. They carry up to 60% of community infections yet receive virtually no targeted interventions. Our prevalence surveys in Nigeria revealed infection rates of 19.6% and 35.6%—clear evidence that this age group requires immediate attention.
+            </p>
+
+            <p>
+                Working with Nigeria's National Malaria Elimination Programme, we're piloting intermittent preventive treatment that could break transmission cycles and protect entire communities. Nigeria bears 31% of global malaria deaths, making success here globally significant.
+            </p>
+        </section>
+
+        <!-- Water Treatment -->
+        <section class="intervention-card">
+            <h3 class="intervention-title">Water Treatment Vouchers</h3>
+            <p class="intervention-meta">Stage 4 • Liberia</p>
+            <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem;">
+                Solving the "Free but Unused" Problem
+            </p>
+            
+            <p>
+                In Liberia, we're tackling one of development's most persistent challenges: why do people accept free health products but then fail to use them? Our voucher system has reduced chlorine waste by 60% while maintaining usage rates, proving that smart targeting can dramatically improve cost-effectiveness.
+            </p>
+
+            <p>
+                Early results show promise, but we're adapting in real-time. When facility-based redemption created barriers, we innovated with community-based distribution points. This iterative approach exemplifies how Evidence Action maximizes impact through continuous learning.
+            </p>
+        </section>
+    </div>
+
+    <!-- Visual Break 3 -->
+    <div class="visual-break">
+        <div class="visual-placeholder">
+            <div class="visual-placeholder-icon">📸</div>
+            <div style="font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">
+                Photo: Water treatment distribution in Liberia
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <h2 class="section-header" style="text-align: center; margin: 4rem 0;">The Portfolio Approach to Global Impact</h2>
+
+        <!-- Immunization -->
+        <section class="intervention-card">
+            <h3 class="intervention-title">Immunization Demand Generation</h3>
+            <p class="intervention-meta">Stage 4 • India, Zambia, Cameroon, Nigeria</p>
+            <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem;">
+                Learning from Nobel Laureates
+            </p>
+            
+            <p>
+                Twenty-one million children remain unvaccinated globally, with 14.5 million never receiving a single dose. Working with Nobel laureates Esther Duflo and Abhijit Banerjee, we're testing behavioral interventions that increased immunization rates by 44% in research settings.
+            </p>
+
+            <div class="stats-callout">
+                <div class="stat-item">
+                    <div class="stat-number">44%</div>
+                    <div class="stat-label">Increase in immunization rates from research</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">21M</div>
+                    <div class="stat-label">Children globally remain unvaccinated</div>
+                </div>
+            </div>
+
+            <p>
+                Our three-pronged approach—digital reminders, community ambassadors, and targeted incentives—addresses the demand-side barriers that keep children from life-saving vaccines. With a pilot launching in Q1 2026, we're positioned to scale solutions that could protect millions of children.
+            </p>
+        </section>
+
+        <!-- HPV Vaccination -->
+        <section class="intervention-card">
+            <h3 class="intervention-title">HPV Vaccination</h3>
+            <p class="intervention-meta">Stage 5 • Malawi</p>
+            <p style="font-weight: 600; font-size: 1.1rem; margin-bottom: 1rem;">
+                Preventing Cancer Before It Starts
+            </p>
+            
+            <p>
+                Cervical cancer claims 350,000 lives annually, yet we have a vaccine that prevents 99% of common cancer-causing strains. In Malawi, where cervical cancer rates are among the world's highest, our school-based delivery model could prevent 18,000 cancer cases and save 15,000 lives over five years.
+            </p>
+
+            <div class="stats-callout">
+                <div class="stat-item">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">Prevention of cancer-causing HPV strains</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">35%</div>
+                    <div class="stat-label">More girls reached through schools vs. clinics</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">18,000</div>
+                    <div class="stat-label">Cancer cases preventable over five years</div>
+                </div>
+            </div>
+
+            <p>
+                The infrastructure exists. The vaccine works. The only barrier is funding to support systematic implementation across multiple countries where we already operate school health programs.
+            </p>
+        </section>
+    </div>
+
+    <!-- Full Width Visual -->
+    <div class="visual-break">
+        <div class="visual-placeholder">
+            <div class="visual-placeholder-icon">📸</div>
+            <div style="font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;">
+                    Photo: School-based health program in Malawi
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <section class="section">
+            <h2 class="section-header">Why This Moment Matters</h2>
+            <p>
+                Evidence Action's Accelerator has spent five years building the foundation for this unprecedented scaling opportunity. We've navigated the rigorous six-stage development process where only 2% of interventions survive. We've built government partnerships that took years to establish. We've gathered the evidence that donors demand.
+            </p>
+
+            <p>
+                Now, seven interventions are ready to transition from promising pilots to population-scale implementation. The convergence is remarkable: government procurement cycles, research timelines, and funding windows are aligning to create maximum leverage for donor investment.
+            </p>
+
+            <p class="quote-block">
+                "Every dollar invested in our technical assistance leverages government resources, existing infrastructure, and proven delivery systems. In Nigeria alone, our SQ-LNS investment multiplies a $30 million government procurement."
+            </p>
+        </section>
+
+        <section class="section">
+            <h2 class="section-header">The Choice Ahead</h2>
+            <p>
+                Global health stands at a crossroads. Traditional approaches are reaching their limits while new challenges emerge daily. Evidence Action's Accelerator represents a different path—one where rigorous evidence meets operational excellence, where government partnership enables sustainable scale, and where donor investment achieves maximum impact.
+            </p>
+
+            <p>
+                These seven interventions represent more than promising health solutions. They represent a new model for how the global health community can identify, test, and scale the interventions that will define the next decade of development progress.
+            </p>
+
+            <p>
+                The question isn't whether these interventions work—the evidence is clear. The question is whether we'll seize this moment when all the pieces have aligned for transformational impact at unprecedented scale.
+            </p>
+        </section>
+    </div>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <h2 style="color:#ffffff">The Time for Action is Now</h2>
+        <p style="color:#ffffff;">
+            The opportunity for impact has never been greater. Join us in transforming lives at scale.
+        </p>
+        <a href="#" class="cta-button">Support the Accelerator</a>
+    </section>
+
+</body>
+</html>
