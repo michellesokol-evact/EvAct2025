@@ -6,7 +6,6 @@
     <title>Malawi IFA Cost-Effectiveness Slide</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;400;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
     <style>
         /* Evidence Action Brand Colors */
         :root {
@@ -298,12 +297,9 @@
 
         Chart.defaults.font.family = "'Roboto Condensed', Arial, sans-serif";
         Chart.defaults.color = eaColors.ink;
-        
-        // Register the annotation plugin
-        Chart.register(ChartAnnotation);
 
         const ctx = document.getElementById('costChart').getContext('2d');
-        new Chart(ctx, {
+        const chart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Malawi IFA'],
@@ -313,7 +309,7 @@
                     backgroundColor: eaColors.magenta,
                     borderColor: eaColors.magenta,
                     borderWidth: 4,
-                    borderRadius: 6,
+                    borderRadius: 8,
                     borderSkipped: false,
                 }]
             },
@@ -343,94 +339,6 @@
                             },
                             afterLabel: function(context) {
                                 return 'EXCEPTIONAL cost-effectiveness';
-                            }
-                        }
-                    },
-                    annotation: {
-                        annotations: {
-                            whoLine: {
-                                type: 'line',
-                                yMin: 508,
-                                yMax: 508,
-                                borderColor: eaColors.purple,
-                                borderWidth: 3,
-                                borderDash: [8, 4],
-                                label: {
-                                    content: 'WHO Threshold ($508)',
-                                    display: true,
-                                    position: 'end',
-                                    backgroundColor: eaColors.purple,
-                                    color: eaColors.white,
-                                    font: {
-                                        size: 12,
-                                        weight: 'bold'
-                                    },
-                                    padding: 6,
-                                    borderRadius: 4
-                                }
-                            },
-                            eaHighLine: {
-                                type: 'line',
-                                yMin: 345,
-                                yMax: 345,
-                                borderColor: eaColors.kale,
-                                borderWidth: 3,
-                                borderDash: [8, 4],
-                                label: {
-                                    content: 'EA High Bar ($345)',
-                                    display: true,
-                                    position: 'end',
-                                    backgroundColor: eaColors.kale,
-                                    color: eaColors.white,
-                                    font: {
-                                        size: 12,
-                                        weight: 'bold'
-                                    },
-                                    padding: 6,
-                                    borderRadius: 4
-                                }
-                            },
-                            eaHighestLine: {
-                                type: 'line',
-                                yMin: 127,
-                                yMax: 127,
-                                borderColor: eaColors.green,
-                                borderWidth: 2,
-                                borderDash: [4, 2],
-                                label: {
-                                    content: 'EA Highest Bar ($127)',
-                                    display: true,
-                                    position: 'start',
-                                    backgroundColor: eaColors.green,
-                                    color: eaColors.white,
-                                    font: {
-                                        size: 12,
-                                        weight: 'bold'
-                                    },
-                                    padding: 6,
-                                    borderRadius: 4
-                                }
-                            },
-                            eaTargetLine: {
-                                type: 'line',
-                                yMin: 690,
-                                yMax: 690,
-                                borderColor: eaColors.tangerine,
-                                borderWidth: 2,
-                                borderDash: [12, 6],
-                                label: {
-                                    content: 'EA Target Bar ($690)',
-                                    display: true,
-                                    position: 'end',
-                                    backgroundColor: eaColors.tangerine,
-                                    color: eaColors.ink,
-                                    font: {
-                                        size: 12,
-                                        weight: 'bold'
-                                    },
-                                    padding: 6,
-                                    borderRadius: 4
-                                }
                             }
                         }
                     }
@@ -476,7 +384,51 @@
                         }
                     }
                 }
-            }
+            },
+            plugins: [{
+                id: 'thresholdLines',
+                afterDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    const chartArea = chart.chartArea;
+                    const yAxis = chart.scales.y;
+                    
+                    // Threshold data
+                    const thresholds = [
+                        { value: 508, label: 'WHO Threshold ($508)', color: eaColors.purple },
+                        { value: 345, label: 'EA High Bar ($345)', color: eaColors.kale },
+                        { value: 127, label: 'EA Highest Bar ($127)', color: eaColors.green },
+                        { value: 690, label: 'EA Target Bar ($690)', color: eaColors.tangerine }
+                    ];
+                    
+                    ctx.save();
+                    
+                    thresholds.forEach((threshold, index) => {
+                        const yPixel = yAxis.getPixelForValue(threshold.value);
+                        
+                        // Draw dashed line
+                        ctx.setLineDash([8, 4]);
+                        ctx.lineWidth = 3;
+                        ctx.strokeStyle = threshold.color;
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(chartArea.left, yPixel);
+                        ctx.lineTo(chartArea.right, yPixel);
+                        ctx.stroke();
+                        
+                        // Draw label
+                        ctx.setLineDash([]);
+                        ctx.fillStyle = threshold.color;
+                        ctx.fillRect(chartArea.right - 150, yPixel - 12, 140, 20);
+                        
+                        ctx.fillStyle = eaColors.white;
+                        ctx.font = 'bold 12px Roboto Condensed, Arial, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(threshold.label, chartArea.right - 80, yPixel + 3);
+                    });
+                    
+                    ctx.restore();
+                }
+            }]
         });
     </script>
 </body>

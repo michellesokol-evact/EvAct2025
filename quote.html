@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Carousel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+        }
+
+        /* Quote Carousel Section */
+        .quote-carousel-section {
+            max-width: 450px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .quote-carousel-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quote-carousel-section h3 {
+            color: #05545a;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .quote-carousel-container {
+            position: relative;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .quote-carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quote-carousel-track {
+            display: flex;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .quote-slide {
+            width:450px;
+            min-width: 450px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quote-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .quote-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .quote-slide.active .quote-image {
+            animation: subtleZoom 8s ease-in-out;
+        }
+
+        @keyframes subtleZoom {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .quote-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(5, 84, 90, 0.9) 0%, transparent 100%);
+            padding: 25px;
+            color: white;
+        }
+
+        .quote-attribution-name {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .quote-attribution-title {
+            font-size: 0.85rem;
+            opacity: 0.95;
+            line-height: 1.3;
+        }
+
+        .quote-content-wrapper {
+            padding: 35px 30px;
+            position: relative;
+            background: white;
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 4rem;
+            color: #e600a0;
+            opacity: 0.15;
+            line-height: 1;
+            font-family: Georgia, serif;
+        }
+
+        .quote-accent-bar {
+            width: 50px;
+            height: 3px;
+            background: #e600a0;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quote-text {
+            position: relative;
+            z-index: 2;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #20253a;
+            font-style: italic;
+        }
+
+      
+
+        /* Carousel Navigation */
+        .quote-carousel-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .quote-carousel-button {
+            width: 35px;
+            height: 35px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #05545a;
+            transition: all 0.3s ease;
+        }
+
+        .quote-carousel-button:hover {
+            background: #e600a0;
+            color: white;
+            border-color: #e600a0;
+            transform: scale(1.1);
+        }
+
+        .quote-carousel-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .quote-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #d0d0d0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quote-dot.active {
+            background: #e600a0;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        .quote-dot:hover {
+            background: #05545a;
+        }
+
+        /* Auto-play indicator */
+        .quote-carousel-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: #e600a0;
+            transition: none;
+        }
+
+        @media (max-width: 768px) {
+            .quote-carousel-section {
+                max-width: 400px;
+            }
+
+            .quote-image-wrapper {
+                height: 250px;
+            }
+
+            .quote-content-wrapper {
+                padding: 30px 25px;
+            }
+
+            .quote-icon {
+                font-size: 3rem;
+                top: 15px;
+                left: 25px;
+            }
+
+            .quote-text {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quote-carousel-section visible">
+        <h3>Voices from the Field</h3>
+        <div class="quote-carousel-container">
+            <div class="quote-carousel-wrapper">
+                <div class="quote-carousel-track" id="quoteCarouselTrack">
+                    
+                    <!-- Slide 1 -->
+                    <div class="quote-slide active">
+                        <div class="quote-image-wrapper">
+                            <img src="https://assets.evidenceaction.org/web/images/Iron-and-Folic/IFA-in-Mahil-Village-1920-x-1280-1.webp" alt="Community health worker" class="quote-image">
+                            <div class="quote-image-overlay">
+                                <div class="quote-attribution-name">Sarita Devi</div>
+                                <div class="quote-attribution-title">ASHA health worker, Jharkhand</div>
+                            </div>
+                        </div>
+                        <div class="quote-content-wrapper">
+                           
+                            <div class="quote-text">
+"It gives me immense joy to counsel mothers about the importance of iron — how IFA syrup supports the mental and physical development of children, and how iron is vital during pregnancy for the health of both mother and baby. Being able to share this knowledge with my community is deeply fulfilling.  "                          </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="quote-slide">
+                        <div class="quote-image-wrapper">
+                            <img src="https://assets.evidenceaction.org/web/images/Safe-Water/India-Safe-Water-Madhya-Pradesh-1920-x-1280-1.webp" alt="Mother and child" class="quote-image">
+                            <div class="quote-image-overlay">
+                                <div class="quote-attribution-name">Farzana</div>
+                                <div class="quote-attribution-title">Mother, Jawali</div>
+                            </div>
+                        </div>
+                        <div class="quote-content-wrapper">
+                           
+                            <div class="quote-text">
+                                "Children weren't healthy because the water wasn't pure. We had to take the children to the hospital freqently due to vomitting and diarrhea. They couldn't attend school regularly. The chlorinated water has made a significant difference. Everyone is safe, the children are attending school regularly, and the adults are also doing well at home."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="quote-slide">
+                        <div class="quote-image-wrapper">
+                            <img src="https://assets.evidenceaction.org/web/images/Deworm-the-World/DTW_5.00_04_52_09.Still001.jpg" alt="Field worker" class="quote-image">
+                            <div class="quote-image-overlay">
+                                <div class="quote-attribution-name">Oladoyinbo Tunji</div>
+                                <div class="quote-attribution-title">Oyo State Coordinator, Neglected Tropical Diseases, Nigeria</div>
+                            </div>
+                        </div>
+                        <div class="quote-content-wrapper">
+                           
+                            <div class="quote-text">
+                                "After a year, there was improvement. We heard that the boy who always comes last in school. But immediately he took [the deworming tablet] and he began to come either first or second. Had it been the boy didn't take the drugs, he would have dropped out."
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="quote-slide">
+                        <div class="quote-image-wrapper">
+                            <img src="https://assets.evidenceaction.org/web/images/Accelerator/MMS-in-Nigeria-1056-x-594-1.webp" alt="Community leader" class="quote-image">
+                            <div class="quote-image-overlay">
+                                <div class="quote-attribution-name">Jenniffer Akomaye</div>
+                                <div class="quote-attribution-title">MMS beneficiary, Nigeria</div>
+                            </div>
+                        </div>
+                        <div class="quote-content-wrapper">
+                           
+                            <div class="quote-text">
+"I wake up very strong without feeling nauseous. I eat whatever I want to eat. I feel this surge of energy. I would recommend this medication to every expecting mother and then I would say a huge thank you to the people that put this together because it's a lifesaver for me."                           </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5 -->
+                   
+
+                </div>
+                <div class="quote-carousel-progress" id="quoteCarouselProgress"></div>
+            </div>
+            
+            <div class="quote-carousel-nav">
+                <button class="quote-carousel-button" id="quotePrevBtn" aria-label="Previous quote">‹</button>
+                <div class="quote-carousel-dots" id="quoteCarouselDots"></div>
+                <button class="quote-carousel-button" id="quoteNextBtn" aria-label="Next quote">›</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quote Carousel Functionality
+        class QuoteCarousel {
+            constructor() {
+                this.currentSlide = 0;
+                this.slides = document.querySelectorAll('.quote-slide');
+                this.track = document.getElementById('quoteCarouselTrack');
+                this.prevBtn = document.getElementById('quotePrevBtn');
+                this.nextBtn = document.getElementById('quoteNextBtn');
+                this.dotsContainer = document.getElementById('quoteCarouselDots');
+                this.progressBar = document.getElementById('quoteCarouselProgress');
+                this.autoplayInterval = null;
+                this.autoplayDuration = 8000; // 8 seconds per slide
+                this.progressStartTime = null;
+                this.progressAnimationFrame = null;
+                
+                this.init();
+            }
+
+            init() {
+                // Create dots
+                this.slides.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('quote-dot');
+                    if (index === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                    this.dotsContainer.appendChild(dot);
+                });
+
+                // Button listeners
+                this.prevBtn.addEventListener('click', () => this.previousSlide());
+                this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+                // Start autoplay
+                this.startAutoplay();
+
+                // Pause on hover
+                const container = document.querySelector('.quote-carousel-container');
+                container.addEventListener('mouseenter', () => this.stopAutoplay());
+                container.addEventListener('mouseleave', () => this.startAutoplay());
+            }
+
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.updateCarousel();
+                this.resetAutoplay();
+            }
+
+            nextSlide() {
+                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                this.updateCarousel();
+                this.resetAutoplay();
+            }
+
+            previousSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                this.updateCarousel();
+                this.resetAutoplay();
+            }
+
+            updateCarousel() {
+                // Move track
+                const offset = -this.currentSlide * 100;
+                this.track.style.transform = `translateX(${offset}%)`;
+
+                // Update active slide
+                this.slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === this.currentSlide);
+                });
+
+                // Update dots
+                const dots = this.dotsContainer.querySelectorAll('.quote-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+
+            animateProgress() {
+                const elapsed = Date.now() - this.progressStartTime;
+                const progress = Math.min((elapsed / this.autoplayDuration) * 100, 100);
+                this.progressBar.style.width = `${progress}%`;
+
+                if (progress < 100) {
+                    this.progressAnimationFrame = requestAnimationFrame(() => this.animateProgress());
+                }
+            }
+
+            startAutoplay() {
+                this.stopAutoplay(); // Clear any existing intervals
+                
+                // Start progress animation
+                this.progressStartTime = Date.now();
+                this.progressBar.style.width = '0%';
+                this.animateProgress();
+
+                // Auto-advance
+                this.autoplayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, this.autoplayDuration);
+            }
+
+            stopAutoplay() {
+                if (this.autoplayInterval) {
+                    clearInterval(this.autoplayInterval);
+                    this.autoplayInterval = null;
+                }
+                if (this.progressAnimationFrame) {
+                    cancelAnimationFrame(this.progressAnimationFrame);
+                    this.progressAnimationFrame = null;
+                }
+                this.progressBar.style.width = '0%';
+            }
+
+            resetAutoplay() {
+                this.stopAutoplay();
+                this.startAutoplay();
+            }
+        }
+
+        // Initialize carousel
+        document.addEventListener('DOMContentLoaded', () => {
+            new QuoteCarousel();
+        });
+
+        // Intersection Observer for fade-in animation
+        const quoteObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        document.querySelectorAll('.quote-carousel-section').forEach(section => {
+            quoteObserver.observe(section);
+        });
+    </script>
+
+    <div class="donation-table-container">
+<p>For a donation to be recognized in 2025, it must be <strong>received by December 31</strong>; except for donations via mail such as checks, which must be <strong>postmarked by December 31</strong>.<br><br>For more details on suggested donation timelines, please see below:<br><br></p>
+
+<table class="donation-table" cellpadding="8">
+<tbody>
+<tr style="height:13px;">
+<td style="width:490.905px;height:13px;background-color:#05545a;"><span style="color:#ffffff;"><strong>Payment Type</strong></span></td>
+<td style="width:341.095px;height:13px;background-color:#d5f4f7;"><strong>Suggested Initiation Date*</strong></td>
+</tr>
+<tr style="height:13px;">
+<td style="width:490.905px;height:13px;"><span style="font-weight:400;">Donations through our <a href="https://www.evidenceaction.org/donate?form=donateevidenceaction">online donation platform</a> with a payment method of <strong>credit/debit card, Apple Pay/Google Pay, Venmo, or PayPal</strong></span></td>
+<td style="width:341.095px;height:13px;"><span style="font-weight:400;">On or before December 31</span></td>
+</tr>
+<tr style="height:13px;background-color:#ecfafb;">
+<td style="width:490.905px;height:13px;"><span style="font-weight:400;">Donations through our <a href="https://www.evidenceaction.org/donate?form=donateevidenceaction">online donation platform</a> via bank transfer <strong>(US ACH Direct Debit)</strong></span></td>
+<td style="width:341.095px;height:13px;">On or before December 23</td>
+</tr>
+<tr style="height:13px;">
+<td style="width:490.905px;height:13px;"><span style="font-weight:400;">ACH/Wire Transfers (directly from your bank rather than through our online donation platform)</span></td>
+<td style="width:341.095px;height:13px;"><p>On or before December 23 (must request ACH/wire instructions in advance at donate@evidenceaction.org)</p></td>
+</tr>
+<tr style="height:13px;background-color:#ecfafb;">
+<td style="width:490.905px;height:13px;"><span style="font-weight:400;">Checks - sent via standard mail</span></td>
+<td style="width:341.095px;height:13px;">Postmarked by December 31</td>
+</tr>
+<tr style="height:13px;">
+<td style="width:490.905px;height:13px;"><span style="font-weight:400;">Appreciated securities, such as stocks</span></td>
+<td style="width:341.095px;height:13px;"><p>On or before December 16</p></td>
+</tr>
+<tr style="height:13px;background-color:#ecfafb;">
+<td style="width:490.905px;height:13px;"><span style="font-weight:400;">Cryptocurrency</span></td>
+<td style="width:341.095px;height:13px;"><span style="font-weight:400;">On or before December 31 directly through <a href="https://www.every.org/evidence-action?method=crypto&utm_campaign=donate-link#/donate/crypto" target="_blank" rel="noreferrer noopener">the Every.org website</a>**<em><br></em></span></td>
+</tr>
+</tbody>
+</table>
+<small class="fine-print"></small></div>
+<div class="donation-table-container"> </div>
+<div class="donation-table-container">*These are suggestions only – please note that processing times vary by geography, bank, and donation type and may take longer. We recommend confirming processing times with your financial institution. For wire, bank transfer, check sent via carrier, stock, and cryptocurrency donations, Evidence Action can recognize a gift in 2025 if received by December 31, 2025; if received after the gift will be recognized in 2026. Donations made via our website - with any payment method other than US ACH direct debit - can be made up until midnight (ET) on December 31, 2025.<br><br>**To donate currency not listed on the Every.org website, or to secure advantageous exchange rates on large donations (valued at $5,000 USD or more), please contact donate@evidenceaction.org and allow for additional processing time.<br><br>For questions on whether your donation is tax deductible, check out our <a href="https://www.evidenceaction.org/donate#faqs">FAQ</a>. If you're interested in making a tax-deductible donation from another country, we partner with organizations across multiple countries, listed <a href="https://www.evidenceaction.org/donate#countrytaxinfo">here</a>. Please note the suggested dates above are not intended to apply to our partner organizations or third parties; please check with the relevant entity directly about year-end giving deadlines.</div>
+</body>
+</html>

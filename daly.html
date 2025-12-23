@@ -55,7 +55,8 @@
     .who-line { position:absolute; top:0; bottom:0; width:2px; border-left:2px dashed #EC4899;; } /* blue dashed */
     .who-label { position:absolute; top:-45px; left:50%; transform:translateX(-50%); font-size:11px; color:#EC4899;; text-align:center; white-space:nowrap; }
   </style>
-
+</head>
+<body>
   <div class="container">
       <span class="title">COST PER DALY AVERTED</span>
    
@@ -348,4 +349,341 @@ function setActiveTab(country) {
     <ul>
 <li style="margin-left:20px;"><span style="color:#05545a">YLL (years of life lost)</span> = n (number of deaths) x L1 (the standard life expectancy at age of death)</li>
 <li style="margin-left:20px;"><span style="color:#05545a">YLD (years lived with disability)</span> = l (number of new cases of a disease) x DW (disability weight) x L2 (duration of disability)</li></ul>
-<p>*This is a hyper-simplified formula to help communicate this concept in general terms. When calculating DALYs, we also take into account other variables like discounting, which considers time preferencing for effects now vs. later. If you are interested in the full explanation of how we calculate DALYs, feel free to email us at communications@evidenceaction.org.</p></div>
+<p style="font-style:italic;font-size:13px;">*This is a hyper-simplified formula to help communicate this concept in general terms. When calculating DALYs, we also take into account other variables like discounting, which considers time preferencing for effects now vs. later. If you are interested in the full explanation of how we calculate DALYs, feel free to email us at communications@evidenceaction.org.</p></div>
+
+
+<style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    .container { max-width:800px; margin:0 auto; background:#fff; border-radius:8px; padding:40px; box-shadow:0 2px 8px rgba(0,0,0,.1); }
+    .legend { display:flex; gap:30px; margin-bottom:16px; flex-wrap:wrap; justify-content:center;}
+    .legend-item { display:flex; align-items:center; gap:8px; font-size:12px; }
+    .legend-dot { width:12px; height:12px; border-radius:50%; }
+    .early-stage{background:#8B5CF6;} .late-stage{background:#1F2937;} .at-scale{background:#EC4899;}
+.who-comparison {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+    /* NEW: Country tabs */
+    .country-tabs { display:flex; gap:8px; flex-wrap:wrap; margin:8px 0 14px 0; }
+    .country-tab {
+      padding:6px 10px; font-size:12px; border:1px solid #e5e7eb; border-radius:999px; background:#fff; color:#374151;
+      cursor:pointer; transition:all .15s ease;
+    }
+    .country-tab:hover { border-color:#EC4899; color:#EC4899; }
+    .country-tab.active { background:#EC4899; color:#fff; border-color:#EC4899; }
+
+    .chart-container { overflow-x:auto; overflow-y:hidden; }
+    .chart-wrapper { position:relative; height:300px; margin-top:50px; margin-bottom:10px; min-width:1400px; }
+    .y-axis { position:absolute; left:0; top:0; bottom:60px; width:280px; display:flex; flex-direction:column; }
+    .program-label {
+      font-size:11px; text-align:right; padding-right:10px; cursor:pointer; transition:all .2s; line-height:1.3;
+      flex:1; display:flex; align-items:center; justify-content:flex-end;
+    }
+    .program-label:hover { font-weight:600; color:#EC4899; }
+    .chart-area { position:absolute; left:290px; right:0; top:0; bottom:60px; border-left:2px solid #e5e7eb; border-bottom:2px solid #e5e7eb; }
+    .x-axis { position:absolute; bottom:0; left:290px; right:0; height:40px; display:flex; justify-content:space-between; padding:10px 0; flex-direction:row-reverse; }
+    .x-label { font-size:12px; color:#6b7280; }
+    .x-axis-title { position:absolute; bottom:-5px; left:50%; transform:translateX(-50%); font-size:13px; font-weight:600; color:#EC4899; }
+.title {display: flex; justify-content:center;font-size:18px; margin-bottom:5px;font-weight:600; color:#EC4899; text-align: center;}
+    .threshold-line { position:absolute; top:0; bottom:0; width:2px; border-left:2px dashed #d1d5db; }
+    .threshold-label { position:absolute; top:-45px; left:50%; transform:translateX(-50%); font-size:11px; color:#6b7280; white-space:nowrap; text-align:center; }
+
+    .data-point { position:absolute; width:10px; height:10px; border-radius:50%; cursor:pointer; transition:all .2s; z-index:10; }
+    .data-point:hover { transform:scale(1.5); z-index:20; }
+    .confidence-interval { position:absolute; height:2px; background:currentColor; opacity:.3; }
+
+    .tooltip { position:fixed; background:#1F2937; color:#fff; padding:12px 16px; border-radius:6px; font-size:12px; pointer-events:none; opacity:0; transition:opacity .2s; z-index:100; max-width:250px; line-height:1.5; }
+    .tooltip.visible { opacity:1; }
+.who-note {font-size:11px; color:#6b7280; font-style:italic; }
+    .note { text-align: center;display: flex; flex-direction:column; justify-content:center;margin-top:30px; font-size:11px; color:#6b7280; font-style:italic; }
+
+    /* NEW: WHO line styling */
+    .who-line { position:absolute; top:0; bottom:0; width:2px; border-left:2px dashed #EC4899;; } /* blue dashed */
+    .who-label { position:absolute; top:-45px; left:50%; transform:translateX(-50%); font-size:11px; color:#EC4899;; text-align:center; white-space:nowrap; }
+  </style>
+
+  <div class="container">
+      <span class="title">COST PER DALY AVERTED</span>
+   
+
+    <!-- NEW: Country tabs container -->
+   
+    <div class="chart-container" id="chartContainer">
+      <div class="chart-wrapper" id="chartWrapper">
+        <div class="y-axis" id="yAxis"></div>
+        <div class="chart-area" id="chartArea">
+          <div class="threshold-line" id="targetThreshold">
+            <div class="threshold-label">Target CE<br/>Threshold<br/>$690</div>
+          </div>
+          <div class="threshold-line" id="highThreshold">
+            <div class="threshold-label">High CE<br/>Threshold<br/>$345</div>
+          </div>
+          <div class="threshold-line" id="highestThreshold">
+            <div class="threshold-label">Highest CE<br/>Threshold<br/>$127</div>
+          </div>
+
+          <!-- NEW: WHO 1×GDP line (hover/click) -->
+          <div class="who-line" id="whoLine" style="display:none;">
+            <div class="who-label" id="whoLabel">WHO 1×GDP: $—</div>
+          </div>
+        </div>
+        
+        <div class="x-axis" id="xAxis">
+            
+       
+        </div>
+       
+
+      </div>
+    </div>
+    <div class="who-comparison">
+    <span style="font-size:14px;margin-top:10px;">Comparing to World Health Organizaton Thresholds</span>
+    <span class="who-note" style="text-align:center;">The World Health Organization recommends that interventions costing less than a country's GDP per capita are "cost-effective." Although Evidence Action uses more stringent standards, we still verify that each program meets WHO's country-specific standard for each country where we consider implementation. </span>
+  <div class="country-tabs" id="countryTabs"></div>
+  </div>
+    <div class="tooltip" id="tooltip"></div>
+    
+
+    <div class="note">
+      Note: Deworming benefits are not measured in health units and thus DtW is not evaluated through cost-effectiveness terms<br/>
+      All cost-effectiveness figures are subject to change with the release of new studies or updated monitoring and evaluation results.
+    </div>
+  </div>
+
+  <script>
+    const programs = [
+      { name: "Dispensers for Safe Water (Kenya)", cost: 978, stage: "at-scale", min: null, max: null },
+      { name: "Dispensers for Safe Water (Uganda)", cost: 143.91, stage: "at-scale", min: null, max: null },
+      { name: "Dispensers for Safe Water (Malawi)", cost: 196, stage: "at-scale", min: null, max: null },
+      { name: "Iron & Folic Acid Supplementation (India)", cost: 56, stage: "at-scale", min: null, max: null },
+      { name: "Iron & Folic Acid Supplementation (Malawi)", cost: 243, stage: "at-scale", min: null, max: null },
+      { name: "Syphilis Free Start (Liberia)", cost: 148, stage: "at-scale", min: null, max: null },
+      { name: "Syphilis Free Start (Zambia)", cost: 20, stage: "at-scale", min: null, max: null },
+      { name: "Syphilis Free Start (Cameroon)", cost: 33, stage: "at-scale", min: null, max: null },
+    ];
+
+    // EDIT these to your preferred 1×GDP (USD) values used as WHO CE thresholds.
+    const gdpPerCapita = {
+      "Kenya": 2206,
+      "Uganda": 1073,
+      "Malawi": 508,
+      "India": 2697,
+      "Liberia": 846,
+      "Zambia": 1235,
+      "Cameroon": 1762    };
+
+    const minCost = 0;
+    const maxCost = 2800;
+    const chartWidth = 1070;
+
+    function clamp(val, min, max){ return Math.max(min, Math.min(max, val)); }
+    function costToX(cost) { return (clamp(cost, minCost, maxCost) / maxCost) * chartWidth; }
+
+    function extractCountry(label) {
+      const match = label.match(/\(([^)]+)\)\s*$/);
+      return match ? match[1].trim() : null;
+    }
+
+    function uniqueCountries() {
+      const set = new Set();
+      programs.forEach(p => {
+        const c = extractCountry(p.name);
+        if (c) set.add(c);
+      });
+      return Array.from(set);
+    }
+
+    function buildCountryTabs() {
+      const tabsEl = document.getElementById('countryTabs');
+      const countries = uniqueCountries();
+      countries.forEach(country => {
+        const tab = document.createElement('button');
+        tab.className = 'country-tab';
+        tab.type = 'button';
+        tab.textContent = country;
+
+        // Hover: preview WHO line
+        tab.addEventListener('mouseenter', () => showWhoLine(country, false));
+        tab.addEventListener('focus', () => showWhoLine(country, false));
+        tab.addEventListener('mouseleave', () => { if (!snappedCountry) hideWhoLine(); else if (snappedCountry !== country) showWhoLine(snappedCountry, true); });
+        tab.addEventListener('blur', () => { if (!snappedCountry) hideWhoLine(); });
+
+ // Click: toggle WHO line on/off
+tab.addEventListener('click', () => {
+  if (snappedCountry === country) {
+    // If already active, revert to default
+    snappedCountry = null;
+    setActiveTab(null);
+    hideWhoLine();
+  } else {
+    // Otherwise activate and center
+    snappedCountry = country;
+    setActiveTab(country);
+    showWhoLine(country, true);
+    centerOnWhoLine(country);
+  }
+});
+
+        tabsEl.appendChild(tab);
+      });
+    }
+
+function setActiveTab(country) {
+  document.querySelectorAll('.country-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent === country);
+  });
+}
+
+    let snappedCountry = null;
+
+    function showWhoLine(country, lock) {
+      const value = gdpPerCapita[country];
+      const whoLine = document.getElementById('whoLine');
+      const whoLabel = document.getElementById('whoLabel');
+
+      if (!value) {
+        whoLine.style.display = 'none';
+        return;
+      }
+
+      const x = costToX(value);
+      whoLine.style.left = x + 'px';
+      whoLabel.innerHTML = `WHO Threshold (1× GDP)<br/>${country}: $${value.toLocaleString()}`;
+      whoLine.style.display = 'block';
+
+      if (lock) snappedCountry = country;
+    }
+
+    function hideWhoLine() {
+      const whoLine = document.getElementById('whoLine');
+      whoLine.style.display = 'none';
+    }
+
+    function centerOnWhoLine(country) {
+      const value = gdpPerCapita[country];
+      if (!value) return;
+
+      // Determine absolute x of the line relative to the scrollable wrapper
+      const xWithinChartArea = costToX(value);         // left within .chart-area
+      const chartAreaLeft = 290;                       // .chart-area { left: 290px; }
+      const xAbsolute = chartAreaLeft + xWithinChartArea;
+
+      const container = document.getElementById('chartContainer');
+      const containerWidth = container.clientWidth;
+
+      const targetScrollLeft = Math.max(0, xAbsolute - containerWidth / 2);
+      container.scrollTo({ left: targetScrollLeft, behavior: 'smooth' });
+    }
+
+    function renderChart() {
+      const yAxis = document.getElementById('yAxis');
+      const chartArea = document.getElementById('chartArea');
+      const xAxis = document.getElementById('xAxis');
+      const tooltip = document.getElementById('tooltip');
+
+      // Y-axis labels
+      programs.forEach((program, index) => {
+        const label = document.createElement('div');
+        label.className = 'program-label';
+        label.textContent = program.name;
+        label.dataset.index = index;
+        yAxis.appendChild(label);
+      });
+
+      // Fixed thresholds
+      const thresholds = [
+        { id: 'targetThreshold', value: 690 },
+        { id: 'highThreshold', value: 345 },
+        { id: 'highestThreshold', value: 127 }
+      ];
+      thresholds.forEach(thr => {
+        const line = document.getElementById(thr.id);
+        line.style.left = costToX(thr.value) + 'px';
+      });
+
+      // X-axis labels
+      const xLabels = [2600, 2400, 2200, 2000, 1800, 1600, 1400, 1200, 1000, 800, 600, 400, 200, 0];
+      xLabels.forEach(value => {
+        const label = document.createElement('span');
+        label.className = 'x-label';
+        label.textContent = value;
+        label.style.position = 'absolute';
+        label.style.left = costToX(value) + 'px';
+        label.style.transform = 'translateX(-50%)';
+        xAxis.appendChild(label);
+      });
+
+      // Plot points
+      const chartHeight = 300 - 60;
+      const heightPerProgram = chartHeight / programs.length;
+
+      programs.forEach((program, index) => {
+        const y = (index * heightPerProgram) + (heightPerProgram / 2);
+
+        if (program.min !== null && program.max !== null) {
+          const interval = document.createElement('div');
+          interval.className = 'confidence-interval';
+          interval.style.left = costToX(program.min) + 'px';
+          interval.style.width = (costToX(program.max) - costToX(program.min)) + 'px';
+          interval.style.top = y + 'px';
+
+          const stageColors = {
+            'early-stage': '#8B5CF6',
+            'late-stage' : '#1F2937',
+            'at-scale'   : '#EC4899'
+          };
+          interval.style.color = stageColors[program.stage];
+          chartArea.appendChild(interval);
+        }
+
+        const point = document.createElement('div');
+        point.className = 'data-point';
+        point.style.left = (costToX(program.cost) - 5) + 'px';
+        point.style.top = (y - 5) + 'px';
+
+        const stageColors = {
+          'early-stage': '#8B5CF6',
+          'late-stage' : '#1F2937',
+          'at-scale'   : '#EC4899'
+        };
+        point.style.background = stageColors[program.stage];
+
+        point.addEventListener('mouseenter', () => {
+          tooltip.innerHTML = `<strong>${program.name}</strong><br>$${program.cost} per DALY averted`;
+          if (program.min && program.max) tooltip.innerHTML += `<br>Range: $${program.min} - $${program.max}`;
+          tooltip.classList.add('visible');
+          const rect = point.getBoundingClientRect();
+          tooltip.style.left = (rect.left + 15) + 'px';
+          tooltip.style.top  = (rect.top - 40) + 'px';
+        });
+        point.addEventListener('mouseleave', () => { tooltip.classList.remove('visible'); });
+
+        chartArea.appendChild(point);
+      });
+
+      // Label hover tooltips
+      document.querySelectorAll('.program-label').forEach(label => {
+        label.addEventListener('mouseenter', (e) => {
+          const index = parseInt(e.target.dataset.index, 10);
+          const program = programs[index];
+          tooltip.innerHTML = `<strong>${program.name}</strong><br>$${program.cost} per DALY averted`;
+          if (program.min && program.max) tooltip.innerHTML += `<br>Range: $${program.min} - $${program.max}`;
+          tooltip.classList.add('visible');
+          const rect = e.target.getBoundingClientRect();
+          tooltip.style.left = (rect.right + 10) + 'px';
+          tooltip.style.top  = rect.top + 'px';
+        });
+        label.addEventListener('mouseleave', () => { tooltip.classList.remove('visible'); });
+      });
+    }
+
+    // Boot
+    renderChart();
+    buildCountryTabs();
+
+    // Optional: pre-select first country with known GDP
+    
+  </script>
+  </body></html>

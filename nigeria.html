@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malawi IFA Cost-Effectiveness Slide</title>
+    <title>Immunization Demand Generation</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200;400;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3.0.1/dist/chartjs-plugin-annotation.min.js"></script>
     <style>
         /* Evidence Action Brand Colors */
         :root {
@@ -14,6 +13,9 @@
             --ea-white: #ffffff;
             --ea-magenta: #e600a0;
             --ea-kale: #05545a;
+            --ea-target: #032a2d;
+            --ea-high: #044348;
+            --ea-highest: #69989c;
             --ea-blue: #d5f4f7;
             --ea-light-blue: #ecfafb;
             --ea-cool-gray: #f8f8fa;
@@ -22,27 +24,34 @@
             --ea-tangerine: #feca90;
         }
 
-        body {
+        html, body {
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* ensure no scrollbars on 1920x1080 */
+        }
+
+        body {
             font-family: 'Roboto Condensed', Arial, sans-serif;
             background: linear-gradient(135deg, var(--ea-white) 0%, var(--ea-light-blue) 100%);
-            height: 100vh;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: stretch;
+            justify-content: stretch;
         }
 
         .slide {
-            width: 1280px;
-            height: 720px;
+            width: 100vw;   /* fills 1920px width */
+            height: 100vh;  /* fills 1080px height */
             background: var(--ea-white);
-            box-shadow: 0 8px 32px rgba(32, 37, 58, 0.15);
-            border-radius: 8px;
+            box-sizing: border-box;
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            /* Remove rounded corners/shadow so it fits neatly full-screen */
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .slide::before {
@@ -53,26 +62,29 @@
             right: 0;
             height: 6px;
             background: linear-gradient(90deg, var(--ea-magenta), var(--ea-kale));
+            z-index: 1;
         }
 
         .slide-header {
-            padding: 50px 60px 30px 60px;
+            padding: 30px 50px 20px 50px;
             border-bottom: 2px solid var(--ea-light-blue);
+            position: relative;
+            z-index: 2;
         }
 
         .slide-title {
             font-family: 'JetBrains Mono', Arial, sans-serif;
             font-weight: 700;
-            font-size: 36px;
+            font-size: 40px;
             color: var(--ea-ink);
-            margin: 0 0 15px 0;
+            margin: 0 0 10px 0;
             line-height: 1.2;
         }
 
         .slide-subtitle {
             font-family: 'Roboto Condensed', Arial, sans-serif;
             font-weight: 300;
-            font-size: 20px;
+            font-size: 22px;
             color: var(--ea-ink);
             margin: 0;
             line-height: 1.3;
@@ -80,21 +92,23 @@
 
         .slide-content {
             flex: 1;
-            padding: 40px 60px;
+            padding: 30px 50px 60px 50px;
             display: flex;
             gap: 40px;
+            box-sizing: border-box;
         }
 
         .chart-section {
-            flex: 2;
+            flex: 1;
             display: flex;
             flex-direction: column;
+            min-width: 0; /* allow proper flex shrinking */
         }
 
         .chart-wrapper {
             flex: 1;
             position: relative;
-            min-height: 400px;
+            min-height: 0; /* allow canvas to fully fit vertical space */
         }
 
         .insights-section {
@@ -102,12 +116,14 @@
             display: flex;
             flex-direction: column;
             gap: 25px;
+            min-width: 0;
+            justify-content:center;
         }
 
         .key-metric {
             background: linear-gradient(135deg, var(--ea-magenta), #cc0089);
             color: var(--ea-white);
-            padding: 30px;
+            padding: 24px;
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 4px 16px rgba(230, 0, 160, 0.3);
@@ -116,7 +132,7 @@
         .metric-number {
             font-family: 'JetBrains Mono', Arial, sans-serif;
             font-weight: 700;
-            font-size: 48px;
+            font-size: 52px;
             display: block;
             margin-bottom: 8px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -137,7 +153,7 @@
 
         .comparison-card {
             background: var(--ea-light-blue);
-            padding: 20px;
+            padding: 18px;
             border-radius: 8px;
             border-left: 4px solid var(--ea-kale);
             display: flex;
@@ -161,7 +177,7 @@
 
         .bottom-note {
             background: var(--ea-cool-gray);
-            padding: 15px 20px;
+            padding: 14px 16px;
             border-radius: 6px;
             margin-top: auto;
         }
@@ -176,16 +192,16 @@
 
         .logo-area {
             position: absolute;
-            bottom: 30px;
-            right: 60px;
+            bottom: 24px;
+            right: 50px;
             display: flex;
             align-items: center;
             gap: 15px;
         }
 
         .logo-placeholder {
-            width: 120px;
-            height: 36px;
+            width: 140px;
+            height: 40px;
             background-color: var(--ea-ink);
             border-radius: 4px;
             display: flex;
@@ -199,34 +215,30 @@
             font-family: 'JetBrains Mono', Arial, sans-serif;
             font-weight: 700;
             font-size: 12px;
+            text-transform: lowercase;
         }
 
         .logo-accent {
             width: 3px;
-            height: 20px;
+            height: 22px;
             background-color: var(--ea-magenta);
             position: absolute;
             right: 12px;
             transform: rotate(15deg);
         }
 
-        /* Responsive adjustments */
+        /* Optional: fallback for smaller screens */
         @media (max-width: 1400px) {
-            .slide {
-                width: 1024px;
-                height: 576px;
-            }
-            
             .slide-title {
-                font-size: 28px;
+                font-size: 32px;
             }
-            
+
             .slide-subtitle {
                 font-size: 18px;
             }
-            
+
             .metric-number {
-                font-size: 36px;
+                font-size: 40px;
             }
         }
     </style>
@@ -234,8 +246,8 @@
 <body>
     <div class="slide">
         <div class="slide-header">
-            <h1 class="slide-title">Malawi IFA: Exceptional Cost-Effectiveness</h1>
-            <p class="slide-subtitle">Iron and Folic Acid supplementation significantly outperforms WHO cost-effectiveness thresholds</p>
+            <h1 class="slide-title">IDG: Exceptional Cost-Effectiveness</h1>
+            <p class="slide-subtitle">Immunization Demand Generation significantly outperforms WHO cost-effectiveness thresholds</p>
         </div>
 
         <div class="slide-content">
@@ -247,39 +259,33 @@
 
             <div class="insights-section">
                 <div class="key-metric">
-                    <span class="metric-number">$243</span>
-                    <p class="metric-label">Cost per DALY Averted<br><strong>Malawi IFA Program</strong></p>
+                    <span class="metric-number">$199</span>
+                    <p class="metric-label">Cost per DALY Averted<br><strong>Nigeria IDG</strong></p>
                 </div>
+                
 
                 <div class="comparison-cards">
                     <div class="comparison-card">
-                        <span class="comparison-label">vs. WHO Threshold ($508)</span>
-                        <span class="comparison-value">2.1x better</span>
+                        <span class="comparison-label">vs. WHO "Highly Cost-Effective" Threshold<br/><span style="font-size:12px; font-style: italic;">Nigeria's GDP per capita</span></span>
+                        <span class="comparison-value">4.1x better</span>
                     </div>
-                    
+<div class="comparison-card">
+                        <span class="comparison-label">vs. EA Target Bar</span>
+                        <span class="comparison-value">3.5x better</span>
+                    </div>
                     <div class="comparison-card">
-                        <span class="comparison-label">vs. EA High Bar ($345)</span>
-                        <span class="comparison-value">1.4x better</span>
+                        <span class="comparison-label">vs. EA High Bar</span>
+                        <span class="comparison-value">1.7x better</span>
                     </div>
+
                     
-                    <div class="comparison-card">
-                        <span class="comparison-label">vs. EA Highest Bar ($127)</span>
-                        <span class="comparison-value">1.9x cost</span>
-                    </div>
                 </div>
 
-                <div class="bottom-note">
-                    <p><strong>Evidence-based impact:</strong> Lower cost per DALY indicates higher cost-effectiveness. Malawi IFA demonstrates exceptional value in preventing anemia through government partnerships.</p>
-                </div>
+               
             </div>
         </div>
 
-        <div class="logo-area">
-            <div class="logo-placeholder">
-                <span class="logo-text">evidence action</span>
-                <div class="logo-accent"></div>
-            </div>
-        </div>
+       
     </div>
 
     <script>
@@ -293,27 +299,27 @@
             green: '#5dd9b3',
             purple: '#bc9ed2',
             tangerine: '#feca90',
-            white: '#ffffff'
+            white: '#ffffff',
+            highest: '#69989c',
+            high: '#044348',
+            target: '#032a2d'
         };
 
         Chart.defaults.font.family = "'Roboto Condensed', Arial, sans-serif";
         Chart.defaults.color = eaColors.ink;
-        
-        // Register the annotation plugin
-        Chart.register(ChartAnnotation);
 
         const ctx = document.getElementById('costChart').getContext('2d');
-        new Chart(ctx, {
+        const chart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Malawi IFA'],
+                labels: ['Nigeria IDG'],
                 datasets: [{
                     label: 'Cost per DALY',
-                    data: [243],
+                    data: [199],
                     backgroundColor: eaColors.magenta,
                     borderColor: eaColors.magenta,
                     borderWidth: 4,
-                    borderRadius: 6,
+                    borderRadius: 8,
                     borderSkipped: false,
                 }]
             },
@@ -341,104 +347,24 @@
                             label: function(context) {
                                 return `$${context.parsed.y} per DALY averted`;
                             },
-                            afterLabel: function(context) {
+                            afterLabel: function() {
                                 return 'EXCEPTIONAL cost-effectiveness';
                             }
                         }
-                    },
-                    annotation: {
-                        annotations: {
-                            whoLine: {
-                                type: 'line',
-                                yMin: 508,
-                                yMax: 508,
-                                borderColor: eaColors.purple,
-                                borderWidth: 3,
-                                borderDash: [8, 4],
-                                label: {
-                                    content: 'WHO Threshold ($508)',
-                                    display: true,
-                                    position: 'end',
-                                    backgroundColor: eaColors.purple,
-                                    color: eaColors.white,
-                                    font: {
-                                        size: 12,
-                                        weight: 'bold'
-                                    },
-                                    padding: 6,
-                                    borderRadius: 4
-                                }
-                            },
-                            eaHighLine: {
-                                type: 'line',
-                                yMin: 345,
-                                yMax: 345,
-                                borderColor: eaColors.kale,
-                                borderWidth: 3,
-                                borderDash: [8, 4],
-                                label: {
-                                    content: 'EA High Bar ($345)',
-                                    display: true,
-                                    position: 'end',
-                                    backgroundColor: eaColors.kale,
-                                    color: eaColors.white,
-                                    font: {
-                                        size: 12,
-                                        weight: 'bold'
-                                    },
-                                    padding: 6,
-                                    borderRadius: 4
-                                }
-                            },
-                            eaHighestLine: {
-                                type: 'line',
-                                yMin: 127,
-                                yMax: 127,
-                                borderColor: eaColors.green,
-                                borderWidth: 2,
-                                borderDash: [4, 2],
-                                label: {
-                                    content: 'EA Highest Bar ($127)',
-                                    display: true,
-                                    position: 'start',
-                                    backgroundColor: eaColors.green,
-                                    color: eaColors.white,
-                                    font: {
-                                        size: 12,
-                                        weight: 'bold'
-                                    },
-                                    padding: 6,
-                                    borderRadius: 4
-                                }
-                            },
-                            eaTargetLine: {
-                                type: 'line',
-                                yMin: 690,
-                                yMax: 690,
-                                borderColor: eaColors.tangerine,
-                                borderWidth: 2,
-                                borderDash: [12, 6],
-                                label: {
-                                    content: 'EA Target Bar ($690)',
-                                    display: true,
-                                    position: 'end',
-                                    backgroundColor: eaColors.tangerine,
-                                    color: eaColors.ink,
-                                    font: {
-                                        size: 12,
-                                        weight: 'bold'
-                                    },
-                                    padding: 6,
-                                    borderRadius: 4
-                                }
-                            }
-                        }
+                    }
+                },
+                layout: {
+                    padding: {
+                        top: 20,
+                        bottom: 20,
+                        left: 0,
+                        right: 0
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
-                        max: 750,
+                        max: 900,
                         title: {
                             display: true,
                             text: 'Cost per DALY Averted (USD)',
@@ -476,7 +402,59 @@
                         }
                     }
                 }
-            }
+            },
+            plugins: [{
+                id: 'thresholdLines',
+                afterDraw: function(chart) {
+                    const ctx = chart.ctx;
+                    const chartArea = chart.chartArea;
+                    const yAxis = chart.scales.y;
+
+                    const thresholds = [
+                        { value: 199, label: 'Nigeria IDG ($199)', color: eaColors.magenta },
+                        { value: 806, label: 'WHO Threshold ($806)', color: eaColors.high },
+                        { value: 345, label: 'EA High Bar ($345)', color: eaColors.kale },
+                        { value: 127, label: 'EA Highest Bar ($127)', color: eaColors.kale },
+                        { value: 690, label: 'EA Target Bar ($690)', color: eaColors.kale }
+                    ];
+
+                    ctx.save();
+
+                    thresholds.forEach((threshold) => {
+                        const yPixel = yAxis.getPixelForValue(threshold.value);
+
+                        // Skip drawing if outside chart area (safety for small heights)
+                        if (yPixel < chartArea.top || yPixel > chartArea.bottom) return;
+
+                        ctx.setLineDash([8, 4]);
+                        ctx.lineWidth = 3;
+                        ctx.strokeStyle = threshold.color;
+
+                        ctx.beginPath();
+                        ctx.moveTo(chartArea.left, yPixel);
+                        ctx.lineTo(chartArea.right, yPixel);
+                        ctx.stroke();
+
+                        // Label box
+                        const boxWidth = 170;
+                        const boxHeight = 22;
+                        const boxX = chartArea.right - boxWidth - 10;
+                        const boxY = yPixel - boxHeight / 2;
+
+                        ctx.setLineDash([]);
+                        ctx.fillStyle = threshold.color;
+                        ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
+
+                        ctx.fillStyle = eaColors.white;
+                        ctx.font = 'bold 12px "Roboto Condensed", Arial, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(threshold.label, boxX + boxWidth / 2, boxY + boxHeight / 2);
+                    });
+
+                    ctx.restore();
+                }
+            }]
         });
     </script>
 </body>

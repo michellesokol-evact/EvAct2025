@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Action Partner Content Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0066cc;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .welcome-banner {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .welcome-banner h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .welcome-banner p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #0066cc;
+        }
+
+        .stat-card .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #0066cc;
+            display: block;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .view-all-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .view-all-link:hover {
+            text-decoration: underline;
+        }
+
+        .program-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .program-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            position: relative;
+            bottom: -2px;
+        }
+
+        .program-tab:hover {
+            color: #0066cc;
+        }
+
+        .program-tab.active {
+            color: #0066cc;
+            border-bottom-color: #0066cc;
+        }
+
+        .program-content {
+            display: none;
+        }
+
+        .program-content.active {
+            display: block;
+        }
+
+        .program-summary {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #0066cc;
+        }
+
+        .program-summary h3 {
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .program-summary p {
+            color: #555;
+            margin-bottom: 1rem;
+        }
+
+        .update-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .content-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .content-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .content-card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .content-card-image.water {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .content-card-image.health {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .content-card-image.impact {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .content-type-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.95);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .content-card-body {
+            padding: 1.5rem;
+        }
+
+        .content-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .content-card-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .content-card-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .content-card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .content-card-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: #0066cc;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0052a3;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quick-action-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .quick-action-card:hover {
+            transform: scale(1.05);
+        }
+
+        .quick-action-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quick-action-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .download-count {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #0066cc;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .program-tabs {
+                flex-direction: column;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        .notification-banner {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .notification-banner .icon {
+            font-size: 1.5rem;
+        }
+
+        .notification-banner .content {
+            flex: 1;
+        }
+
+        .notification-banner .content strong {
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                🌍 Evidence Action Partner Hub
+            </div>
+            <div class="user-info">
+                <span>The Life You Can Save</span>
+                <div class="user-avatar">TL</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="welcome-banner">
+            <h1>Welcome back, TLYCS!</h1>
+            
+          
+        </div>
+
+       
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Programs & Latest Updates</h2>
+            </div>
+
+            <div class="program-tabs">
+                <button class="program-tab active" onclick="switchProgram('india-water')">India Safe Water</button>
+                <button class="program-tab" onclick="switchProgram('deworm')">Deworm the World</button>
+            </div>
+
+            <div id="india-water" class="program-content active">
+                <div class="program-summary">
+                    <span class="update-badge">NEW UPDATE: Jan 2025</span>
+                    <h3>India Safe Water Program</h3>
+                    <p>Leveraging India's $44 billion Jal Jeevan Mission, we're scaling in-line chlorination to reach 40+ million people in Madhya Pradesh and Andhra Pradesh. Recent milestone: Government of Madhya Pradesh signed MoU for statewide scale-up, and National Jal Jeemin Mission issued guidance to all 30 states to adopt our chlorination model.</p>
+                    <p><strong>Key Stats:</strong> 50 devices installed • 40M people targeted • $1.50/person/year cost • 30% reduction in child mortality</p>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" class="search-box" placeholder="Search content...">
+                    <select class="filter-select">
+                        <option>All Content Types</option>
+                        <option>Impact Stories</option>
+                        <option>Social Media Kits</option>
+                        <option>Email Templates</option>
+                        <option>Fact Sheets</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Most Recent</option>
+                        <option>Most Downloaded</option>
+                        <option>Highest Rated</option>
+                    </select>
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-card-image water">
+                            <span>💧</span>
+                            <div class="content-type-badge">Complete Package</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">India Government Partnership: National Scale-Up</h3>
+                            <p class="content-card-description">Story about National Jal Jeemin Mission issuing guidance to 30 states, catalyzing nationwide adoption of in-line chlorination.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Jan 15, 2025</span>
+                             
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image water">
+                            <span>🏛️</span>
+                            <div class="content-type-badge">Impact Story</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">Madhya Pradesh MoU: Statewide Chlorination Launch</h3>
+                            <p class="content-card-description">Just 3 days after election results, MP government signed MoU for chlorination scale-up. Includes signing ceremony photos and impact projections.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Jan 8, 2025</span>
+                              
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image water">
+                            <span>📊</span>
+                            <div class="content-type-badge">Infographic</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">How In-Line Chlorination Works</h3>
+                            <p class="content-card-description">Visual explainer showing device technology, installation process, and water treatment pathway. Perfect for social media.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Dec 20, 2024</span>
+                              
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image water">
+                            <span>🎥</span>
+                            <div class="content-type-badge">Video + Social</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">Village Chief Testimonial: "This Saves Lives"</h3>
+                            <p class="content-card-description">2-minute video featuring village leader discussing impact of safe water. Includes 30-sec and 60-sec cuts for social media.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Dec 15, 2024</span>
+                               
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image water">
+                            <span>📧</span>
+                            <div class="content-type-badge">Email Template</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">Q1 2025 India Program Update</h3>
+                            <p class="content-card-description">Ready-to-send email template with key milestones, impact numbers, and donor call-to-action. Fully customizable HTML.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Jan 5, 2025</span>
+                                
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image water">
+                            <span>📄</span>
+                            <div class="content-type-badge">Fact Sheet</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">India Safe Water: Program Overview 2025</h3>
+                            <p class="content-card-description">One-page fact sheet with program basics, cost-effectiveness data, reach projections, and government partnership details.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Jan 1, 2025</span>
+                             
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="deworm" class="program-content">
+                <div class="program-summary">
+                    <span class="update-badge">NEW UPDATE: Jan 2025</span>
+                    <h3>Deworm the World Initiative</h3>
+                    <p>Evidence Action has supported governments to deliver over 1.6 billion deworming treatments since 2009, reaching 280 million children annually. Recent milestone: Tanzania launched national school-based deworming program with our technical assistance, representing major expansion into new high-need geography.</p>
+                    <p><strong>Key Stats:</strong> 280M children annually • 1.6B treatments delivered • $0.58 cost per treatment • 25% increase in school attendance</p>
+                </div>
+
+                <div class="filter-bar">
+                    <input type="text" class="search-box" placeholder="Search content...">
+                    <select class="filter-select">
+                        <option>All Content Types</option>
+                        <option>Impact Stories</option>
+                        <option>Social Media Kits</option>
+                        <option>Email Templates</option>
+                        <option>Fact Sheets</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Most Recent</option>
+                        <option>Most Downloaded</option>
+                        <option>Highest Rated</option>
+                    </select>
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-card-image health">
+                            <span>🏫</span>
+                            <div class="content-type-badge">Complete Package</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">Tanzania Launch: 10 Million Children Reached</h3>
+                            <p class="content-card-description">Story of Tanzania's first national school-based deworming program, reaching 10M children in high-burden regions.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Jan 18, 2025</span>
+                               
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image health">
+                            <span>👧</span>
+                            <div class="content-type-badge">Impact Story</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">Priya's Story: From Missing School to Top of Class</h3>
+                            <p class="content-card-description">Personal story of 12-year-old girl in India whose attendance and performance improved after deworming treatment.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Jan 10, 2025</span>
+                               
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image health">
+                            <span>📊</span>
+                            <div class="content-type-badge">Infographic</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">15 Years of Impact: 1.6 Billion Treatments</h3>
+                            <p class="content-card-description">Visual timeline showing program growth from 2009 to 2024, with key milestones and cumulative impact numbers.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Dec 28, 2024</span>
+                            
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image health">
+                            <span>🎓</span>
+                            <div class="content-type-badge">Research Brief</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">Why School-Based Delivery Works</h3>
+                            <p class="content-card-description">Evidence brief explaining why schools are optimal delivery channel, with data on reach, cost-effectiveness, and sustainability.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Dec 15, 2024</span>
+                              
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image health">
+                            <span>🌍</span>
+                            <div class="content-type-badge">Social Media Kit</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">Deworming Day Social Campaign 2025</h3>
+                            <p class="content-card-description">Complete social media toolkit for National Deworming Day, with graphics, captions, and posting schedule for 2-week campaign.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Jan 20, 2025</span>
+                               
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-image health">
+                            <span>💰</span>
+                            <div class="content-type-badge">Donor Brief</div>
+                        </div>
+                        <div class="content-card-body">
+                            <h3 class="content-card-title">Cost-Effectiveness: $0.58 Per Treatment</h3>
+                            <p class="content-card-description">Data-focused brief on deworming cost-effectiveness, including comparison to other interventions and GiveWell analysis.</p>
+                            <div class="content-card-meta">
+                                <span>📅 Jan 5, 2025</span>
+                             
+                            </div>
+                            <div class="content-card-actions">
+                                <button class="btn btn-primary">Download Package</button>
+                                <button class="btn btn-secondary">Preview</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="all" class="program-content">
+                <p style="padding: 2rem; text-align: center; color: #666;">
+                    View all programs and content across Evidence Action's portfolio...
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Quick Actions</h2>
+            </div>
+            <div class="quick-actions">
+                <div class="quick-action-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <h3>📋 Request Custom Content</h3>
+                    <p>Need something specific? Submit a custom content request and we'll create it for you.</p>
+                </div>
+               
+                <div class="quick-action-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                    <h3>🎯 Active Campaigns</h3>
+                    <p>View and download materials for ongoing fundraising campaigns and matching opportunities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchProgram(programId) {
+            // Hide all content
+            document.querySelectorAll('.program-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active state from all tabs
+            document.querySelectorAll('.program-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected content
+            document.getElementById(programId).classList.add('active');
+            
+            // Add active state to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Simulate download button clicks
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Download started! In production, this would download the complete content package as a ZIP file.');
+            });
+        });
+
+        // Simulate preview button clicks
+        document.querySelectorAll('.btn-secondary').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Opening preview... In production, this would show a modal with content preview and detailed package contents.');
+            });
+        });
+    </script>
+</body>
+</html>

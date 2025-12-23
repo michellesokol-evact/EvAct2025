@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Action 2025 Email Signatures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f8f8fa;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #05545a 0%, #e600a0 100%);
+            color: white;
+            padding: 40px 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+        
+        .instructions {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            border-left: 4px solid #e600a0;
+        }
+        
+        .instructions h2 {
+            color: #05545a;
+            margin-bottom: 16px;
+            font-size: 1.3rem;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+            color: #20253a;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .signature-option {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #ecfafb;
+        }
+        
+        .option-title {
+            color: #05545a;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        
+        .option-meta {
+            color: #5c5161;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+        
+        .copy-btn {
+            background: #e600a0;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .copy-btn:hover {
+            background: #c0008a;
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: #5dd9b3;
+        }
+        
+        .preview-box {
+            background: #f8f8fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .code-box {
+            background: #20253a;
+            color: #d5f4f7;
+            padding: 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        .code-box.show {
+            display: block;
+        }
+        
+        .toggle-code {
+            color: #5e93fb;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-decoration: underline;
+            margin-top: 12px;
+            padding: 0;
+        }
+        
+        .toggle-code:hover {
+            color: #e600a0;
+        }
+        
+        .footer {
+            text-align: center;
+            color: #5c5161;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 2px solid #ecfafb;
+        }
+        
+        @media (max-width: 768px) {
+            .option-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Evidence Action 2025 Email Signatures</h1>
+            <p>Click "Copy HTML" to grab the code, then paste into your Gmail signature</p>
+        </div>
+        
+        <div class="instructions">
+            <h2>📧 How to Add to Gmail</h2>
+            <ol>
+                <li>Click the <strong>"Copy HTML"</strong> button on your preferred signature option below</li>
+                <li>Open Gmail → Click the gear icon → <strong>See all settings</strong></li>
+                <li>Scroll to <strong>"Signature"</strong> section</li>
+                <li>Click <strong>⋮ (three dots)</strong> in the formatting toolbar</li>
+                <li>Select <strong>"Show original"</strong> or paste directly into the editor</li>
+                <li>The signature should appear formatted - adjust as needed</li>
+                <li>Scroll down and click <strong>"Save Changes"</strong></li>
+            </ol>
+        </div>
+
+        <!-- OPTION 1 -->
+        <div class="signature-option">
+            <div class="option-header">
+                <div>
+                    <div class="option-title">Option 1: Bold Gradient with Stats</div>
+                    <div class="option-meta">500px wide • Recommended • Most eye-catching</div>
+                </div>
+                <button class="copy-btn" onclick="copySignature('sig1', this)">
+                    <span>📋</span> Copy HTML
+                </button>
+            </div>
+            <div class="preview-box" id="preview1">
+                <!-- Preview will be inserted here -->
+            </div>
+            <button class="toggle-code" onclick="toggleCode('code1')">Show HTML Code</button>
+            <pre class="code-box" id="code1"></pre>
+        </div>
+
+        <!-- OPTION 2 -->
+        <div class="signature-option">
+            <div class="option-header">
+                <div>
+                    <div class="option-title">Option 2: Compact with Key Stat</div>
+                    <div class="option-meta">480px wide • Professional</div>
+                </div>
+                <button class="copy-btn" onclick="copySignature('sig2', this)">
+                    <span>📋</span> Copy HTML
+                </button>
+            </div>
+            <div class="preview-box" id="preview2"></div>
+            <button class="toggle-code" onclick="toggleCode('code2')">Show HTML Code</button>
+            <pre class="code-box" id="code2"></pre>
+        </div>
+
+        <!-- OPTION 3 -->
+        <div class="signature-option">
+            <div class="option-header">
+                <div>
+                    <div class="option-title">Option 3: Border Box with Details</div>
+                    <div class="option-meta">500px wide • Most comprehensive</div>
+                </div>
+                <button class="copy-btn" onclick="copySignature('sig3', this)">
+                    <span>📋</span> Copy HTML
+                </button>
+            </div>
+            <div class="preview-box" id="preview3"></div>
+            <button class="toggle-code" onclick="toggleCode('code3')">Show HTML Code</button>
+            <pre class="code-box" id="code3"></pre>
+        </div>
+
+        <!-- OPTION 4 -->
+        <div class="signature-option">
+            <div class="option-header">
+                <div>
+                    <div class="option-title">Option 4: Minimal with Accent Bars</div>
+                    <div class="option-meta">450px wide • Clean & simple</div>
+                </div>
+                <button class="copy-btn" onclick="copySignature('sig4', this)">
+                    <span>📋</span> Copy HTML
+                </button>
+            </div>
+            <div class="preview-box" id="preview4"></div>
+            <button class="toggle-code" onclick="toggleCode('code4')">Show HTML Code</button>
+            <pre class="code-box" id="code4"></pre>
+        </div>
+
+        <!-- OPTION 5 -->
+        <div class="signature-option">
+            <div class="option-header">
+                <div>
+                    <div class="option-title">Option 5: Achievement Focused</div>
+                    <div class="option-meta">520px wide • Highlights programs</div>
+                </div>
+                <button class="copy-btn" onclick="copySignature('sig5', this)">
+                    <span>📋</span> Copy HTML
+                </button>
+            </div>
+            <div class="preview-box" id="preview5"></div>
+            <button class="toggle-code" onclick="toggleCode('code5')">Show HTML Code</button>
+            <pre class="code-box" id="code5"></pre>
+        </div>
+
+        <!-- OPTION 6 -->
+        <div class="signature-option">
+            <div class="option-header">
+                <div>
+                    <div class="option-title">Option 6: Ultra-Compact Badge</div>
+                    <div class="option-meta">400px wide • Smallest footprint</div>
+                </div>
+                <button class="copy-btn" onclick="copySignature('sig6', this)">
+                    <span>📋</span> Copy HTML
+                </button>
+            </div>
+            <div class="preview-box" id="preview6"></div>
+            <button class="toggle-code" onclick="toggleCode('code6')">Show HTML Code</button>
+            <pre class="code-box" id="code6"></pre>
+        </div>
+
+        <!-- OPTION 7 -->
+        <div class="signature-option">
+            <div class="option-header">
+                <div>
+                    <div class="option-title">Option 7: Simple Text</div>
+                    <div class="option-meta">480px wide • Traditional style</div>
+                </div>
+                <button class="copy-btn" onclick="copySignature('sig7', this)">
+                    <span>📋</span> Copy HTML
+                </button>
+            </div>
+            <div class="preview-box" id="preview7"></div>
+            <button class="toggle-code" onclick="toggleCode('code7')">Show HTML Code</button>
+            <pre class="code-box" id="code7"></pre>
+        </div>
+
+        <div class="footer">
+            <p><strong>Evidence Action</strong> • 2025 in Review Email Signatures</p>
+            <p style="margin-top: 8px; font-size: 0.9rem;">Questions? Contact communications@evidenceaction.org</p>
+        </div>
+    </div>
+
+    <script>
+        // Signature HTML templates
+        const signatures = {
+            sig1: `<table cellspacing="0" cellpadding="0" border="0" style="width: 500px; max-width: 500px; margin: 0; padding: 0; border-collapse: collapse;">
+    <tr>
+        <td style="background: linear-gradient(135deg, #5e93fb 0%, #20253a 40%, #e600a0 100%); padding: 16px 20px; border-radius: 6px; font-family: Arial, sans-serif;">
+            <table cellspacing="0" cellpadding="0" border="0" style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 0; vertical-align: middle;">
+                        <span style="color: #ffffff; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px;">New</span>
+                        <span style="color: #ffffff; font-size: 15px; font-weight: bold; display: block; margin-bottom: 2px;">2025 in Review</span>
+                        <span style="color: #ffffff; font-size: 12px; opacity: 0.95; display: block;">177M children dewormed, 1M+ pregnant women screened</span>
+                    </td>
+                    <td style="padding: 0 0 0 16px; vertical-align: middle; text-align: right;">
+                        <a href="https://www.evidenceaction.org/2025-in-review?utm_source=signature&utm_medium=email&utm_campaign=yir" style="background: #ffffff; color: #20253a; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; text-decoration: none; padding: 10px 16px; display: inline-block; border-radius: 4px; white-space: nowrap;">Read Report</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>`,
+
+            sig2: `<table cellspacing="0" cellpadding="0" border="0" style="width: 480px; max-width: 480px; margin: 0; padding: 0; border-collapse: collapse;">
+    <tr>
+        <td style="background: linear-gradient(110deg, #05545a 0%, #043d42 30%, #20253a 60%, #e600a0 100%); padding: 14px 18px; border-radius: 6px; font-family: Arial, sans-serif;">
+            <table cellspacing="0" cellpadding="0" border="0" style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 0; vertical-align: middle;">
+                        <span style="color: #ffffff; font-size: 14px; font-weight: bold; display: block; margin-bottom: 3px;">2025 in Review</span>
+                        <span style="color: #ffffff; font-size: 11px; opacity: 0.95; display: block;">8 interventions advanced, reaching millions with proven solutions</span>
+                    </td>
+                    <td style="padding: 0 0 0 14px; vertical-align: middle; text-align: right;">
+                        <a href="https://www.evidenceaction.org/2025-in-review?utm_source=signature&utm_medium=email&utm_campaign=yir" style="background: #ffffff; color: #05545a; font-family: Arial, sans-serif; font-size: 12px; font-weight: bold; text-decoration: none; padding: 9px 14px; display: inline-block; border-radius: 4px; white-space: nowrap;">View Report</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>`,
+
+            sig3: `<table cellspacing="0" cellpadding="0" border="0" style="width: 500px; max-width: 500px; margin: 0; padding: 0; border-collapse: collapse;">
+    <tr>
+        <td style="border-left: 4px solid #e600a0; background: linear-gradient(90deg, #f8f8fa 0%, #ecfafb 100%); padding: 14px 16px; font-family: Arial, sans-serif;">
+            <p style="margin: 0 0 8px 0; padding: 0; font-size: 13px; line-height: 1.5; color: #20253a;">
+                <strong style="color: #05545a;">Our 2025 Year in Review is now available.</strong> 177 million children dewormed, 1 million pregnant women screened for syphilis, and 8 new interventions advancing toward scale.
+            </p>
+            <a href="https://www.evidenceaction.org/2025-in-review?utm_source=signature&utm_medium=email&utm_campaign=yir" style="color: #e600a0; font-size: 13px; font-weight: bold; text-decoration: none;">Read the full report →</a>
+        </td>
+    </tr>
+</table>`,
+
+            sig4: `<table cellspacing="0" cellpadding="0" border="0" style="width: 450px; max-width: 450px; margin: 0; padding: 0; border-collapse: collapse;">
+    <tr>
+        <td style="padding: 0;">
+            <div style="height: 4px; background: linear-gradient(90deg, #05545a 0%, #5e93fb 50%, #e600a0 100%); border-radius: 2px;"></div>
+            <div style="padding: 12px 0; font-family: Arial, sans-serif;">
+                <span style="color: #05545a; font-size: 13px; font-weight: bold; display: block; margin-bottom: 4px;">2025 in Review</span>
+                <span style="color: #20253a; font-size: 12px; display: block; line-height: 1.4; margin-bottom: 6px;">A year of scale, learning, and impact across Africa and Asia.</span>
+                <a href="https://www.evidenceaction.org/2025-in-review?utm_source=signature&utm_medium=email&utm_campaign=yir" style="color: #e600a0; font-size: 12px; font-weight: bold; text-decoration: none;">Read the report →</a>
+            </div>
+            <div style="height: 2px; background: linear-gradient(90deg, #05545a 0%, #5e93fb 50%, #e600a0 100%); border-radius: 1px;"></div>
+        </td>
+    </tr>
+</table>`,
+
+            sig5: `<table cellspacing="0" cellpadding="0" border="0" style="width: 520px; max-width: 520px; margin: 0; padding: 0; border-collapse: collapse;">
+    <tr>
+        <td style="background: linear-gradient(135deg, #05545a 0%, #e600a0 100%); padding: 16px 20px; border-radius: 6px; font-family: Arial, sans-serif;">
+            <table cellspacing="0" cellpadding="0" border="0" style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 0; vertical-align: middle; width: 70%;">
+                        <span style="color: #ffffff; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 4px;">2025 in Review</span>
+                        <span style="color: #ffffff; font-size: 13px; display: block; line-height: 1.4; opacity: 0.95;">What we achieved together: preventing anemia, stillbirths, and expanding safe water access</span>
+                    </td>
+                    <td style="padding: 0 0 0 16px; vertical-align: middle; text-align: right; width: 30%;">
+                        <a href="https://www.evidenceaction.org/2025-in-review?utm_source=signature&utm_medium=email&utm_campaign=yir" style="background: #ffffff; color: #05545a; font-family: Arial, sans-serif; font-size: 13px; font-weight: bold; text-decoration: none; padding: 10px 16px; display: inline-block; border-radius: 4px; white-space: nowrap;">Read More</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>`,
+
+            sig6: `<table cellspacing="0" cellpadding="0" border="0" style="width: 400px; max-width: 400px; margin: 0; padding: 0; border-collapse: collapse;">
+    <tr>
+        <td style="background: #05545a; padding: 10px 16px; border-radius: 6px; font-family: Arial, sans-serif;">
+            <table cellspacing="0" cellpadding="0" border="0" style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 0; vertical-align: middle;">
+                        <span style="color: #ffffff; font-size: 13px; font-weight: bold;">2025 in Review</span>
+                        <span style="color: #d5f4f7; font-size: 11px; display: block; margin-top: 2px;">A breakthrough year for global health</span>
+                    </td>
+                    <td style="padding: 0 0 0 12px; vertical-align: middle; text-align: right;">
+                        <a href="https://www.evidenceaction.org/2025-in-review?utm_source=signature&utm_medium=email&utm_campaign=yir" style="background: #e600a0; color: #ffffff; font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; text-decoration: none; padding: 8px 14px; display: inline-block; border-radius: 4px; white-space: nowrap;">Read Now</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>`,
+
+            sig7: `<table cellspacing="0" cellpadding="0" border="0" style="width: 480px; max-width: 480px; margin: 0; padding: 0; border-collapse: collapse;">
+    <tr>
+        <td style="padding: 12px 0; font-family: Arial, sans-serif; border-top: 2px solid #e600a0; border-bottom: 2px solid #e600a0;">
+            <span style="color: #05545a; font-size: 13px; font-weight: bold; display: block; margin-bottom: 6px;">2025 in Review: A Year Defined by Scale and Impact</span>
+            <span style="color: #20253a; font-size: 12px; display: block; line-height: 1.4; margin-bottom: 8px;">From deworming 177M children to advancing 8 interventions through our Accelerator, see what we achieved together.</span>
+            <a href="https://www.evidenceaction.org/2025-in-review?utm_source=signature&utm_medium=email&utm_campaign=yir" style="color: #e600a0; font-size: 12px; font-weight: bold; text-decoration: none;">Explore the full report →</a>
+        </td>
+    </tr>
+</table>`
+        };
+
+        // Initialize previews and code displays
+        window.addEventListener('DOMContentLoaded', () => {
+            Object.keys(signatures).forEach(key => {
+                const num = key.replace('sig', '');
+                const preview = document.getElementById(`preview${num}`);
+                const codeBox = document.getElementById(`code${num}`);
+                
+                preview.innerHTML = signatures[key];
+                codeBox.textContent = signatures[key];
+            });
+        });
+
+        // Copy signature function
+        async function copySignature(sigKey, button) {
+            const html = signatures[sigKey];
+            
+            try {
+                await navigator.clipboard.writeText(html);
+                
+                // Visual feedback
+                button.classList.add('copied');
+                const originalText = button.innerHTML;
+                button.innerHTML = '<span>✓</span> Copied!';
+                
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = originalText;
+                }, 2000);
+            } catch (err) {
+                alert('Failed to copy. Please try using the "Show HTML Code" button and manually copy the code.');
+            }
+        }
+
+        // Toggle code display
+        function toggleCode(codeId) {
+            const codeBox = document.getElementById(codeId);
+            const button = event.target;
+            
+            if (codeBox.classList.contains('show')) {
+                codeBox.classList.remove('show');
+                button.textContent = 'Show HTML Code';
+            } else {
+                codeBox.classList.add('show');
+                button.textContent = 'Hide HTML Code';
+            }
+        }
+    </script>
+</body>
+</html>
