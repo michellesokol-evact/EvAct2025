@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Case for Dual-Elimination Testing | Syphilis-Free Start</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ea-ink: #20253a;
+      --ea-magenta: #e600a0;
+      --ea-kale-green: #05545a;
+      --ea-blue: #d5f4f7;
+      --ea-light-blue: #ecfafb;
+      --ea-cool-gray: #f8f8fa;
+      --ea-white: #ffffff;
+      --ea-neutral-purple: #5c5161;
+      --ea-neutral-pink: #fe6e87;
+      --ea-stratosphere: #5e93fb;
+      --ea-lemongrass: #f4f252;
+      --ea-green: #5dd9b3;
+      --ea-pink: #ffb9ef;
+      --ea-purple: #bc9ed2;
+      --ea-tangerine: #feca90;
+      --ea-beige: #f2ede8;
+      --ea-font-heading: 'JetBrains Mono', 'Courier New', monospace;
+      --ea-font-body: 'Roboto Condensed', Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-snap-type: y mandatory; }
+
+    body {
+      font-family: var(--ea-font-body);
+      color: var(--ea-ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      background: var(--ea-ink);
+    }
+
+    /* ── Slide framework ── */
+    .slide {
+      width: 100%;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 80px;
+      position: relative;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    .slide-inner {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── Logo ── */
+    .logo {
+      position: absolute;
+      bottom: 40px;
+      right: 64px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--ea-font-heading);
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+    .logo span { line-height: 1.15; }
+    .logo strong { font-weight: 700; }
+    .logo-slash {
+      color: var(--ea-magenta);
+      font-weight: 300;
+      font-size: 1.6em;
+      transform: rotate(-20deg);
+      display: inline-block;
+    }
+    .logo-light { color: var(--ea-white); }
+    .logo-dark { color: var(--ea-ink); }
+
+    /* ── Slide counter ── */
+    .slide-number {
+      position: absolute;
+      top: 40px;
+      right: 64px;
+      font-family: var(--ea-font-heading);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      opacity: 0.5;
+      z-index: 10;
+    }
+
+    /* ── Typography ── */
+    h1, h2, h3, h4 {
+      font-family: var(--ea-font-heading);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    h1 strong, h2 strong, h3 strong { font-weight: 700; }
+
+    .eyebrow {
+      font-family: var(--ea-font-heading);
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 2px;
+      background: currentColor;
+      display: inline-block;
+    }
+
+    /* ── Decorative slash ── */
+    .deco-slash {
+      position: absolute;
+      font-family: var(--ea-font-heading);
+      font-weight: 300;
+      color: var(--ea-magenta);
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: 0;
+      line-height: 1;
+    }
+
+    /* ===================================================
+       SLIDE 1 — TITLE
+       =================================================== */
+    .slide-title {
+      background: linear-gradient(135deg, var(--ea-ink) 0%, var(--ea-kale-green) 40%, #1a3a5c 70%, var(--ea-ink) 100%);
+      color: var(--ea-white);
+    }
+    .slide-title .deco-slash {
+      font-size: 700px;
+      right: -80px;
+      bottom: -180px;
+      transform: rotate(-15deg);
+      opacity: 0.06;
+    }
+    .slide-title h1 {
+      font-size: clamp(42px, 5vw, 68px);
+      max-width: 16ch;
+      margin-bottom: 24px;
+    }
+    .slide-title .subtitle {
+      font-size: 20px;
+      opacity: 0.8;
+      max-width: 52ch;
+      line-height: 1.5;
+    }
+    .slide-title .meeting-date {
+      margin-top: 48px;
+      font-family: var(--ea-font-heading);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+    }
+    .program-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      font-family: var(--ea-font-heading);
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 32px;
+    }
+    .program-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--ea-magenta);
+    }
+
+    /* ===================================================
+       SLIDE 2 — THE CRISIS
+       =================================================== */
+    .slide-crisis {
+      background: var(--ea-white);
+      color: var(--ea-ink);
+    }
+    .slide-crisis .deco-slash {
+      font-size: 600px;
+      left: -100px;
+      top: -120px;
+      transform: rotate(-10deg);
+      opacity: 0.03;
+      color: var(--ea-ink);
+    }
+    .crisis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 40px;
+    }
+    .crisis-narrative h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      margin-bottom: 20px;
+    }
+    .crisis-narrative p {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--ea-neutral-purple);
+      max-width: 48ch;
+    }
+    .crisis-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .crisis-stat {
+      padding-top: 16px;
+      border-top: 2px solid var(--ea-ink);
+    }
+    .crisis-stat.highlight {
+      border-top-color: var(--ea-magenta);
+    }
+    .crisis-stat-value {
+      font-family: var(--ea-font-heading);
+      font-size: clamp(36px, 4vw, 54px);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .crisis-stat-value.magenta { color: var(--ea-magenta); }
+    .crisis-stat-label {
+      font-size: 14px;
+      margin-top: 8px;
+      line-height: 1.4;
+      color: var(--ea-neutral-purple);
+    }
+    .neglect-bar {
+      grid-column: 1 / -1;
+      margin-top: 8px;
+    }
+    .neglect-bar-label {
+      font-family: var(--ea-font-heading);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      color: var(--ea-neutral-purple);
+    }
+    .bar-compare {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .bar-row-label {
+      font-size: 13px;
+      font-family: var(--ea-font-heading);
+      font-weight: 500;
+      width: 140px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .bar-track {
+      flex: 1;
+      height: 28px;
+      background: var(--ea-cool-gray);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      font-family: var(--ea-font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ea-white);
+    }
+    .bar-fill.hiv { background: var(--ea-stratosphere); }
+    .bar-fill.syphilis { background: var(--ea-magenta); }
+
+    /* ===================================================
+       SLIDE 3 — THE SOLUTION
+       =================================================== */
+    .slide-solution {
+      background: var(--ea-light-blue);
+      color: var(--ea-ink);
+    }
+    .slide-solution .deco-slash {
+      font-size: 500px;
+      right: -60px;
+      top: -80px;
+      transform: rotate(-18deg);
+      opacity: 0.04;
+      color: var(--ea-kale-green);
+    }
+    .solution-header {
+      margin-bottom: 48px;
+    }
+    .solution-header h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+    }
+    .solution-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .solution-card {
+      background: var(--ea-white);
+      padding: 36px 32px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .solution-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+    .solution-card:nth-child(1)::before { background: var(--ea-magenta); }
+    .solution-card:nth-child(2)::before { background: var(--ea-kale-green); }
+    .solution-card:nth-child(3)::before { background: var(--ea-stratosphere); }
+
+    .solution-card .step-num {
+      font-family: var(--ea-font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ea-neutral-purple);
+      margin-bottom: 16px;
+    }
+    .solution-card h3 {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .solution-card p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ea-neutral-purple);
+      flex: 1;
+    }
+    .solution-card .cost-badge {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 8px 16px;
+      background: var(--ea-blue);
+      border-radius: 2px;
+      font-family: var(--ea-font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ea-kale-green);
+    }
+    .outcomes-strip {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(32,37,58,0.08);
+    }
+    .outcome-cell {
+      background: var(--ea-white);
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .outcome-value {
+      font-family: var(--ea-font-heading);
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 700;
+      color: var(--ea-kale-green);
+      line-height: 1;
+    }
+    .outcome-label {
+      font-size: 13px;
+      color: var(--ea-neutral-purple);
+      margin-top: 6px;
+      line-height: 1.35;
+    }
+
+    /* ===================================================
+       SLIDE 4 — PROVEN RESULTS
+       =================================================== */
+    .slide-results {
+      background: var(--ea-kale-green);
+      color: var(--ea-white);
+    }
+    .slide-results .deco-slash {
+      font-size: 600px;
+      right: -120px;
+      bottom: -160px;
+      transform: rotate(-12deg);
+      opacity: 0.06;
+      color: var(--ea-white);
+    }
+    .results-header {
+      margin-bottom: 48px;
+    }
+    .results-header h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+    }
+    .results-header .context {
+      font-size: 16px;
+      opacity: 0.75;
+      max-width: 60ch;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .result-card {
+      border-top: 2px solid var(--ea-white);
+      padding-top: 20px;
+    }
+    .result-card.accent { border-top-color: var(--ea-magenta); }
+    .result-value {
+      font-family: var(--ea-font-heading);
+      font-size: clamp(42px, 5vw, 64px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .result-label {
+      font-size: 15px;
+      margin-top: 10px;
+      opacity: 0.8;
+      line-height: 1.45;
+      max-width: 28ch;
+    }
+    .screening-viz {
+      margin-top: 48px;
+      padding: 32px 36px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 2px;
+    }
+    .screening-viz-title {
+      font-family: var(--ea-font-heading);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+    .screening-before-after {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .screening-block {
+      flex: 1;
+    }
+    .screening-label {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-family: var(--ea-font-heading);
+      opacity: 0.6;
+      margin-bottom: 8px;
+    }
+    .screening-bar-bg {
+      width: 100%;
+      height: 48px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+    .screening-bar-fill {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 14px;
+      font-family: var(--ea-font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+    .screening-bar-fill.before {
+      width: 7%;
+      background: rgba(255,255,255,0.25);
+      font-size: 14px;
+      justify-content: center;
+      padding: 0;
+    }
+    .screening-bar-fill.after {
+      width: 88%;
+      background: linear-gradient(90deg, var(--ea-green), var(--ea-lemongrass));
+      color: var(--ea-ink);
+    }
+    .arrow-connector {
+      font-size: 28px;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+    .expansion-note {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      font-size: 15px;
+      opacity: 0.75;
+      line-height: 1.5;
+    }
+    .expansion-note strong {
+      color: var(--ea-lemongrass);
+      font-weight: 700;
+    }
+
+    /* ===================================================
+       SLIDE 5 — INVESTMENT OPPORTUNITY
+       =================================================== */
+    .slide-invest {
+      background: var(--ea-ink);
+      color: var(--ea-white);
+    }
+    .slide-invest .deco-slash {
+      font-size: 700px;
+      left: -140px;
+      bottom: -200px;
+      transform: rotate(-14deg);
+      opacity: 0.04;
+    }
+    .invest-header h2 {
+      font-size: clamp(28px, 3.5vw, 44px);
+      margin-bottom: 12px;
+    }
+    .invest-header .tagline {
+      font-size: 17px;
+      opacity: 0.65;
+      max-width: 56ch;
+      line-height: 1.5;
+    }
+    .invest-tiers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .invest-card {
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 36px 32px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s ease;
+    }
+    .invest-card:hover {
+      border-color: rgba(255,255,255,0.3);
+    }
+    .invest-card.featured {
+      border-color: var(--ea-magenta);
+      background: rgba(230,0,160,0.04);
+    }
+    .invest-card.featured::after {
+      content: 'HIGH IMPACT';
+      position: absolute;
+      top: 0;
+      right: 24px;
+      transform: translateY(-50%);
+      background: var(--ea-magenta);
+      color: white;
+      padding: 4px 12px;
+      font-family: var(--ea-font-heading);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      border-radius: 2px;
+    }
+    .invest-amount {
+      font-family: var(--ea-font-heading);
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+    .invest-card.featured .invest-amount {
+      color: var(--ea-magenta);
+    }
+    .invest-scope {
+      font-family: var(--ea-font-heading);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .invest-detail {
+      font-size: 15px;
+      line-height: 1.55;
+      opacity: 0.8;
+      flex: 1;
+    }
+    .invest-metric {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .invest-metric-value {
+      font-family: var(--ea-font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ea-green);
+      line-height: 1;
+    }
+    .invest-metric-label {
+      font-size: 13px;
+      opacity: 0.5;
+      margin-top: 4px;
+    }
+    .closing-note {
+      margin-top: 40px;
+      padding: 24px 32px;
+      background: rgba(255,255,255,0.04);
+      border-left: 3px solid var(--ea-magenta);
+      font-size: 16px;
+      line-height: 1.55;
+      opacity: 0.8;
+      max-width: 72ch;
+    }
+    .closing-note em {
+      font-style: italic;
+      color: var(--ea-magenta);
+      opacity: 1;
+    }
+
+    /* ── Navigation dots ── */
+    .slide-nav {
+      position: fixed;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 100;
+    }
+    .slide-nav a {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.3s ease;
+      display: block;
+    }
+    .slide-nav a:hover,
+    .slide-nav a.active {
+      background: var(--ea-magenta);
+      border-color: var(--ea-magenta);
+      transform: scale(1.3);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .slide { padding: 48px 40px; }
+      .crisis-grid { grid-template-columns: 1fr; gap: 40px; }
+      .solution-cards { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+      .invest-tiers { grid-template-columns: 1fr; }
+      .outcomes-strip { grid-template-columns: repeat(2, 1fr); }
+      .logo { right: 40px; bottom: 32px; }
+      .slide-number { right: 40px; }
+    }
+
+    @media print {
+      .slide { 
+        height: auto; 
+        min-height: auto; 
+        page-break-after: always; 
+        padding: 40px;
+      }
+      .slide-nav { display: none; }
+      html { scroll-snap-type: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation dots -->
+  <nav class="slide-nav" aria-label="Slide navigation">
+    <a href="#slide-1" title="Title"></a>
+    <a href="#slide-2" title="The Crisis"></a>
+    <a href="#slide-3" title="The Solution"></a>
+    <a href="#slide-4" title="Proven Results"></a>
+    <a href="#slide-5" title="Investment"></a>
+  </nav>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 1 — TITLE
+       ════════════════════════════════════════════ -->
+  <section class="slide slide-title" id="slide-1">
+    <div class="deco-slash">/</div>
+    <span class="slide-number">01 / 05</span>
+    <div class="slide-inner">
+      <div class="program-badge">
+        <span class="dot"></span>
+        Syphilis-Free Start
+      </div>
+      <h1>The case for <strong>dual-elimination testing</strong></h1>
+      <p class="subtitle">
+        How integrating syphilis screening into existing HIV infrastructure can prevent hundreds of thousands of stillbirths, newborn deaths, and disabilities — at a fraction of the cost.
+      </p>
+      <p class="meeting-date">February 23, 2026 — Briefing Materials</p>
+    </div>
+    <div class="logo logo-light">
+      <span>evidence<br><strong>action</strong></span>
+      <span class="logo-slash">/</span>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 2 — THE CRISIS
+       ════════════════════════════════════════════ -->
+  <section class="slide slide-crisis" id="slide-2">
+    <div class="deco-slash">/</div>
+    <span class="slide-number" style="color: var(--ea-ink);">02 / 05</span>
+    <div class="slide-inner">
+      <div class="eyebrow" style="color: var(--ea-magenta);">The crisis</div>
+      <div class="crisis-grid">
+        <div class="crisis-narrative">
+          <h2>Maternal syphilis is <strong>deeply neglected</strong> — and getting worse</h2>
+          <p>
+            Each year, over 1 million pregnant women have active syphilis. Most adverse outcomes occur among women who attend prenatal care but simply aren't tested. Maternal syphilis causes more stillbirths and newborn deaths than child deaths from HIV — yet receives a fraction of the funding.
+          </p>
+        </div>
+        <div class="crisis-stats">
+          <div class="crisis-stat highlight">
+            <div class="crisis-stat-value magenta">220K</div>
+            <div class="crisis-stat-label">Stillbirths &amp; infant deaths from maternal syphilis each year</div>
+          </div>
+          <div class="crisis-stat highlight">
+            <div class="crisis-stat-value magenta">170K+</div>
+            <div class="crisis-stat-label">Cases of disability from congenital syphilis annually</div>
+          </div>
+          <div class="crisis-stat">
+            <div class="crisis-stat-value">96%</div>
+            <div class="crisis-stat-label">Of maternal syphilis infections occur in low-income countries</div>
+          </div>
+          <div class="crisis-stat">
+            <div class="crisis-stat-value">+11%</div>
+            <div class="crisis-stat-label">Increase in infant exposure risk over the past eight years</div>
+          </div>
+
+          <div class="neglect-bar">
+            <div class="neglect-bar-label">Annual global spending: HIV vs. syphilis in maternal health</div>
+            <div class="bar-compare">
+              <div class="bar-row">
+                <span class="bar-row-label">Maternal HIV</span>
+                <div class="bar-track">
+                  <div class="bar-fill hiv" style="width: 100%;">$300M+</div>
+                </div>
+              </div>
+              <div class="bar-row">
+                <span class="bar-row-label">Maternal Syphilis</span>
+                <div class="bar-track">
+                  <div class="bar-fill syphilis" style="width: 16.7%;">&lt;$50M</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="logo logo-dark">
+      <span>evidence<br><strong>action</strong></span>
+      <span class="logo-slash">/</span>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 3 — THE SOLUTION
+       ════════════════════════════════════════════ -->
+  <section class="slide slide-solution" id="slide-3">
+    <div class="deco-slash">/</div>
+    <span class="slide-number" style="color: var(--ea-ink);">03 / 05</span>
+    <div class="slide-inner">
+      <div class="solution-header">
+        <div class="eyebrow" style="color: var(--ea-kale-green);">The solution</div>
+        <h2>One test, one shot — <strong>deployed at scale</strong></h2>
+      </div>
+
+      <div class="solution-cards">
+        <div class="solution-card">
+          <div class="step-num">01 — Screen</div>
+          <h3><strong>Dual HIV/syphilis test</strong></h3>
+          <p>A single fingerstick yields results within 15 minutes. Can be administered by midwives, nurses, and community volunteers. Deploys within existing HIV infrastructure without compromising HIV testing accuracy.</p>
+          <div class="cost-badge">Just 15¢ more than HIV-only tests</div>
+        </div>
+        <div class="solution-card">
+          <div class="step-num">02 — Treat</div>
+          <h3><strong>Single penicillin injection</strong></h3>
+          <p>A single shot administered before a woman's third trimester dramatically reduces the risk of adverse birth outcomes. Same-day treatment is possible — no follow-up visits required.</p>
+          <div class="cost-badge">Less than 50¢ per treatment</div>
+        </div>
+        <div class="solution-card">
+          <div class="step-num">03 — Scale</div>
+          <h3><strong>Government partnership model</strong></h3>
+          <p>Evidence Action provides technical assistance across five core areas: piloting, policy, training, procurement, supply chain management, and data monitoring — setting governments on track for sustained ownership.</p>
+          <div class="cost-badge">Proven pathway to national scale</div>
+        </div>
+      </div>
+
+      <div class="outcomes-strip">
+        <div class="outcome-cell">
+          <div class="outcome-value">96%</div>
+          <div class="outcome-label">of disabilities prevented</div>
+        </div>
+        <div class="outcome-cell">
+          <div class="outcome-value">82%</div>
+          <div class="outcome-label">of stillbirths prevented</div>
+        </div>
+        <div class="outcome-cell">
+          <div class="outcome-value">80%</div>
+          <div class="outcome-label">of infant deaths prevented</div>
+        </div>
+        <div class="outcome-cell">
+          <div class="outcome-value">64%</div>
+          <div class="outcome-label">of preterm births prevented</div>
+        </div>
+      </div>
+    </div>
+    <div class="logo logo-dark">
+      <span>evidence<br><strong>action</strong></span>
+      <span class="logo-slash">/</span>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 4 — PROVEN RESULTS
+       ════════════════════════════════════════════ -->
+  <section class="slide slide-results" id="slide-4">
+    <div class="deco-slash">/</div>
+    <span class="slide-number">04 / 05</span>
+    <div class="slide-inner">
+      <div class="results-header">
+        <div class="eyebrow" style="color: var(--ea-lemongrass);">Proven results</div>
+        <h2>Rapid, dramatic impact — <strong>Liberia and beyond</strong></h2>
+        <p class="context">Since partnering with the Government of Liberia in January 2021, Evidence Action has supported training in nearly every prenatal health facility in the country.</p>
+      </div>
+
+      <div class="results-grid">
+        <div class="result-card accent">
+          <div class="result-value">500K+</div>
+          <div class="result-label">Pregnant women tested for syphilis in Liberia</div>
+        </div>
+        <div class="result-card">
+          <div class="result-value">4,900+</div>
+          <div class="result-label">Syphilis-positive pregnant women treated — 94% treatment coverage</div>
+        </div>
+        <div class="result-card accent">
+          <div class="result-value">2,100+</div>
+          <div class="result-label">Adverse birth outcomes prevented, including 1,200+ lives saved</div>
+        </div>
+      </div>
+
+      <div class="screening-viz">
+        <div class="screening-viz-title">Screening coverage transformation — Liberia</div>
+        <div class="screening-before-after">
+          <div class="screening-block">
+            <div class="screening-label">Before</div>
+            <div class="screening-bar-bg">
+              <div class="screening-bar-fill before">&lt;7%</div>
+            </div>
+          </div>
+          <div class="arrow-connector">→</div>
+          <div class="screening-block">
+            <div class="screening-label">After</div>
+            <div class="screening-bar-bg">
+              <div class="screening-bar-fill after">88%</div>
+            </div>
+          </div>
+        </div>
+        <p class="expansion-note">
+          Expanded to <strong>Zambia</strong> and <strong>Cameroon</strong>, targeting &gt;90% screening and &gt;70% treatment coverage by 2026. All three governments now purchase dual tests for their entire pregnant populations.
+        </p>
+      </div>
+    </div>
+    <div class="logo logo-light">
+      <span>evidence<br><strong>action</strong></span>
+      <span class="logo-slash">/</span>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════
+       SLIDE 5 — INVESTMENT OPPORTUNITY
+       ════════════════════════════════════════════ -->
+  <section class="slide slide-invest" id="slide-5">
+    <div class="deco-slash">/</div>
+    <span class="slide-number">05 / 05</span>
+    <div class="slide-inner">
+      <div class="invest-header">
+        <div class="eyebrow" style="color: var(--ea-magenta);">Investment opportunity</div>
+        <h2>A rare <strong>'low-hanging fruit'</strong> in global health</h2>
+        <p class="tagline">A highly tractable opportunity where modest investment yields sustained, outsized impact at multiple scales.</p>
+      </div>
+
+      <div class="invest-tiers">
+        <div class="invest-card">
+          <div class="invest-amount">$1M</div>
+          <div class="invest-scope">Last mile — 3 countries</div>
+          <p class="invest-detail">Go the last mile in Liberia, Zambia, and Cameroon — reaching unsupported facilities and preparing for government ownership transition.</p>
+          <div class="invest-metric">
+            <div class="invest-metric-value">200K</div>
+            <div class="invest-metric-label">Additional pregnant women screened per year</div>
+          </div>
+        </div>
+
+        <div class="invest-card featured">
+          <div class="invest-amount">$7M</div>
+          <div class="invest-scope">New country — Côte d'Ivoire</div>
+          <p class="invest-detail">Scale into Côte d'Ivoire, where 1M dual tests arrive in 2025 but the government lacks funding to train health workers and prepare facilities.</p>
+          <div class="invest-metric">
+            <div class="invest-metric-value">500K</div>
+            <div class="invest-metric-label">Pregnant women reached each year</div>
+          </div>
+        </div>
+
+        <div class="invest-card">
+          <div class="invest-amount">$120M</div>
+          <div class="invest-scope">Big bet — 10 countries, 6 years</div>
+          <p class="invest-detail">Eliminate 40% of the global maternal syphilis burden across 10 high-burden countries in two strategic 3-year cycles of $60M each.</p>
+          <div class="invest-metric">
+            <div class="invest-metric-value">150K</div>
+            <div class="invest-metric-label">Adverse birth outcomes averted, incl. 85K stillbirths &amp; deaths</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="closing-note">
+        <em>Maternal syphilis is one of the few remaining 'low-hanging fruits' in global health.</em> This is a highly tractable and rare opportunity where a relatively modest investment can yield sustained global impact.
+      </div>
+    </div>
+    <div class="logo logo-light">
+      <span>evidence<br><strong>action</strong></span>
+      <span class="logo-slash">/</span>
+    </div>
+  </section>
+
+  <script>
+    // Update active nav dot on scroll
+    const slides = document.querySelectorAll('.slide');
+    const navLinks = document.querySelectorAll('.slide-nav a');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+          // Update nav dot colors based on slide background
+          const isDark = entry.target.classList.contains('slide-title') || 
+                         entry.target.classList.contains('slide-results') || 
+                         entry.target.classList.contains('slide-invest');
+          document.querySelector('.slide-nav').style.setProperty('--dot-bg', isDark ? 'rgba(255,255,255,0.25)' : 'rgba(32,37,58,0.2)');
+          document.querySelector('.slide-nav').style.setProperty('--dot-border', isDark ? 'rgba(255,255,255,0.3)' : 'rgba(32,37,58,0.25)');
+          navLinks.forEach(link => {
+            if (!link.classList.contains('active')) {
+              link.style.background = isDark ? 'rgba(255,255,255,0.25)' : 'rgba(32,37,58,0.2)';
+              link.style.borderColor = isDark ? 'rgba(255,255,255,0.3)' : 'rgba(32,37,58,0.25)';
+            } else {
+              link.style.background = '';
+              link.style.borderColor = '';
+            }
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    slides.forEach(slide => observer.observe(slide));
+  </script>
+</body>
+</html>
