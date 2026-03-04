@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>She Shouldn't Have to Wait | International Women's Day 2026 | Evidence Action</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* === BRAND VARIABLES === */
+    :root {
+      --ea-ink: #20253a;
+      --ea-magenta: #e600a0;
+      --ea-kale-green: #05545a;
+      --ea-blue: #d5f4f7;
+      --ea-light-blue: #ecfafb;
+      --ea-cool-gray: #f8f8fa;
+      --ea-white: #ffffff;
+      --ea-neutral-purple: #5c5161;
+      --ea-neutral-pink: #fe6e87;
+      --ea-stratosphere: #5e93fb;
+      --ea-green: #5dd9b3;
+      --ea-pink: #ffb9ef;
+      --ea-purple: #bc9ed2;
+      --ea-tangerine: #feca90;
+      --ea-beige: #f2ede8;
+      --ea-font-heading: 'JetBrains Mono', 'Courier New', monospace;
+      --ea-font-body: 'Roboto Condensed', Arial, sans-serif;
+      --ea-text-xs: clamp(0.6875rem, 0.6rem + 0.25vw, 0.8125rem);
+      --ea-text-sm: clamp(0.875rem, 0.75rem + 0.35vw, 1.0625rem);
+      --ea-text-base: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+      --ea-text-md: clamp(1.25rem, 1rem + 0.75vw, 1.75rem);
+      --ea-text-lg: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+      --ea-text-xl: clamp(1.875rem, 1.5rem + 1.5vw, 2.75rem);
+      --ea-text-2xl: clamp(2.25rem, 1.75rem + 2vw, 3.75rem);
+      --ea-text-3xl: clamp(3rem, 2rem + 3vw, 5rem);
+      --ea-text-4xl: clamp(3.5rem, 2.5rem + 4vw, 7.5rem);
+      --ea-space-xs: clamp(0.5rem, 0.4rem + 0.25vw, 0.75rem);
+      --ea-space-sm: clamp(0.75rem, 0.6rem + 0.5vw, 1.5rem);
+      --ea-space-md: clamp(1.5rem, 1rem + 1.5vw, 3rem);
+      --ea-space-lg: clamp(3rem, 2rem + 3vw, 6rem);
+      --ea-space-xl: clamp(4rem, 3rem + 4vw, 8rem);
+      --ea-max-width: 1440px;
+      --ea-side-margin: clamp(1rem, 5vw, 4rem);
+      --ea-radius-pill: 50px;
+      --ea-transition-fast: 150ms ease;
+      --ea-transition-normal: 250ms ease;
+      --ea-shadow-md: 0 4px 6px rgba(32,37,58,0.07), 0 1px 3px rgba(32,37,58,0.1);
+      --ea-shadow-lg: 0 10px 15px rgba(32,37,58,0.1), 0 4px 6px rgba(32,37,58,0.05);
+    }
+
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; padding: 0;
+      font-family: var(--ea-font-body);
+      font-size: var(--ea-text-base);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--ea-ink);
+      background: var(--ea-white);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,h2,h3,h4,h5,h6 {
+      font-family: var(--ea-font-heading);
+      font-weight: 400;
+      line-height: 1.1;
+      margin: 0 0 var(--ea-space-sm);
+      letter-spacing: -0.01em;
+    }
+    h1 strong, h2 strong, h3 strong { font-weight: 700; }
+    p { margin: 0 0 1em; }
+    a { color: inherit; text-decoration: none; transition: color var(--ea-transition-fast); }
+    a:hover { color: var(--ea-magenta); }
+    img { max-width: 100%; display: block; }
+    strong { font-weight: 700; }
+
+    /* === LAYOUT === */
+    .container {
+      width: 100%;
+      max-width: var(--ea-max-width);
+      margin-inline: auto;
+      padding-inline: var(--ea-side-margin);
+    }
+    .section { padding-block: var(--ea-space-lg); }
+
+    /* === HEADER === */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--ea-white);
+      padding-block: var(--ea-space-sm);
+      border-bottom: 1px solid var(--ea-cool-gray);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--ea-space-md);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--ea-font-heading);
+      font-size: 1.25rem; font-weight: 400;
+    }
+    .logo-slash {
+      color: var(--ea-magenta);
+      font-weight: 300; font-size: 1.5em;
+      line-height: 0.8;
+      transform: rotate(-20deg);
+      display: inline-block;
+    }
+    .nav-links {
+      display: flex; gap: var(--ea-space-md);
+      list-style: none; margin: 0; padding: 0;
+    }
+    .nav-link {
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* === BUTTONS === */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.5em;
+      padding: 0.75em 1.5em;
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 2px solid transparent;
+      border-radius: var(--ea-radius-pill);
+      cursor: pointer;
+      transition: all var(--ea-transition-normal);
+      line-height: 1;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--ea-magenta);
+      border-color: var(--ea-magenta);
+      color: var(--ea-white);
+    }
+    .btn-primary:hover {
+      background: var(--ea-white);
+      color: var(--ea-magenta);
+    }
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--ea-magenta);
+      color: currentColor;
+    }
+    .btn-secondary:hover {
+      background: var(--ea-magenta);
+      color: var(--ea-white);
+    }
+    .btn-white {
+      background: var(--ea-white);
+      border-color: var(--ea-white);
+      color: var(--ea-magenta);
+    }
+    .btn-white:hover {
+      background: transparent;
+      color: var(--ea-white);
+    }
+    .btn-outline-white {
+      background: transparent;
+      border-color: rgba(255,255,255,0.5);
+      color: var(--ea-white);
+    }
+    .btn-outline-white:hover {
+      background: var(--ea-white);
+      color: var(--ea-ink);
+      border-color: var(--ea-white);
+    }
+
+    /* === TAG / BADGE === */
+    .campaign-tag {
+      display: inline-block;
+      padding: 0.3em 1em;
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: var(--ea-radius-pill);
+      border: 1px solid rgba(255,255,255,0.35);
+      color: var(--ea-white);
+      margin-bottom: var(--ea-space-sm);
+    }
+
+    /* === HERO === */
+    .hero {
+      position: relative;
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-block: var(--ea-space-xl);
+      background: linear-gradient(150deg,
+        var(--ea-ink) 0%,
+        var(--ea-kale-green) 30%,
+        #1a3a5c 55%,
+        var(--ea-neutral-purple) 75%,
+        var(--ea-magenta) 100%
+      );
+      color: var(--ea-white);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 20% 80%, rgba(230,0,160,0.15) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(5,84,90,0.2) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      max-width: 52ch;
+    }
+    .hero h1 {
+      font-size: var(--ea-text-3xl);
+      margin-bottom: var(--ea-space-sm);
+    }
+    .hero p {
+      font-size: var(--ea-text-md);
+      opacity: 0.9;
+      line-height: 1.5;
+      max-width: 48ch;
+    }
+    .hero-stat-strip {
+      position: relative; z-index: 1;
+      margin-top: var(--ea-space-lg);
+      display: flex;
+      gap: var(--ea-space-lg);
+      flex-wrap: wrap;
+    }
+    .hero-stat-strip .mini-stat {
+      border-left: 2px solid rgba(255,255,255,0.3);
+      padding-left: var(--ea-space-sm);
+    }
+    .hero-stat-strip .mini-stat-value {
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-lg);
+      font-weight: 600;
+      line-height: 1;
+    }
+    .hero-stat-strip .mini-stat-label {
+      font-size: var(--ea-text-sm);
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+    /* Floating slash decoration */
+    .hero-slash {
+      position: absolute;
+      font-family: var(--ea-font-heading);
+      color: var(--ea-magenta);
+      opacity: 0.08;
+      font-weight: 300;
+      pointer-events: none;
+      line-height: 1;
+      user-select: none;
+    }
+    .hero-slash-1 { font-size: 40rem; top: -8rem; right: -4rem; transform: rotate(-15deg); }
+    .hero-slash-2 { font-size: 18rem; bottom: -2rem; left: 10%; transform: rotate(-20deg); opacity: 0.05; }
+
+    /* === CRISIS STATS SECTION === */
+    .crisis-section {
+      background: var(--ea-white);
+      padding-block: var(--ea-space-lg);
+    }
+    .crisis-header {
+      max-width: 50ch;
+      margin-bottom: var(--ea-space-lg);
+    }
+    .crisis-header h2 {
+      font-size: var(--ea-text-xl);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--ea-space-md);
+    }
+    .stat-card {
+      border-top: 3px solid var(--ea-magenta);
+      padding-top: var(--ea-space-sm);
+    }
+    .stat-card .stat-value {
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-2xl);
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ea-ink);
+    }
+    .stat-card .stat-label {
+      font-size: var(--ea-text-sm);
+      margin-top: var(--ea-space-xs);
+      opacity: 0.8;
+      line-height: 1.4;
+    }
+    .stat-card .stat-source {
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-xs);
+      color: var(--ea-neutral-purple);
+      margin-top: var(--ea-space-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* === WATER EQUITY FEATURE === */
+    .water-feature {
+      background: var(--ea-kale-green);
+      color: var(--ea-white);
+      padding-block: var(--ea-space-lg);
+      overflow: hidden;
+    }
+    .water-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--ea-space-lg);
+      align-items: center;
+    }
+    .water-visual {
+      display: flex;
+      flex-direction: column;
+      gap: var(--ea-space-md);
+    }
+    .time-comparison {
+      display: flex;
+      gap: var(--ea-space-md);
+      align-items: flex-end;
+    }
+    .time-bar-group {
+      flex: 1;
+      text-align: center;
+    }
+    .time-bar-group .bar-label {
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--ea-space-xs);
+      opacity: 0.8;
+    }
+    .time-bar {
+      width: 100%;
+      border-radius: 4px 4px 0 0;
+      transition: height 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+    }
+    .time-bar-women {
+      height: 0;
+      background: linear-gradient(to top, var(--ea-magenta), var(--ea-neutral-pink));
+    }
+    .time-bar-women.animated { height: 220px; }
+    .time-bar-men {
+      height: 0;
+      background: linear-gradient(to top, var(--ea-stratosphere), rgba(94,147,251,0.6));
+    }
+    .time-bar-men.animated { height: 24px; }
+    .time-bar .bar-value {
+      position: absolute;
+      top: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-lg);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .water-content h2 {
+      font-size: var(--ea-text-xl);
+    }
+    .water-content p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+    .water-callout {
+      background: rgba(255,255,255,0.08);
+      border-left: 3px solid var(--ea-magenta);
+      padding: var(--ea-space-sm) var(--ea-space-md);
+      margin-top: var(--ea-space-md);
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-sm);
+      line-height: 1.5;
+    }
+
+    /* === INTERVENTIONS SECTION === */
+    .interventions-section {
+      background: var(--ea-cool-gray);
+      padding-block: var(--ea-space-lg);
+    }
+    .interventions-header {
+      text-align: center;
+      max-width: 50ch;
+      margin: 0 auto var(--ea-space-lg);
+    }
+    .interventions-header h2 { font-size: var(--ea-text-xl); }
+    .intervention-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--ea-space-md);
+    }
+    .intervention-card {
+      background: var(--ea-white);
+      overflow: hidden;
+      transition: box-shadow var(--ea-transition-normal), transform var(--ea-transition-normal);
+    }
+    .intervention-card:hover {
+      box-shadow: var(--ea-shadow-lg);
+      transform: translateY(-4px);
+    }
+    .intervention-card-accent {
+      height: 6px;
+    }
+    .intervention-card-body {
+      padding: var(--ea-space-md);
+    }
+    .intervention-icon {
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      margin-bottom: var(--ea-space-sm);
+      font-size: 1.5rem;
+    }
+    .intervention-card h3 {
+      font-size: var(--ea-text-md);
+      margin-bottom: var(--ea-space-xs);
+    }
+    .intervention-card p {
+      font-size: var(--ea-text-sm);
+      line-height: 1.5;
+      opacity: 0.85;
+      margin-bottom: var(--ea-space-sm);
+    }
+    .intervention-stat {
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--ea-magenta);
+      font-weight: 500;
+    }
+
+    /* === QUOTE / PULLQUOTE === */
+    .pullquote-section {
+      background: var(--ea-light-blue);
+      padding-block: var(--ea-space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    .pullquote-section::before {
+      content: '/';
+      position: absolute;
+      top: -1rem; right: 5%;
+      font-family: var(--ea-font-heading);
+      font-size: 20rem;
+      font-weight: 300;
+      color: var(--ea-magenta);
+      opacity: 0.06;
+      pointer-events: none;
+      transform: rotate(-15deg);
+      line-height: 1;
+    }
+    .pullquote-inner {
+      max-width: 55ch;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .pullquote-inner blockquote {
+      font-family: var(--ea-font-heading);
+      font-size: var(--ea-text-lg);
+      line-height: 1.35;
+      border: none;
+      padding: 0;
+      margin: 0 0 var(--ea-space-md);
+      font-weight: 400;
+    }
+    .pullquote-inner blockquote em {
+      color: var(--ea-magenta);
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    /* === IMPACT TIMELINE === */
+    .timeline-section {
+      background: var(--ea-white);
+      padding-block: var(--ea-space-lg);
+    }
+    .timeline-header {
+      max-width: 50ch;
+      margin-bottom: var(--ea-space-lg);
+    }
+    .timeline-header h2 { font-size: var(--ea-text-xl); }
+    .timeline {
+      position: relative;
+      padding-left: 3rem;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--ea-magenta), var(--ea-blue));
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: var(--ea-space-lg);
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: calc(-3rem - 5px);
+      top: 4px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--ea-magenta);
+    }
+    .timeline-item h3 {
+      font-size: var(--ea-text-md);
+      margin-bottom: var(--ea-space-xs);
+    }
+    .timeline-item p {
+      font-size: var(--ea-text-sm);
+      line-height: 1.5;
+      opacity: 0.85;
+      max-width: 50ch;
+    }
+
+    /* === FULL-WIDTH CTA === */
+    .cta-section {
+      background: linear-gradient(135deg,
+        var(--ea-ink) 0%,
+        var(--ea-kale-green) 35%,
+        var(--ea-magenta) 100%
+      );
+      color: var(--ea-white);
+      padding-block: var(--ea-space-xl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 60% 50%, rgba(230,0,160,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative; z-index: 1;
+      max-width: 50ch;
+      margin: 0 auto;
+    }
+    .cta-inner h2 {
+      font-size: var(--ea-text-2xl);
+      margin-bottom: var(--ea-space-sm);
+    }
+    .cta-inner p {
+      font-size: var(--ea-text-md);
+      opacity: 0.9;
+      margin-bottom: var(--ea-space-md);
+    }
+    .cta-buttons {
+      display: flex;
+      gap: var(--ea-space-sm);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* === FOOTER === */
+    .site-footer {
+      background: var(--ea-ink);
+      color: var(--ea-white);
+      padding-block: var(--ea-space-lg);
+      border-top: 6px solid;
+      border-image: linear-gradient(to right, var(--ea-magenta), var(--ea-light-blue), var(--ea-stratosphere)) 1;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--ea-space-lg);
+    }
+    .footer-grid ul {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .footer-grid ul li { margin-bottom: var(--ea-space-xs); }
+    .footer-grid ul a { opacity: 0.7; font-size: var(--ea-text-sm); }
+    .footer-grid ul a:hover { opacity: 1; }
+    .footer-grid h4 {
+      font-size: var(--ea-text-sm);
+      margin-bottom: var(--ea-space-sm);
+    }
+    .footer-bottom {
+      margin-top: var(--ea-space-lg);
+      padding-top: var(--ea-space-md);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--ea-space-sm);
+      font-size: var(--ea-text-xs);
+      opacity: 0.5;
+    }
+    .footer-bottom a { margin-left: var(--ea-space-md); }
+
+    /* === ANIMATIONS === */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .animate-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero-content { animation: fadeSlideUp 0.8s ease 0.2s both; }
+    .hero-stat-strip { animation: fadeSlideUp 0.8s ease 0.5s both; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .intervention-cards { grid-template-columns: repeat(2, 1fr); }
+      .water-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero { min-height: 80vh; }
+      .hero h1 { font-size: var(--ea-text-2xl); }
+      .hero-stat-strip { flex-direction: column; gap: var(--ea-space-md); }
+      .stats-grid { grid-template-columns: 1fr; }
+      .intervention-cards { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .time-comparison { gap: var(--ea-space-sm); }
+      .time-bar-women.animated { height: 160px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-slash-1 { font-size: 20rem; right: -3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <nav class="container nav">
+      <a href="#" class="logo">
+        <span>evidence<br><strong>action</strong></span>
+        <span class="logo-slash">/</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#programs" class="nav-link">Our Programs</a></li>
+        <li><a href="#water" class="nav-link">Safe Water</a></li>
+        <li><a href="#impact" class="nav-link">Impact</a></li>
+        <li><a href="#donate" class="nav-link">Donate</a></li>
+      </ul>
+      <a href="#donate" class="btn btn-primary">Donate</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero-slash hero-slash-1" aria-hidden="true">/</span>
+    <span class="hero-slash hero-slash-2" aria-hidden="true">/</span>
+    <div class="container">
+      <div class="hero-content">
+        <span class="campaign-tag">International Women's Day 2026</span>
+        <h1>she shouldn't have to <strong>wait</strong></h1>
+        <p>Every 7 seconds, a woman or newborn dies during pregnancy, childbirth, or shortly after birth. 4.5 million lives lost every year&mdash;most of them preventable. The solutions exist. Your support delivers them.</p>
+        <div style="display: flex; gap: var(--ea-space-sm); flex-wrap: wrap; margin-top: var(--ea-space-md);">
+          <a href="#donate" class="btn btn-white">Support Her Now</a>
+          <a href="#programs" class="btn btn-outline-white">See Our Work</a>
+        </div>
+      </div>
+      <div class="hero-stat-strip">
+        <div class="mini-stat">
+          <div class="mini-stat-value">4.5M</div>
+          <div class="mini-stat-label">lives lost yearly</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-value">70%</div>
+          <div class="mini-stat-label">of maternal deaths in Sub-Saharan Africa</div>
+        </div>
+        <div class="mini-stat">
+          <div class="mini-stat-value">1B</div>
+          <div class="mini-stat-label">girls &amp; women with undernutrition</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Crisis Stats -->
+  <section class="crisis-section section">
+    <div class="container">
+      <div class="crisis-header animate-on-scroll">
+        <h2>The crisis is <strong>measurable. So is the solution.</strong></h2>
+        <p>Behind every statistic is a woman or girl whose life can change with the right intervention, at the right time.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card animate-on-scroll">
+          <div class="stat-value">1M</div>
+          <div class="stat-label">pregnant women with active syphilis&mdash;the 2nd most common infectious cause of stillbirth worldwide</div>
+          <div class="stat-source">Evidence Action</div>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <div class="stat-value">200K</div>
+          <div class="stat-label">stillbirths and neonatal deaths from mother-to-child syphilis transmission every year</div>
+          <div class="stat-source">Evidence Action</div>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <div class="stat-value">26%</div>
+          <div class="stat-label">of adolescent girls worldwide are anemic, compared to 18% of boys</div>
+          <div class="stat-source">Evidence Action</div>
+        </div>
+        <div class="stat-card animate-on-scroll">
+          <div class="stat-value">342K</div>
+          <div class="stat-label">women died from cervical cancer in 2020; 90% of those deaths in low- and middle-income countries</div>
+          <div class="stat-source">Evidence Action</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Water Equity Feature -->
+  <section class="water-feature section" id="water">
+    <div class="container">
+      <div class="water-grid">
+        <div class="water-visual animate-on-scroll">
+          <div style="font-family: var(--ea-font-heading); font-size: var(--ea-text-xs); text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.6; margin-bottom: var(--ea-space-xs);">Average time per water collection trip — Malawi</div>
+          <div class="time-comparison">
+            <div class="time-bar-group">
+              <div class="bar-label">Women</div>
+              <div class="time-bar time-bar-women" id="bar-women">
+                <span class="bar-value">54 min</span>
+              </div>
+            </div>
+            <div class="time-bar-group">
+              <div class="bar-label">Men</div>
+              <div class="time-bar time-bar-men" id="bar-men">
+                <span class="bar-value">6 min</span>
+              </div>
+            </div>
+          </div>
+          <div class="water-callout">
+            In 8 out of 10 households without running water, girls bear the responsibility of water collection.
+            <span style="display: block; margin-top: 4px; opacity: 0.6;">Source: UNICEF</span>
+          </div>
+        </div>
+        <div class="water-content animate-on-scroll">
+          <span class="campaign-tag" style="border-color: rgba(255,255,255,0.2);">Safe Water &amp; Gender Equity</span>
+          <h2>safe water is a <strong>women's equity issue</strong></h2>
+          <p>Women and girls spend an estimated 200 million hours every single day collecting water. That's 22,800 years of time&mdash;every day&mdash;lost to a task that falls overwhelmingly on them.</p>
+          <p>This isn't just a water problem. It's time stolen from school, from work, from rest, from building a future. And 1 in 3 schools lack the toilets girls need once they hit puberty, creating yet another barrier.</p>
+          <p>Evidence Action's safe water programs help remove this burden&mdash;giving women and girls back their time and protecting their families' health.</p>
+          <a href="#donate" class="btn btn-white" style="margin-top: var(--ea-space-sm);">Support Safe Water</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interventions -->
+  <section class="interventions-section section" id="programs">
+    <div class="container">
+      <div class="interventions-header animate-on-scroll">
+        <span class="campaign-tag" style="color: var(--ea-magenta); border-color: var(--ea-magenta);">#SheShouldntHaveToWait</span>
+        <h2>proven interventions that <strong>reach her now</strong></h2>
+        <p>Your investment doesn't fund a wish. It funds what works. Each of these programs is evidence-based, cost-effective, and already changing lives.</p>
+      </div>
+      <div class="intervention-cards">
+        <!-- Syphilis-Free Start -->
+        <div class="intervention-card animate-on-scroll">
+          <div class="intervention-card-accent" style="background: linear-gradient(to right, var(--ea-magenta), var(--ea-neutral-pink));"></div>
+          <div class="intervention-card-body">
+            <div class="intervention-icon" style="background: rgba(230,0,160,0.1); color: var(--ea-magenta);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <h3><strong>Syphilis-Free Start</strong></h3>
+            <p>Screening and treating syphilis in pregnant women to prevent stillbirths and newborn deaths. Already at nationwide scale in Liberia. Congenital syphilis is entirely preventable.</p>
+            <div class="intervention-stat">200,000 stillbirths &amp; newborn deaths preventable yearly</div>
+          </div>
+        </div>
+        <!-- MMS -->
+        <div class="intervention-card animate-on-scroll">
+          <div class="intervention-card-accent" style="background: linear-gradient(to right, var(--ea-green), var(--ea-stratosphere));"></div>
+          <div class="intervention-card-body">
+            <div class="intervention-icon" style="background: rgba(93,217,179,0.15); color: var(--ea-kale-green);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>multiple micronutrient <strong>supplements</strong></h3>
+            <p>Closing the prenatal vitamin gap by embedding supplements into existing health systems&mdash;so the solution reaches her where she already is and lasts beyond any single program.</p>
+            <div class="intervention-stat">1 billion girls &amp; women affected by undernutrition</div>
+          </div>
+        </div>
+        <!-- IFA -->
+        <div class="intervention-card animate-on-scroll">
+          <div class="intervention-card-accent" style="background: linear-gradient(to right, var(--ea-purple), var(--ea-pink));"></div>
+          <div class="intervention-card-body">
+            <div class="intervention-icon" style="background: rgba(188,158,210,0.15); color: var(--ea-neutral-purple);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <h3>iron &amp; folic acid <strong>supplementation</strong></h3>
+            <p>26% of adolescent girls worldwide are anemic&mdash;compared to 18% of boys. IFA supplementation supports the girls who need it most, helping them stay in school and thrive.</p>
+            <div class="intervention-stat">26% of adolescent girls are anemic globally</div>
+          </div>
+        </div>
+        <!-- Safe Water -->
+        <div class="intervention-card animate-on-scroll">
+          <div class="intervention-card-accent" style="background: linear-gradient(to right, var(--ea-stratosphere), var(--ea-blue));"></div>
+          <div class="intervention-card-body">
+            <div class="intervention-icon" style="background: rgba(94,147,251,0.15); color: var(--ea-stratosphere);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            </div>
+            <h3>safe water <strong>now</strong></h3>
+            <p>Women and girls spend 200 million hours a day collecting water. Safe water programs give them back their time, protect families from waterborne disease, and remove a critical barrier to education.</p>
+            <div class="intervention-stat">300,000+ children under 5 die annually from diarrhoeal disease</div>
+          </div>
+        </div>
+        <!-- Deworming -->
+        <div class="intervention-card animate-on-scroll">
+          <div class="intervention-card-accent" style="background: linear-gradient(to right, var(--ea-tangerine), var(--ea-lemongrass));"></div>
+          <div class="intervention-card-body">
+            <div class="intervention-icon" style="background: rgba(254,202,144,0.2); color: #c4882a;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <h3>deworm the <strong>world</strong></h3>
+            <p>School-based deworming is proven to increase girls' chances of staying in school&mdash;where every year of education transforms her future, her family's prospects, and her community.</p>
+            <div class="intervention-stat">Proven to increase school attendance in girls</div>
+          </div>
+        </div>
+        <!-- Interconnected -->
+        <div class="intervention-card animate-on-scroll" style="background: var(--ea-ink); color: var(--ea-white);">
+          <div class="intervention-card-accent" style="background: linear-gradient(to right, var(--ea-magenta), var(--ea-stratosphere), var(--ea-green));"></div>
+          <div class="intervention-card-body">
+            <div class="intervention-icon" style="background: rgba(230,0,160,0.2); color: var(--ea-magenta);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></svg>
+            </div>
+            <h3>interconnected <strong>impact</strong></h3>
+            <p>These aren't isolated programs. Evidence Action addresses overlapping barriers&mdash;health, nutrition, education, time&mdash;so the impact compounds. Every intervention is designed to be cost-effective and embedded in existing systems.</p>
+            <div class="intervention-stat" style="color: var(--ea-green);">Systemic, lasting change</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pullquote -->
+  <section class="pullquote-section section">
+    <div class="container">
+      <div class="pullquote-inner animate-on-scroll">
+        <blockquote>
+          "The question isn't whether we <em>can</em> close these gaps. It's whether we <em>will.</em>"
+        </blockquote>
+        <p style="font-family: var(--ea-font-heading); font-size: var(--ea-text-sm); text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.6; margin: 0;">#SheShouldntHaveToWait</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Timeline -->
+  <section class="timeline-section section" id="impact">
+    <div class="container">
+      <div class="timeline-header animate-on-scroll">
+        <h2>what your support <strong>makes possible</strong></h2>
+        <p>When you invest in Evidence Action, you fund interventions that are proven, cost-effective, and already reaching millions. Here's what that looks like.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-dot"></div>
+          <h3>screen &amp; <strong>treat</strong></h3>
+          <p>Through Syphilis-Free Start, governments detect and treat syphilis in pregnant women before it's too late. In Liberia, this has already reached nationwide scale&mdash;preventing stillbirths and saving newborn lives.</p>
+        </div>
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-dot"></div>
+          <h3>nourish &amp; <strong>strengthen</strong></h3>
+          <p>Multiple micronutrient supplements and iron-folic acid programs close the prenatal vitamin gap, tackling anemia in 1 billion adolescent girls and women and reducing adverse birth outcomes.</p>
+        </div>
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-dot"></div>
+          <h3>free her <strong>time</strong></h3>
+          <p>Safe water programs eliminate the daily burden of water collection&mdash;200 million hours a day spent by women and girls&mdash;giving them back time for school, work, and rest.</p>
+        </div>
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-dot"></div>
+          <h3>keep her in <strong>school</strong></h3>
+          <p>School-based deworming increases girls' attendance and outcomes. Every additional year of education transforms her trajectory and the prospects of the next generation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="donate">
+    <div class="container">
+      <div class="cta-inner animate-on-scroll">
+        <h2>she shouldn't have to <strong>wait</strong></h2>
+        <p>The solutions exist. They're proven. They're cost-effective. And they're reaching millions of women and girls right now. Will you join us?</p>
+        <div class="cta-buttons">
+          <a href="#" class="btn btn-white">Donate Now</a>
+          <a href="#" class="btn btn-outline-white">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="logo" style="color: white; margin-bottom: var(--ea-space-md);">
+            <span>evidence<br><strong>action</strong></span>
+            <span class="logo-slash">/</span>
+          </div>
+          <p style="font-size: var(--ea-text-sm); opacity: 0.7; max-width: 30ch;">
+            We scale evidence-based and cost-effective programs to reduce the burden of poverty.
+          </p>
+        </div>
+        <div>
+          <h4>Our Programs</h4>
+          <ul>
+            <li><a href="#">Deworm the World</a></li>
+            <li><a href="#">Safe Water Now</a></li>
+            <li><a href="#">Syphilis-Free Start</a></li>
+            <li><a href="#">Equal Vitamin Access</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>About</h4>
+          <ul>
+            <li><a href="#">Our Approach</a></li>
+            <li><a href="#">Team</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Financials</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Connect</h4>
+          <ul>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Newsletter</a></li>
+            <li><a href="#">Social Media</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Evidence Action. All rights reserved.</span>
+        <div>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Animations & Bar Chart Animation -->
+  <script>
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          // Animate the time bars when the water section becomes visible
+          if (entry.target.closest('.water-feature')) {
+            document.getElementById('bar-women')?.classList.add('animated');
+            setTimeout(() => {
+              document.getElementById('bar-men')?.classList.add('animated');
+            }, 400);
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
