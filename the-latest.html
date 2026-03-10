@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Latest | Evidence Action</title>
+  <meta name="description" content="Insights, program updates, announcements, and media mentions from Evidence Action.">
+  <meta name="robots" content="noindex">
+
+  <!-- ✦ MOCKUP NOTE ✦
+       This is a static HTML prototype for /the-latest (or equivalent URL).
+       In production:
+         - Card data comes from a merged Sprig component query across both
+           the Insights and Newsroom entry types, ordered by postDate desc.
+         - Filters trigger server-side Sprig renders (same pattern as the
+           existing insightsFilter / newsFilter components).
+         - The sub-category field on Insights is a new dropdown field to be
+           added to the Insights channel: Evidence & Data | Program Progress | Stories & Voices.
+         - Newsroom gets a new "Research" option added to its existing type field.
+         - /insights and /newsroom can 301 → /the-latest.
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* === EA BRAND TOKENS === */
+    :root {
+      --ea-ink:           #20253a;
+      --ea-magenta:       #e600a0;
+      --ea-kale-green:    #05545a;
+      --ea-blue:          #d5f4f7;
+      --ea-light-blue:    #ecfafb;
+      --ea-cool-gray:     #f8f8fa;
+      --ea-white:         #ffffff;
+      --ea-neutral-purple:#5c5161;
+      --ea-stratosphere:  #5e93fb;
+      --ea-green:         #5dd9b3;
+      --ea-pink:          #ffb9ef;
+      --ea-tangerine:     #feca90;
+      --ea-beige:         #f2ede8;
+      --ea-font-heading:  'JetBrains Mono', 'Courier New', monospace;
+      --ea-font-body:     'Roboto Condensed', Arial, sans-serif;
+      --ea-radius-sm: 4px;
+      --ea-radius-md: 8px;
+      --ea-shadow-md: 0 4px 6px rgba(32,37,58,.07), 0 1px 3px rgba(32,37,58,.10);
+      --ea-shadow-lg: 0 10px 15px rgba(32,37,58,.10), 0 4px 6px rgba(32,37,58,.05);
+      --ea-transition: 200ms ease;
+      --ea-max-width: 1260px;
+    }
+
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; padding: 0;
+      font-family: var(--ea-font-body);
+      font-size: 1rem;
+      color: var(--ea-ink);
+      background: var(--ea-white);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,h2,h3,h4 {
+      font-family: var(--ea-font-heading);
+      font-weight: 400; line-height: 1.1; margin: 0;
+    }
+    p { margin: 0 0 1em; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* === MOCK HEADER (simplified for prototype) === */
+    .site-header {
+      background: var(--ea-ink);
+      padding: 0 clamp(1rem,5vw,4rem);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .site-header__logo {
+      font-family: var(--ea-font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ea-white);
+      letter-spacing: 0.04em;
+    }
+    .site-header__logo span { color: var(--ea-green); }
+    .site-header__nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .site-header__nav a {
+      font-family: var(--ea-font-heading);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      transition: color var(--ea-transition);
+    }
+    .site-header__nav a:hover,
+    .site-header__nav a.active { color: var(--ea-white); }
+    .site-header__nav a.active { border-bottom: 2px solid var(--ea-green); padding-bottom: 2px; }
+    @media (max-width:640px) { .site-header__nav { display: none; } }
+
+    /* === HERO === */
+    .hero {
+      background: var(--ea-ink);
+      padding: clamp(3rem,6vw,5rem) clamp(1rem,5vw,4rem) clamp(2rem,4vw,3.5rem);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 100% 120%, rgba(5,84,90,0.5) 0%, transparent 60%),
+        radial-gradient(ellipse 35% 50% at -5% 10%, rgba(93,217,179,0.10) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero__inner {
+      max-width: var(--ea-max-width);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .hero__breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--ea-font-heading);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.25rem;
+    }
+    .hero__breadcrumb span { color: rgba(255,255,255,0.3); }
+    .hero__heading {
+      font-size: clamp(2rem,4vw,3.25rem);
+      font-weight: 400;
+      color: var(--ea-white);
+      margin-bottom: 1rem;
+      max-width: 700px;
+    }
+    .hero__heading strong { font-weight: 700; }
+    .hero__subtext {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.75);
+      max-width: 620px;
+      margin-bottom: 1.75rem;
+    }
+    .hero__cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .btn-subscribe {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--ea-magenta);
+      color: var(--ea-white);
+      font-family: var(--ea-font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      transition: background var(--ea-transition);
+    }
+    .btn-subscribe:hover { background: #bf008a; color: var(--ea-white); }
+    .hero__note {
+      font-family: var(--ea-font-heading);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.04em;
+    }
+
+    /* === FILTER BAR === */
+    .filter-section {
+      background: var(--ea-light-blue);
+      border-bottom: 1px solid rgba(5,84,90,0.12);
+      padding: 1.25rem clamp(1rem,5vw,4rem);
+      position: sticky;
+      top: 68px;
+      z-index: 90;
+    }
+    .filter-inner {
+      max-width: var(--ea-max-width);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 0.75rem;
+    }
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      flex: 1;
+      min-width: 160px;
+    }
+    .filter-group label {
+      font-family: var(--ea-font-heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ea-kale-green);
+    }
+    .filter-group select {
+      appearance: none;
+      -webkit-appearance: none;
+      background: var(--ea-white);
+      border: 1px solid rgba(5,84,90,0.25);
+      border-radius: var(--ea-radius-sm);
+      padding: 0.55rem 2.25rem 0.55rem 0.75rem;
+      font-family: var(--ea-font-body);
+      font-size: 0.875rem;
+      color: var(--ea-ink);
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2305545a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      transition: border-color var(--ea-transition);
+    }
+    .filter-group select:focus {
+      outline: none;
+      border-color: var(--ea-kale-green);
+    }
+    /* Non-clickable optgroup headers */
+    .filter-group select optgroup {
+      font-family: var(--ea-font-heading);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ea-neutral-purple);
+      font-style: normal;
+      font-weight: 700;
+      pointer-events: none;
+    }
+    .filter-group select option {
+      padding-left: 1rem;
+      font-size: 0.875rem;
+    }
+    .filter-sort {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      min-width: 160px;
+    }
+    .filter-sort label {
+      font-family: var(--ea-font-heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ea-neutral-purple);
+    }
+    .filter-sort select {
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      border: 1px solid rgba(92,81,97,0.3);
+      border-radius: var(--ea-radius-sm);
+      padding: 0.55rem 2.25rem 0.55rem 0.75rem;
+      font-family: var(--ea-font-body);
+      font-size: 0.875rem;
+      color: var(--ea-neutral-purple);
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235c5161' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+    }
+    .filter-sort select:focus { outline: none; }
+    .filter-reset {
+      background: none;
+      border: none;
+      font-family: var(--ea-font-heading);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ea-kale-green);
+      cursor: pointer;
+      padding: 0.55rem 0;
+      align-self: flex-end;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--ea-transition);
+    }
+    .filter-reset.visible { opacity: 1; pointer-events: auto; }
+
+    /* === CONTENT AREA === */
+    .content-area {
+      padding: 2rem clamp(1rem,5vw,4rem) 4rem;
+      background: var(--ea-light-blue);
+      min-height: 60vh;
+    }
+    .content-inner {
+      max-width: var(--ea-max-width);
+      margin: 0 auto;
+    }
+
+    /* Results meta row */
+    .results-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+      flex-wrap: wrap;
+    }
+    .results-count {
+      font-family: var(--ea-font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--ea-kale-green);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .results-count span { color: var(--ea-neutral-purple); font-weight: 400; }
+    .active-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--ea-white);
+      border: 1px solid rgba(5,84,90,0.25);
+      border-radius: 50px;
+      padding: 0.2rem 0.6rem 0.2rem 0.75rem;
+      font-family: var(--ea-font-heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--ea-kale-green);
+    }
+    .filter-pill button {
+      background: none; border: none; cursor: pointer;
+      color: var(--ea-kale-green); padding: 0;
+      font-size: 0.85rem; line-height: 1;
+    }
+
+    /* === CARD GRID === */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 1024px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .card-grid { grid-template-columns: 1fr; } }
+
+    .card-grid.is-filtered .card-item { transition: opacity 0.2s ease; }
+    .card-item[hidden] { display: none; }
+
+    /* === BASE CARD === */
+    .card {
+      background: var(--ea-white);
+      border-radius: var(--ea-radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--ea-shadow-md);
+      transition: transform var(--ea-transition), box-shadow var(--ea-transition);
+      text-decoration: none;
+      color: var(--ea-ink);
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--ea-shadow-lg);
+      color: var(--ea-ink);
+    }
+
+    /* Card image header */
+    .card__image-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--ea-ink);
+    }
+    .card__image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .card:hover .card__image-wrap img { transform: scale(1.03); }
+
+    /* Newsroom cards: branded color header (no image) */
+    .card__color-header {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem 1.25rem;
+    }
+    .card__color-header.announcement  { background: linear-gradient(135deg, var(--ea-kale-green) 0%, #083f44 100%); }
+    .card__color-header.media-mention  { background: linear-gradient(135deg, #3a2040 0%, var(--ea-neutral-purple) 100%); }
+    .card__color-header.newsletter     { background: linear-gradient(135deg, #1a2e6b 0%, var(--ea-stratosphere) 100%); }
+    .card__color-header.research       { background: linear-gradient(135deg, #1d3a2a 0%, #3a7a5a 100%); }
+
+    /* Content type badge (overlaid on image or color header) */
+    .card__type-badge {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      font-family: var(--ea-font-heading);
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 50px;
+      background: rgba(32,37,58,0.7);
+      backdrop-filter: blur(4px);
+      color: var(--ea-white);
+      line-height: 1.4;
+    }
+    /* Sub-category tag inside color header (newsroom has type as main badge) */
+    .card__color-header .card__type-badge {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: none;
+    }
+
+    /* Color accents per sub-category */
+    .badge--evidence-data    { background: rgba(94,147,251,0.85); }
+    .badge--program-progress { background: rgba(5,84,90,0.85); }
+    .badge--stories-voices   { background: rgba(230,0,160,0.7); }
+    .badge--announcement     { background: rgba(5,84,90,0.85); }
+    .badge--media-mention    { background: rgba(92,81,97,0.85); }
+    .badge--newsletter       { background: rgba(94,147,251,0.85); }
+    .badge--research         { background: rgba(30,100,60,0.85); }
+    .badge--perspectives     { background: rgba(254,202,144,0.9); color: #20253a; }
+
+    /* Large content-type wordmark in color header */
+    .card__content-type-mark {
+      font-family: var(--ea-font-heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.35);
+      position: absolute;
+      bottom: 0.85rem;
+      right: 1rem;
+    }
+
+    /* Card body */
+    .card__body {
+      padding: 1.25rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card__meta-top {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .card__subcategory {
+      font-family: var(--ea-font-heading);
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--ea-kale-green);
+    }
+    .card__subcategory.stories-voices   { color: var(--ea-magenta); }
+    .card__subcategory.evidence-data    { color: var(--ea-stratosphere); }
+    .card__subcategory.media-mention    { color: var(--ea-neutral-purple); }
+    .card__subcategory.newsletter       { color: var(--ea-stratosphere); }
+    .card__subcategory.research         { color: #2a7a50; }
+    .card__subcategory.perspectives     { color: #b45309; }
+    .card__dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: rgba(32,37,58,0.25); flex-shrink: 0;
+    }
+    .card__date {
+      font-family: var(--ea-font-heading);
+      font-size: 0.62rem;
+      color: rgba(32,37,58,0.45);
+      letter-spacing: 0.04em;
+    }
+    .card__title {
+      font-family: var(--ea-font-heading);
+      font-size: clamp(0.9rem, 1.1vw, 1rem);
+      font-weight: 700;
+      line-height: 1.35;
+      flex: 1;
+      margin-bottom: 1rem;
+      color: var(--ea-ink);
+    }
+    .card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+    .card__readtime {
+      font-family: var(--ea-font-heading);
+      font-size: 0.65rem;
+      color: rgba(32,37,58,0.45);
+      letter-spacing: 0.04em;
+    }
+    .card__focus-tag {
+      font-family: var(--ea-font-heading);
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ea-kale-green);
+      background: var(--ea-light-blue);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--ea-radius-sm);
+    }
+    .card__arrow {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: var(--ea-font-heading);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ea-kale-green);
+      margin-top: 0.5rem;
+    }
+    .card__arrow svg { transition: transform var(--ea-transition); }
+    .card:hover .card__arrow svg { transform: translateX(3px); }
+
+    /* === EMPTY STATE === */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+    .empty-state__icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .empty-state__title {
+      font-family: var(--ea-font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .empty-state__text {
+      font-size: 0.95rem;
+      color: var(--ea-neutral-purple);
+    }
+
+    /* === ANNOTATION BOX (for mockup) === */
+    .annotation-banner {
+      background: #fef9c3;
+      border: 1.5px dashed #ca8a04;
+      border-radius: 6px;
+      padding: 0.85rem 1.25rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: #713f12;
+    }
+    .annotation-banner strong { font-weight: 700; }
+    .annotation-banner code {
+      background: rgba(0,0,0,0.08);
+      border-radius: 3px;
+      padding: 0.05em 0.35em;
+      font-size: 0.85em;
+    }
+
+    /* === LOAD MORE === */
+    .load-more-wrap {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+    .btn-load-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--ea-white);
+      border: 1.5px solid var(--ea-kale-green);
+      color: var(--ea-kale-green);
+      font-family: var(--ea-font-heading);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background var(--ea-transition), color var(--ea-transition);
+    }
+    .btn-load-more:hover { background: var(--ea-kale-green); color: var(--ea-white); }
+
+    /* === FOOTER === */
+    .site-footer {
+      background: var(--ea-ink);
+      color: rgba(255,255,255,0.55);
+      padding: 2.5rem clamp(1rem,5vw,4rem);
+      text-align: center;
+      font-size: 0.8rem;
+    }
+    .site-footer__logo {
+      font-family: var(--ea-font-heading);
+      font-weight: 700;
+      color: var(--ea-white);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .site-footer a { color: rgba(255,255,255,0.55); }
+    .site-footer a:hover { color: var(--ea-green); }
+  </style>
+</head>
+<body>
+
+<!-- ===== MOCK HEADER ===== -->
+
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__breadcrumb">
+      <a href="#">evidenceaction.org</a>
+      <span>/</span>
+      <span style="color:rgba(255,255,255,0.6)">The Latest</span>
+    </div>
+    <h1 class="hero__heading">
+      <strong>Insights, updates,</strong><br>and what's happening in the field
+    </h1>
+    <p class="hero__subtext">Deep dives into data, program progress, stories of impact, and news from Evidence Action — all in one place.</p>
+    <div class="hero__cta-row">
+      <a href="https://www.evidenceaction.org/subscribe" class="btn-subscribe">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        Subscribe to updates
+      </a>
+      <span class="hero__note">Press inquiries: <a href="mailto:communications@evidenceaction.org" style="color:rgba(255,255,255,0.55);text-decoration:underline;">communications@evidenceaction.org</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FILTER BAR ===== -->
+<div class="filter-section">
+  <div class="filter-inner">
+
+    <!-- Focus Area -->
+    <div class="filter-group">
+      <label for="f-focus">Focus Area</label>
+      <select id="f-focus" name="focusArea">
+        <option value="">All focus areas</option>
+        <option value="child-adolescent-health">Child &amp; Adolescent Health</option>
+        <option value="clean-water">Clean Water</option>
+        <option value="climate-health">Climate &times; Health</option>
+        <option value="maternal-newborn-health">Maternal &amp; Newborn Health</option>
+        <option value="ntd">Neglected Tropical Diseases</option>
+        <option value="nutrition">Nutrition</option>
+        <option value="women-girls">Women &amp; Girls</option>
+      </select>
+    </div>
+
+    <!-- Location -->
+    <div class="filter-group">
+      <label for="f-location">Location</label>
+      <select id="f-location" name="location">
+        <option value="">All locations</option>
+        <option value="cameroon">Cameroon</option>
+        <option value="india">India</option>
+        <option value="kenya">Kenya</option>
+        <option value="liberia">Liberia</option>
+        <option value="malawi">Malawi</option>
+        <option value="nigeria">Nigeria</option>
+        <option value="pakistan">Pakistan</option>
+        <option value="tanzania">Tanzania</option>
+        <option value="uganda">Uganda</option>
+        <option value="zambia">Zambia</option>
+      </select>
+    </div>
+
+    <!-- Program -->
+    <div class="filter-group">
+      <label for="f-program">Program</label>
+      <select id="f-program" name="program">
+        <option value="">All programs</option>
+        <option value="deworm-the-world">Deworm the World</option>
+        <option value="equal-vitamin-access">Equal Vitamin Access</option>
+        <option value="safe-water-now">Safe Water Now</option>
+        <option value="syphilis-free-start">Syphilis-Free Start</option>
+      </select>
+    </div>
+
+    <!-- ✦ NEW: Sub-category — grouped dropdown with non-clickable optgroup headers -->
+    <div class="filter-group">
+      <label for="f-subcat">Category</label>
+      <select id="f-subcat" name="subCategory">
+        <option value="">All categories</option>
+        <!-- Insights sub-categories (new field to be added to Insights channel) -->
+        <optgroup label="— Insights">
+          <option value="evidence-data">Evidence &amp; Data</option>
+          <option value="program-progress">Program Progress</option>
+          <option value="stories-voices">Stories &amp; Voices</option>
+          <option value="perspectives">Perspectives</option>
+        </optgroup>
+        <!-- Newsroom categories (existing + Research) -->
+        <optgroup label="— Newsroom">
+          <option value="announcement">Announcement</option>
+          <option value="media-mention">Media Mention</option>
+          <option value="newsletter">Newsletter</option>
+           <option value="research">Team Update</option>
+          <option value="research">Research</option>
+        </optgroup>
+      </select>
+    </div>
+
+    <!-- Sort -->
+    <div class="filter-sort">
+      <label for="f-sort">Sort by</label>
+      <select id="f-sort" name="sort">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+      </select>
+    </div>
+
+    <button class="filter-reset" id="filter-reset-btn" type="button">Clear filters</button>
+  </div>
+</div>
+
+<!-- ===== CONTENT AREA ===== -->
+<div class="content-area">
+  <div class="content-inner">
+
+    <!-- Mockup annotation -->
+   
+
+    <!-- Results meta -->
+    <div class="results-meta">
+      <div class="results-count" id="results-count">Showing <span id="visible-count">16</span> of <span id="total-count">16</span> items</div>
+      <div class="active-filters" id="active-filters"></div>
+    </div>
+
+    <!-- Card grid -->
+    <div class="card-grid" id="card-grid">
+
+      <!-- ─── CARD 1: Insight — Stories & Voices ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/insights/international-womens-day-2026-how-safe-water-flows-through-the-hands-of-women"
+         data-type="insight"
+         data-subcat="stories-voices"
+         data-focus="clean-water women-girls"
+         data-location="india kenya uganda"
+         data-program="safe-water-now"
+         data-date="2026-03-08">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/Safe-Water/_640x360_crop_center-center_none/117178/IWDBhavani.webp" alt="Bhavani, Safe Water Now technician" loading="lazy">
+          <span class="card__type-badge badge--stories-voices">Stories &amp; Voices</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory stories-voices">Insights</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Mar 8, 2026</span>
+          </div>
+          <h3 class="card__title">International Women's Day 2026: How safe water flows through the hands of women</h3>
+          <div class="card__footer">
+            <span class="card__readtime">8 min read</span>
+            <span class="card__focus-tag">Clean Water</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 2: Newsroom — Announcement ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/newsroom/evidence-action-signs-strategic-partnership-agreement-to-strengthen-rural-water-safety-in-india"
+         data-type="newsroom"
+         data-subcat="announcement"
+         data-focus="clean-water"
+         data-location="india"
+         data-program="safe-water-now"
+         data-date="2026-02-26">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_2560xAUTO_crop_center-center_none/117135/1771572169598.webp" alt="Ankur partnerships" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Announcement</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Newsroom</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Feb 26, 2026</span>
+          </div>
+          <h3 class="card__title">Evidence Action signs strategic partnership agreement to strengthen rural water safety in India</h3>
+          <div class="card__footer">
+            <span class="card__focus-tag">Clean Water</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 3: Insight — Program Progress ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/insights/following-the-evidence-even-when-its-hard-an-update-on-chlorine-dispensers-in-uganda-and-malawi"
+         data-type="insight"
+         data-subcat="program-progress"
+         data-focus="clean-water"
+         data-location="uganda malawi"
+         data-program="safe-water-now"
+         data-date="2026-02-15">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_640x360_crop_center-center_none/26334/image-31.webp" alt="Chlorine dispenser evaluation" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Program Progress</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Insights</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Feb 15, 2026</span>
+          </div>
+          <h3 class="card__title">Following the evidence, even when it's hard: An update on chlorine dispensers in Uganda and Malawi</h3>
+          <div class="card__footer">
+            <span class="card__readtime">15 min read</span>
+            <span class="card__focus-tag">Clean Water</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 4: Newsroom — Announcement ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/newsroom/record-low-price-for-dual-hiv-syphilis-test-strengthens-the-case-for-syphilis-free-start"
+         data-type="newsroom"
+         data-subcat="announcement"
+         data-focus="maternal-newborn-health"
+         data-location="zambia liberia"
+         data-program="syphilis-free-start"
+         data-date="2026-02-02">
+         <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_2560xAUTO_crop_center-center_none/117003/Dual_Test1.webp" alt="School deworming Tanzania" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Announcement</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Newsroom</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Feb 2, 2026</span>
+          </div>
+          <h3 class="card__title">Record-low price for dual HIV/syphilis test strengthens the case for Syphilis-Free Start</h3>
+          <div class="card__footer">
+            <span class="card__focus-tag">Maternal &amp; Newborn</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 5: Insight — Program Progress ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/insights/closing-the-last-mile-gap-in-maternal-syphilis-lessons-from-zambias-national-scale-up"
+         data-type="insight"
+         data-subcat="program-progress"
+         data-focus="maternal-newborn-health women-girls"
+         data-location="zambia"
+         data-program="syphilis-free-start"
+         data-date="2026-01-20">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_640x360_crop_center-center_none/117097/Pregnant-Woman-DHA-PPQ.webp" alt="ANC screening in Zambia" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Program Progress</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Insights</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Jan 20, 2026</span>
+          </div>
+          <h3 class="card__title">Closing the last-mile gap in maternal syphilis: Lessons from Zambia's national scale-up</h3>
+          <div class="card__footer">
+            <span class="card__readtime">6 min read</span>
+            <span class="card__focus-tag">Maternal &amp; Newborn</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 6: Newsroom — Announcement ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/newsroom/evidence-action-expands-to-tanzania-to-eliminate-parasitic-worms-as-a-public-health-problem"
+         data-type="newsroom"
+         data-subcat="announcement"
+         data-focus="ntd child-adolescent-health"
+         data-location="tanzania"
+         data-program="deworm-the-world"
+         data-date="2026-01-07">
+         <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/Deworm-the-World/_2560xAUTO_crop_center-center_none/DTW_Kisii_V3_StephanieSkinner_04-1920-x-1241.webp" alt="School deworming Tanzania" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Announcement</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Newsroom</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Jan 7, 2026</span>
+          </div>
+          <h3 class="card__title">Evidence Action expands to Tanzania to eliminate parasitic worms as a public health problem</h3>
+          <div class="card__footer">
+            <span class="card__focus-tag">NTDs</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 7: Insight — Program Progress ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/insights/tanzanias-next-chapter-smarter-targeted-deworming-after-usaids-exit"
+         data-type="insight"
+         data-subcat="program-progress"
+         data-focus="ntd child-adolescent-health"
+         data-location="tanzania"
+         data-program="deworm-the-world"
+         data-date="2025-12-10">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/Deworm-the-World/_640x360_crop_center-center_none/115085/y10_busia_kenya_2022_9.webp" alt="School deworming Tanzania" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Program Progress</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Insights</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Dec 10, 2025</span>
+          </div>
+          <h3 class="card__title">Tanzania's next chapter: Smarter, targeted deworming after USAID's exit</h3>
+          <div class="card__footer">
+            <span class="card__readtime">8 min read</span>
+            <span class="card__focus-tag">NTDs</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 8: Insight — Evidence & Data ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/insights/what-are-dalys-understanding-the-metric-we-use-to-determine-cost-effectiveness"
+         data-type="insight"
+         data-subcat="evidence-data"
+         data-focus=""
+         data-location=""
+         data-program=""
+         data-date="2025-11-20">
+        <div class="card__image-wrap" style="background: linear-gradient(135deg, #1a2e6b 0%, #2a4ea0 100%); display:flex; align-items:center; justify-content:center;">
+          <svg width="64" height="64" fill="none" viewBox="0 0 24 24" stroke="rgba(255,255,255,0.18)" stroke-width="1"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          <span class="card__type-badge badge--evidence-data">Evidence &amp; Data</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory evidence-data">Insights</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Nov 20, 2025</span>
+          </div>
+          <h3 class="card__title">What are DALYs? Understanding the metric we use to determine cost-effectiveness</h3>
+          <div class="card__footer">
+            <span class="card__readtime">16 min read</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 9: Newsroom — Announcement ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/newsroom/evidence-action-expands-effort-to-eliminate-congenital-syphilis-with-new-funding"
+         data-type="newsroom"
+         data-subcat="announcement"
+         data-focus="maternal-newborn-health women-girls"
+         data-location="liberia zambia"
+         data-program="syphilis-free-start"
+         data-date="2025-11-12">
+         <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_2560xAUTO_crop_center-center_none/114919/Awardee-3_2025-11-11-211712_pyuq.webp" alt="School deworming Tanzania" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Announcement</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Newsroom</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Nov 12, 2025</span>
+          </div>
+          <h3 class="card__title">Evidence Action expands effort to eliminate congenital syphilis with new funding</h3>
+          <div class="card__footer">
+            <span class="card__focus-tag">Maternal &amp; Newborn</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 10: Insight — Evidence & Data ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/insights/a-hidden-crisis-why-school-aged-children-deserve-our-investment"
+         data-type="insight"
+         data-subcat="perspectives"
+         data-focus="ntd child-adolescent-health nutrition"
+         data-location="india pakistan nigeria"
+         data-program="deworm-the-world equal-vitamin-access"
+         data-date="2025-10-15">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_640x360_crop_center-center_none/114532/PATHROTA_NARMADAPURAMDSC08887.webp" alt="School-aged children, India" loading="lazy">
+          <span class="card__type-badge badge--perspectives">Perspectives</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory perspectives">Insights</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Oct 15, 2025</span>
+          </div>
+          <h3 class="card__title">A Hidden Crisis: Why School-Aged Children Deserve Our Investment</h3>
+          <div class="card__footer">
+            <span class="card__readtime">6 min read</span>
+            <span class="card__focus-tag">NTDs</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 11: Newsroom — Announcement ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/newsroom/evidence-action-incubates-comprehensive-analysis-of-ai-applications-in-global-development"
+         data-type="newsroom"
+         data-subcat="announcement"
+         data-focus=""
+         data-location=""
+         data-program=""
+         data-date="2025-10-24">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_2560xAUTO_crop_center-center_none/114762/AI-for-Good.webp" alt="School deworming Tanzania" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Announcement</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Newsroom</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Oct 24, 2025</span>
+          </div>
+          <h3 class="card__title">Evidence Action incubates AI for Good project, publishes cross-sector analysis</h3>
+          <div class="card__footer"></div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 12: Insight — Program Progress ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/insights/were-reducing-our-chlorine-dispenser-program-in-kenya-heres-why-2"
+         data-type="insight"
+         data-subcat="program-progress"
+         data-focus="clean-water"
+         data-location="kenya"
+         data-program="safe-water-now"
+         data-date="2025-08-20">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_640x360_crop_center-center_none/114095/IMG_5395.webp" alt="Chlorine dispenser Kenya" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Program Progress</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Insights</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Aug 20, 2025</span>
+          </div>
+          <h3 class="card__title">We're reducing our chlorine dispenser program in Kenya — here's why.</h3>
+          <div class="card__footer">
+            <span class="card__readtime">21 min read</span>
+            <span class="card__focus-tag">Clean Water</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 13: Insight — Stories & Voices ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/insights/where-the-pipes-lead"
+         data-type="insight"
+         data-subcat="stories-voices"
+         data-focus="clean-water"
+         data-location="india"
+         data-program="safe-water-now"
+         data-date="2025-07-10">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_640x360_crop_center-center_none/113932/District-Eulru-Pic-4-AP.webp" alt="In-line chlorination, India" loading="lazy">
+          <span class="card__type-badge badge--stories-voices">Stories &amp; Voices</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory stories-voices">Insights</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Jul 10, 2025</span>
+          </div>
+          <h3 class="card__title">Where the pipes lead</h3>
+          <div class="card__footer">
+            <span class="card__readtime">9 min read</span>
+            <span class="card__focus-tag">Clean Water</span>
+          </div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 14: Newsroom — Announcement ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/newsroom/evidence-action-launches-search-for-next-ceo"
+         data-type="newsroom"
+         data-subcat="announcement"
+         data-focus=""
+         data-location=""
+         data-program=""
+         data-date="2025-06-04">
+          <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/Careers/_2560xAUTO_crop_center-center_none/76995/DSC_0748.webp" alt="School deworming Tanzania" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Team Update</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Newsroom</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Jun 4, 2025</span>
+          </div>
+          <h3 class="card__title">Evidence Action launches search for next CEO</h3>
+          <div class="card__footer"></div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 15: Newsroom — Announcement ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/newsroom/funding-what-works-danielle-bayer-to-lead-strategic-growth"
+         data-type="newsroom"
+         data-subcat="announcement"
+         data-focus=""
+         data-location=""
+         data-program=""
+         data-date="2025-05-21">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_2560xAUTO_crop_center-center_none/113920/765A8936-Edit-Edit_2025-05-21-153444_hutc.webp" alt="School deworming Tanzania" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Team Update</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Newsroom</span>
+            <span class="card__dot"></span>
+            <span class="card__date">May 21, 2025</span>
+          </div>
+          <h3 class="card__title">Funding what works: Danielle Bayer to lead strategic growth</h3>
+          <div class="card__footer"></div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- ─── CARD 16: Newsroom — Announcement ─── -->
+      <a class="card"
+         href="https://www.evidenceaction.org/newsroom/evidence-action-welcomes-anthony-latta-as-chief-financial-officer"
+         data-type="newsroom"
+         data-subcat="announcement"
+         data-focus=""
+         data-location=""
+         data-program=""
+         data-date="2025-04-08">
+        <div class="card__image-wrap">
+          <img src="https://assets.evidenceaction.org/web/images/_2560xAUTO_crop_center-center_none/113661/AnthonyLattaCrop.webp" alt="School deworming Tanzania" loading="lazy">
+          <span class="card__type-badge badge--program-progress">Team Update</span>
+        </div>
+        <div class="card__body">
+          <div class="card__meta-top">
+            <span class="card__subcategory">Newsroom</span>
+            <span class="card__dot"></span>
+            <span class="card__date">Apr 8, 2025</span>
+          </div>
+          <h3 class="card__title">Evidence Action welcomes Anthony Latta as Chief Financial Officer</h3>
+          <div class="card__footer"></div>
+          <div class="card__arrow">Read more <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></div>
+        </div>
+      </a>
+
+      <!-- Empty state (shown when no results match) -->
+      <div class="empty-state" id="empty-state" hidden>
+        <div class="empty-state__icon">&#128269;</div>
+        <p class="empty-state__title">No items match these filters</p>
+        <p class="empty-state__text">Try clearing one or more filters to see more results.</p>
+      </div>
+
+    </div><!-- /card-grid -->
+
+    <!-- Load more (static in prototype; in production this is Sprig pagination) -->
+    <div class="load-more-wrap" id="load-more-wrap">
+      <button class="btn-load-more" type="button">
+        Load more
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="site-footer__logo">Evidence Action</div>
+  <p>Questions? <a href="mailto:communications@evidenceaction.org">communications@evidenceaction.org</a></p>
+  <p style="margin-top:0.35rem;">&copy; 2026 Evidence Action. All rights reserved.</p>
+</footer>
+
+<script>
+  // ─── CLIENT-SIDE FILTER (prototype only — replace with Sprig in production) ───
+
+  const focusEl   = document.getElementById('f-focus');
+  const locationEl= document.getElementById('f-location');
+  const programEl = document.getElementById('f-program');
+  const subcatEl  = document.getElementById('f-subcat');
+  const sortEl    = document.getElementById('f-sort');
+  const resetBtn  = document.getElementById('filter-reset-btn');
+  const grid      = document.getElementById('card-grid');
+  const countEl   = document.getElementById('visible-count');
+  const emptyEl   = document.getElementById('empty-state');
+  const activeFiltersEl = document.getElementById('active-filters');
+  const loadMoreWrap    = document.getElementById('load-more-wrap');
+
+  function getCards() {
+    return Array.from(grid.querySelectorAll('.card'));
+  }
+
+  function applyFilters() {
+    const focus    = focusEl.value;
+    const location = locationEl.value;
+    const program  = programEl.value;
+    const subcat   = subcatEl.value;
+    const sort     = sortEl.value;
+
+    const cards = getCards();
+    let visible = 0;
+
+    // Sort cards by date
+    const sorted = [...cards].sort((a, b) => {
+      const da = new Date(a.dataset.date);
+      const db = new Date(b.dataset.date);
+      return sort === 'newest' ? db - da : da - db;
+    });
+
+    // Re-order DOM
+    sorted.forEach(c => grid.insertBefore(c, emptyEl));
+
+    sorted.forEach(card => {
+      const matchFocus    = !focus    || card.dataset.focus.includes(focus);
+      const matchLocation = !location || card.dataset.location.includes(location);
+      const matchProgram  = !program  || card.dataset.program.includes(program);
+      const matchSubcat   = !subcat   || card.dataset.subcat === subcat;
+
+      if (matchFocus && matchLocation && matchProgram && matchSubcat) {
+        card.hidden = false;
+        visible++;
+      } else {
+        card.hidden = true;
+      }
+    });
+
+    countEl.textContent = visible;
+    emptyEl.hidden = visible > 0;
+    loadMoreWrap.hidden = visible === 0;
+
+    // Show/hide reset
+    const hasFilter = focus || location || program || subcat;
+    resetBtn.classList.toggle('visible', !!hasFilter);
+
+    // Active filter pills
+    activeFiltersEl.innerHTML = '';
+    const labels = {
+      focus:    { el: focusEl,    name: 'Focus Area' },
+      location: { el: locationEl, name: 'Location' },
+      program:  { el: programEl,  name: 'Program' },
+      subcat:   { el: subcatEl,   name: 'Category' },
+    };
+    Object.entries(labels).forEach(([key, { el, name }]) => {
+      if (el.value) {
+        const text = el.options[el.selectedIndex].text;
+        const pill = document.createElement('span');
+        pill.className = 'filter-pill';
+        pill.innerHTML = `${text} <button type="button" aria-label="Remove ${name} filter">&times;</button>`;
+        pill.querySelector('button').addEventListener('click', () => {
+          el.value = '';
+          applyFilters();
+        });
+        activeFiltersEl.appendChild(pill);
+      }
+    });
+  }
+
+  [focusEl, locationEl, programEl, subcatEl, sortEl].forEach(el => {
+    el.addEventListener('change', applyFilters);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    focusEl.value = '';
+    locationEl.value = '';
+    programEl.value = '';
+    subcatEl.value = '';
+    sortEl.value = 'newest';
+    applyFilters();
+  });
+
+  // Initial sort
+  applyFilters();
+</script>
+
+</body>
+</html>
