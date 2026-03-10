@@ -190,11 +190,11 @@
 
     /* === FILTER BAR === */
     .filter-section {
-      background: var(--ea-light-blue);
+      background: var(--ea-kale-green);
       border-bottom: 1px solid rgba(5,84,90,0.12);
       padding: 1.25rem clamp(1rem,5vw,4rem);
       position: sticky;
-      top: 68px;
+      top: 0px;
       z-index: 90;
     }
     .filter-inner {
@@ -218,7 +218,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--ea-kale-green);
+      color: var(--ea-white);
     }
     .filter-group select {
       appearance: none;
@@ -238,7 +238,7 @@
     }
     .filter-group select:focus {
       outline: none;
-      border-color: var(--ea-kale-green);
+      border-color: var(--ea-light-blue);
     }
     /* Non-clickable optgroup headers */
     .filter-group select optgroup {
@@ -267,7 +267,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: var(--ea-neutral-purple);
+      color: var(--ea-white);
     }
     .filter-sort select {
       appearance: none;
@@ -278,10 +278,9 @@
       padding: 0.55rem 2.25rem 0.55rem 0.75rem;
       font-family: var(--ea-font-body);
       font-size: 0.875rem;
-      color: var(--ea-neutral-purple);
+      color: var(--ea-ink);
       cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235c5161' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
+     background-color: var(--ea-light-blue);
       background-position: right 0.75rem center;
     }
     .filter-sort select:focus { outline: none; }
@@ -293,7 +292,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--ea-kale-green);
+      color: var(--ea-ink);
       cursor: pointer;
       padding: 0.55rem 0;
       align-self: flex-end;
@@ -646,7 +645,7 @@
       <span style="color:rgba(255,255,255,0.6)">The Latest</span>
     </div>
     <h1 class="hero__heading">
-      <strong>Insights, updates,</strong><br>and what's happening in the field
+      <strong>Insights, updates,</strong><br>and what's happening across our programs
     </h1>
     <p class="hero__subtext">Deep dives into data, program progress, stories of impact, and news from Evidence Action — all in one place.</p>
     <div class="hero__cta-row">
