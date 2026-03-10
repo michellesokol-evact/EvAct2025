@@ -369,6 +369,7 @@
 
     .card-grid.is-filtered .card-item { transition: opacity 0.2s ease; }
     .card-item[hidden] { display: none; }
+    .card[hidden] { display: none !important; }
 
     /* === BASE CARD === */
     .card {
@@ -724,7 +725,7 @@
           <option value="announcement">Announcement</option>
           <option value="media-mention">Media Mention</option>
           <option value="newsletter">Newsletter</option>
-           <option value="research">Team Update</option>
+          <option value="team-update">Team Update</option>
           <option value="research">Research</option>
         </optgroup>
       </select>
@@ -1115,11 +1116,11 @@
         </div>
       </a>
 
-      <!-- ─── CARD 14: Newsroom — Announcement ─── -->
+      <!-- ─── CARD 14: Newsroom — Team Update ─── -->
       <a class="card"
          href="https://www.evidenceaction.org/newsroom/evidence-action-launches-search-for-next-ceo"
          data-type="newsroom"
-         data-subcat="announcement"
+         data-subcat="team-update"
          data-focus=""
          data-location=""
          data-program=""
@@ -1140,11 +1141,11 @@
         </div>
       </a>
 
-      <!-- ─── CARD 15: Newsroom — Announcement ─── -->
+      <!-- ─── CARD 15: Newsroom — Team Update ─── -->
       <a class="card"
          href="https://www.evidenceaction.org/newsroom/funding-what-works-danielle-bayer-to-lead-strategic-growth"
          data-type="newsroom"
-         data-subcat="announcement"
+         data-subcat="team-update"
          data-focus=""
          data-location=""
          data-program=""
@@ -1165,11 +1166,11 @@
         </div>
       </a>
 
-      <!-- ─── CARD 16: Newsroom — Announcement ─── -->
+      <!-- ─── CARD 16: Newsroom — Team Update ─── -->
       <a class="card"
          href="https://www.evidenceaction.org/newsroom/evidence-action-welcomes-anthony-latta-as-chief-financial-officer"
          data-type="newsroom"
-         data-subcat="announcement"
+         data-subcat="team-update"
          data-focus=""
          data-location=""
          data-program=""
@@ -1257,9 +1258,9 @@
     sorted.forEach(c => grid.insertBefore(c, emptyEl));
 
     sorted.forEach(card => {
-      const matchFocus    = !focus    || card.dataset.focus.includes(focus);
-      const matchLocation = !location || card.dataset.location.includes(location);
-      const matchProgram  = !program  || card.dataset.program.includes(program);
+      const matchFocus    = !focus    || (card.dataset.focus    || '').includes(focus);
+      const matchLocation = !location || (card.dataset.location || '').includes(location);
+      const matchProgram  = !program  || (card.dataset.program  || '').includes(program);
       const matchSubcat   = !subcat   || card.dataset.subcat === subcat;
 
       if (matchFocus && matchLocation && matchProgram && matchSubcat) {
